@@ -4,7 +4,7 @@
   "assets": {
     "directory": "."
   },
-  "workers_dev": false,
+  "workers_dev": true,
   "routes": [
     { "pattern": "embersovereignty.com", "custom_domain": true },
     { "pattern": "www.embersovereignty.com", "custom_domain": true }
