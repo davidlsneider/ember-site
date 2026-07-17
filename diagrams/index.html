@@ -42,7 +42,6 @@
       <rect x="30" y="84" width="160" height="52" rx="5" fill="#101722" stroke="#1E2936"/>
       <text x="110" y="114" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">customer</text>
       <line x1="190" y1="110" x2="286" y2="110" stroke="#45536B" marker-end="url(#a1)"/>
-      <text x="238" y="100" text-anchor="middle" font-size="10.5" fill="#7D8CA3">plaintext</text>
       <rect x="290" y="84" width="160" height="52" rx="5" fill="#101722" stroke="#1E2936"/>
       <text x="370" y="114" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">vendor app</text>
       <line x1="450" y1="110" x2="546" y2="110" stroke="#45536B" marker-end="url(#a1)"/>
@@ -51,17 +50,18 @@
       <line x1="370" y1="136" x2="370" y2="176" stroke="#45536B" marker-end="url(#a1)"/>
       <rect x="290" y="180" width="160" height="56" rx="5" fill="#101722" stroke="#1E2936"/>
       <text x="370" y="203" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">vendor database</text>
-      <text x="370" y="221" text-anchor="middle" font-size="10.5" fill="#7D8CA3">plaintext · retained</text>
+      <text x="370" y="221" text-anchor="middle" font-size="10.5" fill="#7D8CA3">retained and searchable</text>
 
       <line x1="30" y1="280" x2="750" y2="280" stroke="#1E2936"/>
 
       <!-- SOVEREIGN MODE -->
       <text x="30" y="322" font-size="11" letter-spacing="2.2" fill="#4D9FFF">SOVEREIGN MODE</text>
-      <rect x="30" y="368" width="180" height="56" rx="5" fill="#101722" stroke="#1E2936"/>
-      <text x="120" y="391" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">customer</text>
-      <text x="120" y="409" text-anchor="middle" font-size="10.5" fill="#7D8CA3">holds the key</text>
-      <line x1="210" y1="396" x2="296" y2="396" stroke="#45536B" marker-end="url(#a1)"/>
-      <text x="253" y="386" text-anchor="middle" font-size="10.5" fill="#7D8CA3">ciphertext</text>
+      <rect x="30" y="360" width="200" height="72" rx="5" fill="#101722" stroke="#1E2936"/>
+      <text x="130" y="383" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">customer</text>
+      <text x="130" y="401" text-anchor="middle" font-size="10.5" fill="#7D8CA3">enterprise key · M-of-N</text>
+      <text x="130" y="417" text-anchor="middle" font-size="10.5" fill="#7D8CA3">passkey · YubiKey · wallet</text>
+      <line x1="230" y1="396" x2="296" y2="396" stroke="#45536B" marker-end="url(#a1)"/>
+      <text x="263" y="386" text-anchor="middle" font-size="10.5" fill="#7D8CA3">ciphertext</text>
       <rect x="300" y="356" width="190" height="80" rx="5" fill="#101722" stroke="#4D9FFF"/>
       <text x="395" y="388" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="600">clean room</text>
       <text x="395" y="408" text-anchor="middle" font-size="10.5" fill="#7D8CA3">attested · retains nothing</text>
@@ -85,89 +85,93 @@
     <h2>D2 — One session, precisely</h2>
     <p class="aud">AUDIENCE: THE VENDOR'S ENGINEERS · OWNS: THE RUNTIME PATH</p>
     <div class="frame">
-    <svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#45536B"/></marker>
       </defs>
       <!-- lifeline headers -->
-      <rect x="20" y="24" width="150" height="40" rx="5" fill="#101722" stroke="#1E2936"/><text x="95" y="49" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">user device</text>
-      <rect x="205" y="24" width="150" height="40" rx="5" fill="#101722" stroke="#1E2936"/><text x="280" y="49" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">vendor app</text>
-      <rect x="390" y="24" width="150" height="40" rx="5" fill="#101722" stroke="#4D9FFF"/><text x="465" y="49" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="600">clean room</text>
-      <rect x="580" y="24" width="150" height="40" rx="5" fill="#101722" stroke="#1E2936"/><text x="655" y="49" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">venue</text>
-      <rect x="740" y="24" width="140" height="40" rx="5" fill="#101722" stroke="#1E2936"/><text x="810" y="49" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">chain</text>
+      <rect x="20" y="24" width="180" height="52" rx="5" fill="#101722" stroke="#1E2936"/>
+      <text x="110" y="46" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">vendor app</text>
+      <text x="110" y="64" text-anchor="middle" font-size="10" fill="#7D8CA3">on the user's device</text>
+      <rect x="230" y="24" width="150" height="52" rx="5" fill="#101722" stroke="#1E2936"/><text x="305" y="54" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">vendor backend</text>
+      <rect x="420" y="24" width="150" height="52" rx="5" fill="#101722" stroke="#4D9FFF"/><text x="495" y="54" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="600">clean room</text>
+      <rect x="610" y="24" width="140" height="52" rx="5" fill="#101722" stroke="#1E2936"/><text x="680" y="54" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">venue</text>
+      <rect x="770" y="24" width="120" height="52" rx="5" fill="#101722" stroke="#1E2936"/><text x="830" y="54" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">chain</text>
       <!-- lifelines -->
-      <line x1="95" y1="64" x2="95" y2="530" stroke="#1E2936" stroke-dasharray="3 5"/>
-      <line x1="280" y1="64" x2="280" y2="530" stroke="#1E2936" stroke-dasharray="3 5"/>
-      <line x1="465" y1="64" x2="465" y2="530" stroke="#1E2936" stroke-dasharray="3 5"/>
-      <line x1="655" y1="64" x2="655" y2="530" stroke="#1E2936" stroke-dasharray="3 5"/>
-      <line x1="810" y1="64" x2="810" y2="530" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="110" y1="76" x2="110" y2="590" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="305" y1="76" x2="305" y2="590" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="495" y1="76" x2="495" y2="590" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="680" y1="76" x2="680" y2="590" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="830" y1="76" x2="830" y2="590" stroke="#1E2936" stroke-dasharray="3 5"/>
       <!-- activation bar on clean room -->
-      <rect x="460" y="200" width="10" height="290" rx="2" fill="#101722" stroke="#4D9FFF"/>
-      <!-- 1 self: verify+encrypt -->
-      <path d="M 95 110 L 150 110 L 150 134 L 100 134" fill="none" stroke="#45536B" marker-end="url(#a2)"/>
-      <text x="160" y="126" font-size="11.5" fill="#8CA0B8">verify attestation · encrypt text + PDF</text>
-      <!-- 2 U->C ciphertext -->
-      <line x1="95" y1="200" x2="456" y2="200" stroke="#45536B" marker-end="url(#a2)"/>
-      <text x="270" y="190" text-anchor="middle" font-size="11.5" fill="#8CA0B8">ciphertext</text>
-      <!-- 3 V-->C metadata -->
-      <line x1="280" y1="244" x2="456" y2="244" stroke="#45536B" stroke-dasharray="4 4" marker-end="url(#a2)"/>
-      <text x="366" y="234" text-anchor="middle" font-size="11.5" fill="#8CA0B8">session metadata</text>
+      <rect x="490" y="190" width="10" height="340" rx="2" fill="#101722" stroke="#4D9FFF"/>
+      <!-- 1 self in the app: verify + encrypt -->
+      <path d="M 110 112 L 165 112 L 165 136 L 115 136" fill="none" stroke="#45536B" marker-end="url(#a2)"/>
+      <text x="175" y="120" font-size="11.5" fill="#8CA0B8">sovereign mode on · verify attestation</text>
+      <text x="175" y="136" font-size="11.5" fill="#8CA0B8">encrypt text + PDF locally</text>
+      <!-- 2 app->C ciphertext -->
+      <line x1="110" y1="190" x2="486" y2="190" stroke="#45536B" marker-end="url(#a2)"/>
+      <text x="295" y="180" text-anchor="middle" font-size="11.5" fill="#8CA0B8">ciphertext</text>
+      <!-- 3 backend-->C metadata -->
+      <line x1="305" y1="232" x2="486" y2="232" stroke="#45536B" stroke-dasharray="4 4" marker-end="url(#a2)"/>
+      <text x="392" y="222" text-anchor="middle" font-size="11.5" fill="#8CA0B8">session metadata</text>
       <!-- 4 C self: policy + logic -->
-      <path d="M 470 288 L 524 288 L 524 312 L 475 312" fill="none" stroke="#45536B" marker-end="url(#a2)"/>
-      <text x="534" y="304" font-size="11.5" fill="#8CA0B8">policy check · run vendor logic (CID)</text>
+      <path d="M 500 272 L 554 272 L 554 296 L 505 296" fill="none" stroke="#45536B" marker-end="url(#a2)"/>
+      <text x="564" y="288" font-size="11.5" fill="#8CA0B8">policy check · run vendor logic (CID)</text>
       <!-- 5 C->X prompts -->
-      <line x1="470" y1="356" x2="646" y2="356" stroke="#45536B" marker-end="url(#a2)"/>
-      <text x="558" y="346" text-anchor="middle" font-size="11.5" fill="#8CA0B8">prompts, per policy</text>
+      <line x1="500" y1="330" x2="671" y2="330" stroke="#45536B" marker-end="url(#a2)"/>
+      <text x="585" y="320" text-anchor="middle" font-size="11.5" fill="#8CA0B8">prompts, per policy</text>
       <!-- 6 X-->C completion -->
-      <line x1="655" y1="398" x2="474" y2="398" stroke="#45536B" stroke-dasharray="4 4" marker-end="url(#a2)"/>
-      <text x="565" y="388" text-anchor="middle" font-size="11.5" fill="#8CA0B8">completion</text>
-      <!-- 7 C->U result -->
-      <line x1="460" y1="444" x2="99" y2="444" stroke="#45536B" marker-end="url(#a2)"/>
-      <text x="278" y="434" text-anchor="middle" font-size="11.5" fill="#8CA0B8">result, encrypted to the user</text>
-      <!-- 8 C->B receipt -->
-      <line x1="470" y1="490" x2="801" y2="490" stroke="#45536B" marker-end="url(#a2)"/>
-      <text x="636" y="480" text-anchor="middle" font-size="11.5" fill="#8CA0B8">receipt — hashes · venue · verdicts</text>
+      <line x1="680" y1="372" x2="504" y2="372" stroke="#45536B" stroke-dasharray="4 4" marker-end="url(#a2)"/>
+      <text x="590" y="362" text-anchor="middle" font-size="11.5" fill="#8CA0B8">completion</text>
+      <!-- 7 C->app result -->
+      <line x1="490" y1="418" x2="114" y2="418" stroke="#45536B" marker-end="url(#a2)"/>
+      <text x="300" y="408" text-anchor="middle" font-size="11.5" fill="#8CA0B8">result — decrypts inside the app</text>
+      <!-- 8 self in the app: sovereign state + verify link -->
+      <path d="M 110 458 L 165 458 L 165 482 L 115 482" fill="none" stroke="#45536B" marker-end="url(#a2)"/>
+      <text x="175" y="466" font-size="11.5" fill="#8CA0B8">app shows "Sovereign session ✓" + verify link</text>
+      <text x="175" y="482" font-size="11.5" fill="#4D9FFF">Ember — a separate service, embedded</text>
+      <!-- 9 C->B receipt -->
+      <line x1="500" y1="524" x2="821" y2="524" stroke="#45536B" marker-end="url(#a2)"/>
+      <text x="660" y="514" text-anchor="middle" font-size="11.5" fill="#8CA0B8">receipt — hashes · venue · verdicts</text>
     </svg>
     </div>
-    <p class="cap">Plaintext exists in two places: the user's device, and attested memory. <em>Nowhere else.</em></p>
+    <p class="cap">The whole session happens inside the vendor's product. <em>Plaintext exists in two places — the app on the user's device, and attested memory — and Ember is the separate, verifiable service embedded in it.</em></p>
   </section>
 
   <section>
     <h2>D3 — The dial</h2>
     <p class="aud">AUDIENCE: THE END CUSTOMER AND THEIR AUDITOR · OWNS: TWO POSITIONS, ONE INVARIANT</p>
     <div class="frame">
-    <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#45536B"/></marker>
       </defs>
-      <!-- key -->
-      <rect x="30" y="164" width="190" height="64" rx="5" fill="#101722" stroke="#4D9FFF"/>
-      <text x="125" y="191" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="600">the owner's key</text>
-      <text x="125" y="211" text-anchor="middle" font-size="10.5" fill="#7D8CA3">the invariant</text>
-      <path d="M 220 182 L 250 182 L 250 116 L 276 116" fill="none" stroke="#45536B"/>
-      <path d="M 220 210 L 250 210 L 250 286 L 276 286" fill="none" stroke="#45536B"/>
-      <!-- enclave group -->
-      <rect x="280" y="56" width="590" height="120" rx="6" fill="#0C121C" stroke="#1E2936"/>
-      <text x="300" y="82" font-size="11" letter-spacing="2" fill="#8CA0B8">THE ENCLAVE</text>
-      <rect x="320" y="98" width="190" height="56" rx="5" fill="#101722" stroke="#1E2936"/>
-      <text x="415" y="121" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">Ember-hosted</text>
-      <text x="415" y="139" text-anchor="middle" font-size="10.5" fill="#7D8CA3">attested</text>
-      <line x1="510" y1="126" x2="636" y2="126" stroke="#45536B" marker-start="url(#a3)" marker-end="url(#a3)"/>
-      <rect x="640" y="98" width="190" height="56" rx="5" fill="#101722" stroke="#1E2936"/>
-      <text x="735" y="130" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">owner's box</text>
+      <!-- clean room -->
+      <rect x="330" y="36" width="240" height="64" rx="5" fill="#101722" stroke="#4D9FFF"/>
+      <text x="450" y="62" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="600">the clean room</text>
+      <text x="450" y="82" text-anchor="middle" font-size="10.5" fill="#7D8CA3">runs identically in both homes</text>
+      <path d="M 410 100 L 410 118 Q 410 126 402 126 L 273 126 Q 265 126 265 134 L 265 148" fill="none" stroke="#45536B" marker-end="url(#a3)"/>
+      <path d="M 490 100 L 490 118 Q 490 126 498 126 L 627 126 Q 635 126 635 134 L 635 148" fill="none" stroke="#45536B" marker-end="url(#a3)"/>
+      <!-- two homes -->
+      <rect x="120" y="152" width="290" height="72" rx="5" fill="#101722" stroke="#1E2936"/>
+      <text x="265" y="182" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">Lit network — hosted</text>
+      <text x="265" y="202" text-anchor="middle" font-size="10.5" fill="#7D8CA3">attested · anchored to Ethereum</text>
+      <line x1="414" y1="188" x2="486" y2="188" stroke="#45536B" marker-start="url(#a3)" marker-end="url(#a3)"/>
+      <rect x="490" y="152" width="290" height="72" rx="5" fill="#101722" stroke="#1E2936"/>
+      <text x="635" y="182" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">the owner's box</text>
+      <text x="635" y="202" text-anchor="middle" font-size="10.5" fill="#7D8CA3">EPYC · attested · in your building</text>
       <!-- shared move label -->
-      <text x="573" y="206" text-anchor="middle" font-size="11.5" fill="#4D9FFF">move anytime — owner-signed</text>
-      <!-- memory group -->
-      <rect x="280" y="226" width="590" height="120" rx="6" fill="#0C121C" stroke="#1E2936"/>
-      <text x="300" y="252" font-size="11" letter-spacing="2" fill="#8CA0B8">THE MEMORY · CIPHERTEXT</text>
-      <rect x="320" y="268" width="190" height="56" rx="5" fill="#101722" stroke="#1E2936"/>
-      <text x="415" y="300" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">Ember-hosted</text>
-      <line x1="510" y1="296" x2="636" y2="296" stroke="#45536B" marker-start="url(#a3)" marker-end="url(#a3)"/>
-      <rect x="640" y="268" width="190" height="56" rx="5" fill="#101722" stroke="#1E2936"/>
-      <text x="735" y="300" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">owner's store</text>
+      <text x="450" y="252" text-anchor="middle" font-size="11.5" fill="#4D9FFF">move anytime — owner-signed</text>
+      <!-- SCA root -->
+      <path d="M 340 300 L 340 264 Q 340 256 332 256 L 273 256 Q 265 256 265 248 L 265 228" fill="none" stroke="#45536B" marker-end="url(#a3)"/>
+      <path d="M 560 300 L 560 264 Q 560 256 568 256 L 627 256 Q 635 256 635 248 L 635 228" fill="none" stroke="#45536B" marker-end="url(#a3)"/>
+      <rect x="240" y="300" width="420" height="72" rx="5" fill="#101722" stroke="#4D9FFF"/>
+      <text x="450" y="330" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="600">smart contract accounts</text>
+      <text x="450" y="350" text-anchor="middle" font-size="10.5" fill="#7D8CA3">the owner's keys decide what may run</text>
     </svg>
     </div>
-    <p class="cap">Two positions, never the vendor. <em>Revoke the key and every copy, anywhere, is noise.</em></p>
+    <p class="cap">One room, two homes, one root — accounts controlled by the owners' keys decide what may run. <em>Memory moves the same way. This is how governance gets into people's hands.</em></p>
   </section>
 </div>
 </body>
