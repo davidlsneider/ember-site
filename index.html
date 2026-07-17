@@ -52,6 +52,12 @@
   .note{font-size:15px}
   .note b{color:var(--white);font-weight:600}
 
+  .prodgrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px}
+  .prod{background:var(--surface);padding:32px 30px}
+  .prod h3{color:var(--white);font-size:19px;font-weight:600;margin-bottom:10px}
+  .prod p{font-size:15px}
+  .prodclose{color:var(--white);font-size:clamp(17px,2.2vw,20px);line-height:1.5;max-width:760px}
+
   .point p{color:var(--white);font-size:clamp(17px,2.2vw,21px);line-height:1.55;max-width:760px;margin-bottom:18px}
   .point p em{color:var(--muted);font-style:normal}
 
@@ -61,7 +67,7 @@
   footer p{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;color:#4A5567}
 
   @media (max-width:720px){
-    .notes{grid-template-columns:1fr}
+    .notes,.prodgrid{grid-template-columns:1fr}
     section{padding:56px 0}
     .hero{padding:64px 0 40px}
   }
@@ -90,7 +96,7 @@
       <span>THE SYSTEM</span>
       <span class="flags">ONE API · ATTESTED GPUS&nbsp; 🇺🇸 🇳🇱 🇩🇪 🇮🇳 🇯🇵 · JURISDICTION PROVEN, NOT PROMISED</span>
     </div>
-    <div class="diagram" role="img" aria-label="Ember system diagram, read left to right. Control plane, used rarely: team-held keys — YubiKeys, passkeys, wallets — sign by M-of-N quorum to an EVM chain of your choice, which sends policy to the governance node and receives back receipts. Daily use: your cloud IAM, unchanged, hands sessions to the node by OIDC token exchange; apps, agents, and services call one API. The governance node — a chain-attested TEE, on-prem for $8,000 or hosted — routes to the attested private GPU API, your racks, and frontier APIs. Stablecoins settle through the node, gated by policy. Blue marks the Ember product.">
+    <div class="diagram" role="img" aria-label="Ember system diagram, read left to right. Control plane, used rarely: team-held keys — YubiKeys, passkeys, wallets — sign by M-of-N quorum to an EVM chain of your choice, which sends policy to the governance node and receives receipts back. Daily use: your SaaS and IAM — apps, agents, people — reach the node through one API; a dashed line shows how they connect to providers today, directly and ungoverned. The governance node, a $8,000 TEE on-prem or hosted, routes to frontier APIs, your racks, and the attested private GPU API. Stablecoins settle through the node on policy. Blue marks the Ember product.">
     <svg viewBox="0 0 1040 560" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
@@ -99,80 +105,75 @@
       </defs>
 
       <!-- captions -->
-      <text x="20" y="250" font-size="11" letter-spacing="2.2" fill="#4D9FFF">CONTROL PLANE — RARE</text>
-      <text x="560" y="44" font-size="11" letter-spacing="2.2" fill="#7D8CA3">DAILY USE — CONSTANT</text>
+      <text x="10" y="246" font-size="11" letter-spacing="2.2" fill="#4D9FFF">CONTROL PLANE — RARE</text>
+      <text x="830" y="44" font-size="11" letter-spacing="2.2" fill="#7D8CA3">DAILY USE — CONSTANT</text>
 
-      <!-- daily use: cloud IAM -->
-      <rect x="520" y="60" width="170" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="605" y="82" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">cloud IAM</text>
-      <text x="605" y="100" text-anchor="middle" font-size="11" fill="#7D8CA3">unchanged</text>
+      <!-- SaaS & IAM -->
+      <rect x="830" y="60" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="915" y="84" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">your SaaS &amp; IAM</text>
+      <text x="915" y="102" text-anchor="middle" font-size="10.5" fill="#7D8CA3">apps · agents · people</text>
 
-      <!-- daily use: apps -->
-      <rect x="740" y="60" width="170" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="825" y="90" text-anchor="middle" font-size="12" fill="#F2F7FF" font-weight="500">apps · agents · services</text>
+      <!-- SaaS -> node : one API -->
+      <path d="M 830 90 L 613 90 Q 605 90 605 98 L 605 264" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
+      <text x="613" y="180" font-size="11" fill="#7D8CA3">one API</text>
 
-      <!-- iam -> node -->
-      <line x1="605" y1="112" x2="605" y2="246" stroke="#45536B" marker-end="url(#arr)"/>
-      <text x="613" y="170" font-size="11" fill="#7D8CA3">OIDC token exchange</text>
+      <!-- SaaS -> frontier : today (dashed) -->
+      <path d="M 915 120 L 915 174" fill="none" stroke="#384858" stroke-dasharray="4 4" marker-end="url(#arr)"/>
+      <text x="925" y="152" font-size="10.5" fill="#5B6B84">direct · today</text>
 
-      <!-- apps -> node (elbow) -->
-      <path d="M 825 112 L 825 210 Q 825 218 817 218 L 708 218 Q 700 218 700 226 L 700 246" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
-      <text x="730" y="210" text-anchor="middle" font-size="11" fill="#7D8CA3">one API</text>
-
-      <!-- receipts return: node top -> chain top -->
-      <path d="M 545 252 L 545 208 Q 545 200 537 200 L 383 200 Q 375 200 375 208 L 375 268" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
-      <text x="460" y="192" text-anchor="middle" font-size="11" fill="#7D8CA3">receipts</text>
-
-      <!-- control plane: keys -->
-      <rect x="20" y="274" width="170" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="105" y="294" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">team-held keys</text>
-      <text x="105" y="312" text-anchor="middle" font-size="10.5" fill="#7D8CA3">YubiKey · passkey · wallet</text>
+      <!-- keys -->
+      <rect x="10" y="270" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="95" y="294" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">team-held keys</text>
+      <text x="95" y="312" text-anchor="middle" font-size="10.5" fill="#7D8CA3">YubiKey · passkey · wallet</text>
 
       <!-- keys -> chain -->
-      <line x1="190" y1="300" x2="296" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
-      <text x="243" y="290" text-anchor="middle" font-size="10.5" fill="#7D8CA3">M-of-N quorum</text>
+      <line x1="180" y1="300" x2="276" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
+      <text x="228" y="289" text-anchor="middle" font-size="10.5" fill="#7D8CA3">M-of-N quorum</text>
 
       <!-- chain -->
-      <rect x="300" y="274" width="170" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="385" y="294" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">EVM chain</text>
-      <text x="385" y="312" text-anchor="middle" font-size="10.5" fill="#7D8CA3">your choice · receipts</text>
+      <rect x="280" y="270" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="365" y="294" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">EVM chain</text>
+      <text x="365" y="312" text-anchor="middle" font-size="10.5" fill="#7D8CA3">your choice · receipts</text>
 
-      <!-- chain -> node -->
-      <line x1="470" y1="300" x2="516" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
-      <text x="493" y="290" text-anchor="middle" font-size="11" fill="#7D8CA3">policy</text>
+      <!-- chain -> node : policy -->
+      <line x1="450" y1="300" x2="516" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
+      <text x="483" y="289" text-anchor="middle" font-size="11" fill="#7D8CA3">policy</text>
+
+      <!-- node -> chain : receipts (return channel above rail) -->
+      <path d="M 545 270 L 545 218 Q 545 210 537 210 L 368 210 Q 360 210 360 218 L 360 266" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
+      <text x="450" y="202" text-anchor="middle" font-size="11" fill="#7D8CA3">receipts</text>
 
       <!-- governance node -->
-      <rect x="516" y="248" width="248" height="104" rx="8" fill="none" stroke="#4D9FFF" stroke-opacity=".22"/>
-      <rect x="520" y="252" width="240" height="96" rx="6" fill="#101722" stroke="#4D9FFF"/>
-      <text x="640" y="284" text-anchor="middle" font-size="14.5" fill="#F2F7FF" font-weight="600" letter-spacing="1.2">GOVERNANCE NODE</text>
-      <text x="640" y="306" text-anchor="middle" font-size="12.5" fill="#F2F7FF">chain-attested TEE</text>
-      <text x="640" y="326" text-anchor="middle" font-size="11" fill="#7D8CA3">on-prem $8,000 · or hosted</text>
+      <rect x="516" y="266" width="178" height="68" rx="8" fill="none" stroke="#4D9FFF" stroke-opacity=".22"/>
+      <rect x="520" y="270" width="170" height="60" rx="6" fill="#101722" stroke="#4D9FFF"/>
+      <text x="605" y="294" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="600">governance node</text>
+      <text x="605" y="312" text-anchor="middle" font-size="10.5" fill="#7D8CA3">TEE · $8,000 · or hosted</text>
 
       <!-- stablecoins -->
-      <rect x="290" y="470" width="170" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="375" y="500" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">stablecoins</text>
+      <rect x="520" y="460" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="605" y="494" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">stablecoins</text>
 
-      <!-- stablecoins -> node (elbow) -->
-      <path d="M 375 470 L 375 388 Q 375 380 383 380 L 552 380 Q 560 380 560 372 L 560 352" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
-      <text x="467" y="372" text-anchor="middle" font-size="11" fill="#7D8CA3">policy-gated settlement</text>
+      <!-- stablecoins -> node : settlement -->
+      <line x1="605" y1="460" x2="605" y2="336" stroke="#45536B" marker-end="url(#arr)"/>
+      <text x="615" y="402" font-size="11" fill="#7D8CA3">settlement</text>
 
       <!-- node -> venues (fork) -->
-      <line x1="760" y1="300" x2="826" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
-      <path d="M 795 300 L 795 214 Q 795 206 803 206 L 826 206" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
-      <path d="M 795 300 L 795 386 Q 795 394 803 394 L 826 394" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
-      <circle cx="795" cy="300" r="2.5" fill="#45536B"/>
+      <line x1="690" y1="300" x2="826" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
+      <path d="M 790 300 L 790 218 Q 790 210 798 210 L 826 210" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
+      <path d="M 790 300 L 790 382 Q 790 390 798 390 L 826 390" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
+      <circle cx="790" cy="300" r="2.5" fill="#45536B"/>
 
       <!-- venues -->
-      <rect x="830" y="180" width="180" height="52" rx="6" fill="#101722" stroke="#4D9FFF"/>
-      <text x="920" y="200" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">private GPU API</text>
-      <text x="920" y="218" text-anchor="middle" font-size="10.5"><tspan fill="#9FCBFF">attested</tspan> <tspan fill="#7D8CA3">· 🇺🇸 🇳🇱 🇩🇪 🇮🇳 🇯🇵</tspan></text>
+      <rect x="830" y="180" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="915" y="204" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">frontier APIs</text>
+      <text x="915" y="222" text-anchor="middle" font-size="10.5" fill="#7D8CA3">OpenAI · Anthropic</text>
 
-      <rect x="830" y="274" width="180" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="920" y="304" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">your racks</text>
+      <rect x="830" y="270" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="915" y="304" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">your racks</text>
 
-      <rect x="830" y="368" width="180" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="920" y="388" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">frontier APIs</text>
-      <text x="920" y="406" text-anchor="middle" font-size="10.5" fill="#7D8CA3">OpenAI · Anthropic</text>
+      <rect x="830" y="360" width="170" height="60" rx="6" fill="#101722" stroke="#4D9FFF"/>
+      <text x="915" y="384" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">private GPU API</text>
+      <text x="915" y="402" text-anchor="middle" font-size="10.5"><tspan fill="#9FCBFF">attested</tspan> <tspan fill="#7D8CA3">· 🇺🇸 🇳🇱 🇩🇪 🇮🇳 🇯🇵</tspan></text>
 
       <!-- legend -->
       <text x="1010" y="548" text-anchor="end" font-size="11" fill="#4D9FFF">blue — the Ember product</text>
@@ -189,6 +190,7 @@
         <p class="note"><b>M-of-N quorum.</b> Policy changes require M-of-N signatures from keys your team already holds — YubiKeys, passkeys, wallets. No admin can act alone; no vendor can act at all.</p>
         <p class="note"><b>The chain.</b> Any EVM chain. Authority root, policy, and receipts live there — they outlast every vendor, including us.</p>
         <p class="note"><b>The governance node.</b> A chain-attested TEE: an $8,000 appliance on-prem, or hosted by us. It enforces policy and holds nothing you can't reproduce — if there's a fire, save something else.</p>
+        <p class="note"><b>SaaS &amp; IAM.</b> Your identity and software stack stays as it is — it reaches intelligence through one governed API instead of scattered keys. The dashed line is how it connects today: directly, ungoverned.</p>
         <p class="note"><b>The private GPU API.</b> Venues present attestation — hardware, stack, and location — before payment releases. Today: the US, Netherlands, Germany, India, and Japan (pilot); the map grows. Your racks and the frontier APIs sit behind the same API.</p>
         <p class="note"><b>Settlement.</b> Stablecoins fund every venue through the node; payment moves only on policy. Treasury can live directly in the system — keys sealed in the node — or behind a qualified custodian you plug in. Same policy either way.</p>
         <p class="note"><b>The record.</b> A receipt for every allow and every refusal, anchored to the chain.</p>
@@ -197,8 +199,25 @@
   </section>
 
   <section>
+    <div class="wrap">
+      <p class="label">THE PRODUCT</p>
+      <div class="prodgrid">
+        <div class="prod">
+          <h3>The private GPU API</h3>
+          <p>One endpoint over attested GPUs in five countries. The attestation proves hardware, stack, and location before payment releases — jurisdiction as a verified fact, not a contract clause. Your racks and the frontier APIs plug into the same interface.</p>
+        </div>
+        <div class="prod">
+          <h3>Finance controls</h3>
+          <p>Budgets per team, per app, per agent — enforced, not dashboarded. Holds above thresholds, refusals past the line, a receipt for every decision. Treasury in-system or behind a qualified custodian you plug in.</p>
+        </div>
+      </div>
+      <p class="prodclose">Two sides of one core: <em style="color:var(--muted);font-style:normal">where intelligence runs, and what it may spend.</em> From there, the same governance opens outward — other APIs, email, and the SaaS you already run.</p>
+    </div>
+  </section>
+
+  <section>
     <div class="wrap point">
-      <p class="label">THE POINT</p>
+      <p class="label">WHY SOVEREIGNTY</p>
       <p>Everything your company runs on is rented — the models, the logins, the payments. <em>Renting is fine. Having no way out is not.</em></p>
       <p>Ember puts your authority — keys, budgets, rules, receipts — on an EVM chain you choose, enforced by a chain-attested TEE in your office or hosted by us.</p>
       <p>Your cloud IAM stays. It keeps answering <em>who</em>; Ember answers <em>how much, where, and with whose keys</em>.</p>
