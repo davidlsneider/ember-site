@@ -40,8 +40,6 @@
   .framewrap{position:relative;padding-bottom:10px}
   .framewrap::before{content:"";position:absolute;inset:-90px -60px 0;background:radial-gradient(55% 60% at 50% 42%,rgba(77,159,255,.17),transparent 70%);pointer-events:none}
   .frame{position:relative;border:1px solid #24344D;border-radius:12px;background:var(--panel);padding:18px 16px 12px;box-shadow:0 0 140px rgba(77,159,255,.15)}
-  .framebar{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:2px 8px 14px;border-bottom:1px solid var(--line);margin-bottom:14px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted)}
-  .framebar .flags{letter-spacing:.1em}
   .frame .diagram{overflow-x:auto}
   .frame svg{display:block;min-width:840px;width:100%;height:auto;font-family:"IBM Plex Mono",monospace}
 
@@ -92,11 +90,7 @@
 
     <div class="framewrap">
     <div class="frame">
-    <div class="framebar">
-      <span>THE SYSTEM</span>
-      <span class="flags">ONE API · ATTESTED GPUS&nbsp; 🇺🇸 🇳🇱 🇩🇪 🇮🇳 🇯🇵 · JURISDICTION PROVEN, NOT PROMISED</span>
-    </div>
-    <div class="diagram" role="img" aria-label="Ember system diagram, read left to right. Control plane, used rarely: team-held keys — YubiKeys, passkeys, wallets — sign by M-of-N quorum to an EVM chain of your choice, which sends policy to the governance node and receives receipts back. Daily use: your SaaS and IAM — apps, agents, people — reach the node through one API; a dashed line shows how they connect to providers today, directly and ungoverned. The governance node, a $8,000 TEE on-prem or hosted, routes to frontier APIs, your racks, and the attested private GPU API. Stablecoins settle through the node on policy. Blue marks the Ember product.">
+    <div class="diagram" role="img" aria-label="Ember system diagram, read left to right. Control plane, used rarely: team-held keys — a 3-of-5 quorum of YubiKeys and passkeys — sign to an EVM chain of your choice, which sends policy to the governance node and receives receipts back. Daily use: your SaaS and IAM — apps, agents, people — exchange with the node over one API; a dashed line shows how they connect to providers today, directly and ungoverned. The governance node, a chain-attested TEE, routes to frontier APIs, your racks, and the attested private GPU API with capacity in five countries. Stablecoins settle through the node on policy.">
     <svg viewBox="0 0 1040 560" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
@@ -113,18 +107,23 @@
       <text x="915" y="84" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">your SaaS &amp; IAM</text>
       <text x="915" y="102" text-anchor="middle" font-size="10.5" fill="#7D8CA3">apps · agents · people</text>
 
-      <!-- SaaS -> node : one API -->
-      <path d="M 830 90 L 613 90 Q 605 90 605 98 L 605 264" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
+      <!-- SaaS <-> node : one API (two-way) -->
+      <path d="M 826 90 L 613 90 Q 605 90 605 98 L 605 264" fill="none" stroke="#45536B" marker-start="url(#arr)" marker-end="url(#arr)"/>
       <text x="613" y="180" font-size="11" fill="#7D8CA3">one API</text>
 
       <!-- SaaS -> frontier : today (dashed) -->
       <path d="M 915 120 L 915 174" fill="none" stroke="#384858" stroke-dasharray="4 4" marker-end="url(#arr)"/>
       <text x="925" y="152" font-size="10.5" fill="#5B6B84">direct · today</text>
 
-      <!-- keys -->
-      <rect x="10" y="270" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="95" y="294" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">team-held keys</text>
-      <text x="95" y="312" text-anchor="middle" font-size="10.5" fill="#7D8CA3">YubiKey · passkey · wallet</text>
+      <!-- keys (control plane UI — 3-of-5 quorum) -->
+      <rect x="10" y="270" width="170" height="60" rx="6" fill="#101722" stroke="#4D9FFF"/>
+      <text x="95" y="288" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">team-held keys</text>
+      <rect x="59" y="296" width="8" height="11" rx="2" fill="#4D9FFF"/>
+      <circle cx="79" cy="301.5" r="4.5" fill="#4D9FFF"/>
+      <rect x="91" y="296" width="8" height="11" rx="2" fill="#4D9FFF"/>
+      <circle cx="111" cy="301.5" r="4.5" fill="none" stroke="#45536B"/>
+      <rect x="123" y="296" width="8" height="11" rx="2" fill="none" stroke="#45536B"/>
+      <text x="95" y="322" text-anchor="middle" font-size="10" fill="#7D8CA3">3 of 5 sign</text>
 
       <!-- keys -> chain -->
       <line x1="180" y1="300" x2="276" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
@@ -147,7 +146,7 @@
       <rect x="516" y="266" width="178" height="68" rx="8" fill="none" stroke="#4D9FFF" stroke-opacity=".22"/>
       <rect x="520" y="270" width="170" height="60" rx="6" fill="#101722" stroke="#4D9FFF"/>
       <text x="605" y="294" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="600">governance node</text>
-      <text x="605" y="312" text-anchor="middle" font-size="10.5" fill="#7D8CA3">TEE · $8,000 · or hosted</text>
+      <text x="605" y="312" text-anchor="middle" font-size="10.5" fill="#7D8CA3">chain-attested TEE</text>
 
       <!-- stablecoins -->
       <rect x="520" y="460" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
@@ -155,7 +154,6 @@
 
       <!-- stablecoins -> node : settlement -->
       <line x1="605" y1="460" x2="605" y2="336" stroke="#45536B" marker-end="url(#arr)"/>
-      <text x="615" y="402" font-size="11" fill="#7D8CA3">settlement</text>
 
       <!-- node -> venues (fork) -->
       <line x1="690" y1="300" x2="826" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
@@ -175,8 +173,6 @@
       <text x="915" y="384" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">private GPU API</text>
       <text x="915" y="402" text-anchor="middle" font-size="10.5"><tspan fill="#9FCBFF">attested</tspan> <tspan fill="#7D8CA3">· 🇺🇸 🇳🇱 🇩🇪 🇮🇳 🇯🇵</tspan></text>
 
-      <!-- legend -->
-      <text x="1010" y="548" text-anchor="end" font-size="11" fill="#4D9FFF">blue — the Ember product</text>
     </svg>
     </div>
     </div>
