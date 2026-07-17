@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ember Sovereignty Systems — AI sovereignty, as a system</title>
-<meta name="description" content="AI sovereignty, as a system. Your authority — keys, budgets, rules, receipts — on an EVM chain you choose, enforced by a chain-attested TEE in your office or hosted. Private GPUs first.">
+<meta name="description" content="AI sovereignty is a process. Keys, budgets, rules, and receipts on an EVM chain you choose — enforced by a chain-attested TEE. Private GPUs first.">
 <meta property="og:title" content="Ember Sovereignty Systems">
-<meta property="og:description" content="AI sovereignty, as a system. Authority on your chain, enforced by a chain-attested TEE. Private GPUs first.">
+<meta property="og:description" content="AI sovereignty is a process. Authority on your chain, enforced by a chain-attested TEE. Private GPUs first.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0E14'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%234D9FFF'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,28 +19,37 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--muted);font:400 16px/1.65 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  body{background:var(--bg);color:var(--muted);font:400 16px/1.65 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   ::selection{background:var(--ember);color:var(--bg)}
   a{color:var(--white)}
   a:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
-  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 24px}
 
-  header{border-bottom:1px solid var(--line)}
-  .bar{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;max-width:980px;margin:0 auto;gap:16px}
+  header{border-bottom:1px solid var(--line);position:relative;z-index:2}
+  .bar{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;max-width:1020px;margin:0 auto;gap:16px}
   .brand{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.18em;color:var(--white);text-decoration:none;white-space:nowrap}
-  .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-decoration:none;padding:10px 18px;border:1px solid var(--line);color:var(--white);white-space:nowrap}
+  .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-decoration:none;padding:11px 20px;border:1px solid var(--line);color:var(--white);white-space:nowrap;border-radius:4px}
   .btn:hover{border-color:var(--muted)}
   .btn.fill{background:var(--ember);border-color:var(--ember);color:var(--bg);font-weight:500}
   .btn.fill:hover{background:var(--glow);border-color:var(--glow)}
 
-  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.22em;color:var(--muted);padding:56px 0 8px}
+  /* hero */
+  .hero{text-align:center;padding:92px 0 52px;position:relative;z-index:1}
+  h1{color:var(--white);font-size:clamp(40px,7vw,66px);font-weight:600;line-height:1.08;letter-spacing:-.022em}
+  .hero .sub{max-width:600px;margin:24px auto 34px;font-size:17.5px}
 
-  .diagram{overflow-x:auto;padding:8px 0 0}
-  .diagram svg{display:block;min-width:760px;width:100%;height:auto;font-family:"IBM Plex Mono",monospace}
+  .framewrap{position:relative;padding-bottom:10px}
+  .framewrap::before{content:"";position:absolute;inset:-90px -60px 0;background:radial-gradient(55% 60% at 50% 42%,rgba(77,159,255,.17),transparent 70%);pointer-events:none}
+  .frame{position:relative;border:1px solid #24344D;border-radius:12px;background:var(--panel);padding:18px 16px 12px;box-shadow:0 0 140px rgba(77,159,255,.15)}
+  .framebar{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:2px 8px 14px;border-bottom:1px solid var(--line);margin-bottom:14px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted)}
+  .framebar .flags{letter-spacing:.1em}
+  .frame .diagram{overflow-x:auto}
+  .frame svg{display:block;min-width:780px;width:100%;height:auto;font-family:"IBM Plex Mono",monospace}
 
-  section{padding:72px 0;border-top:1px solid var(--line)}
+  section{padding:76px 0;border-top:1px solid var(--line);position:relative;z-index:1}
+  section.first{margin-top:64px}
   .label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;color:var(--muted);margin-bottom:28px}
-  .notes{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px}
+  .notes{display:grid;grid-template-columns:1fr 1fr;gap:28px 44px}
   .note{font-size:15px}
   .note .n{font-family:"IBM Plex Mono",monospace;color:var(--ember);font-size:13px;margin-right:8px}
   .note b{color:var(--white);font-weight:600}
@@ -49,7 +58,6 @@
   .point p em{color:var(--muted);font-style:normal}
 
   .brief p.big{color:var(--white);font-size:clamp(20px,2.8vw,27px);font-weight:600;line-height:1.35;max-width:700px;margin-bottom:28px}
-  .fine{font-size:14px;margin-top:16px}
 
   footer{border-top:1px solid var(--line);padding:26px 24px;text-align:center}
   footer p{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;color:#4A5567}
@@ -57,6 +65,7 @@
   @media (max-width:720px){
     .notes{grid-template-columns:1fr}
     section{padding:56px 0}
+    .hero{padding:64px 0 40px}
   }
 </style>
 </head>
@@ -71,28 +80,38 @@
 
 <main id="top">
   <div class="wrap">
-    <p class="eyebrow">AI SOVEREIGNTY, AS A SYSTEM</p>
+    <div class="hero">
+      <h1>AI sovereignty<br>is a process.</h1>
+      <p class="sub">Keys, budgets, rules, and receipts on an EVM chain you choose — enforced by a chain-attested TEE. Private GPUs first.</p>
+      <a class="btn fill js-brief" href="#briefing">Request a briefing</a>
+    </div>
 
-    <div class="diagram" role="img" aria-label="Ember system diagram. Control plane, used rarely: team-held keys — YubiKeys, passkeys, wallets — sign by M-of-N quorum to an EVM chain of your choice, which holds the authority root, policy, and receipts. Daily use: your team signs in through your unchanged cloud IAM via SSO; apps, agents, and services call one API. Both feed the governance node — a chain-attested TEE, an $8,000 on-prem appliance or hosted — which routes to private GPUs verified by attestation, your racks, and frontier APIs like OpenAI and Anthropic. Stablecoins settle through the node, gated by policy. A receipt for every allow and every refusal returns to the chain.">
-    <svg viewBox="0 0 920 660" xmlns="http://www.w3.org/2000/svg">
+    <div class="framewrap">
+    <div class="frame">
+    <div class="framebar">
+      <span>THE SYSTEM</span>
+      <span class="flags">ONE API · ATTESTED GPUS&nbsp; 🇺🇸 🇳🇱 🇩🇪 🇮🇳 🇯🇵 · JURISDICTION PROVEN, NOT PROMISED</span>
+    </div>
+    <div class="diagram" role="img" aria-label="Ember system diagram. Control plane, used rarely: team-held keys — YubiKeys, passkeys, wallets — sign by M-of-N quorum to an EVM chain of your choice holding the authority root, policy, and receipts. Daily use: your team signs in through your unchanged cloud IAM via SSO; apps, agents, and services call one API. Policy flows from the chain to the governance node — a chain-attested TEE, on-prem for $8,000 or hosted — and receipts flow back. The node routes to attested private GPUs, your racks, and frontier APIs, with stablecoin settlement gated by policy.">
+    <svg viewBox="0 0 920 650" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
           <path d="M0,0 L10,5 L0,10 z" fill="#7D8CA3"/>
         </marker>
-        <marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
           <path d="M0,0 L10,5 L0,10 z" fill="#4D9FFF"/>
         </marker>
       </defs>
 
       <!-- plane panels -->
-      <rect x="40" y="40" width="400" height="230" rx="4" fill="#0C121C" stroke="#1E2936"/>
+      <rect x="40" y="40" width="400" height="230" rx="6" fill="#0A1018" stroke="#1E2936"/>
       <text x="60" y="68" font-size="11" letter-spacing="2.2" fill="#7D8CA3">① CONTROL PLANE — RARE</text>
 
-      <rect x="480" y="40" width="400" height="230" rx="4" fill="#0C121C" stroke="#1E2936"/>
+      <rect x="480" y="40" width="400" height="230" rx="6" fill="#0A1018" stroke="#1E2936"/>
       <text x="500" y="68" font-size="11" letter-spacing="2.2" fill="#7D8CA3">DAILY USE — CONSTANT</text>
 
       <!-- keys node -->
-      <rect x="70" y="90" width="250" height="54" rx="3" fill="#101722" stroke="#1E2936"/>
+      <rect x="70" y="90" width="250" height="54" rx="4" fill="#101722" stroke="#1E2936"/>
       <text x="195" y="112" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">team-held keys</text>
       <text x="195" y="130" text-anchor="middle" font-size="11.5" fill="#7D8CA3">YubiKey · passkey · wallet</text>
 
@@ -101,12 +120,12 @@
       <text x="207" y="158" font-size="11.5" fill="#7D8CA3">M-of-N quorum</text>
 
       <!-- chain node -->
-      <rect x="70" y="168" width="340" height="56" rx="3" fill="#101722" stroke="#4D9FFF"/>
+      <rect x="70" y="168" width="340" height="56" rx="4" fill="#101722" stroke="#4D9FFF"/>
       <text x="240" y="190" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">② EVM chain of your choice</text>
       <text x="240" y="208" text-anchor="middle" font-size="11.5" fill="#7D8CA3">authority root · policy · receipts</text>
 
       <!-- team node -->
-      <rect x="510" y="90" width="120" height="44" rx="3" fill="#101722" stroke="#1E2936"/>
+      <rect x="510" y="90" width="120" height="44" rx="4" fill="#101722" stroke="#1E2936"/>
       <text x="570" y="116" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">your team</text>
 
       <!-- team -> iam -->
@@ -114,74 +133,75 @@
       <text x="649" y="103" text-anchor="middle" font-size="11.5" fill="#7D8CA3">SSO</text>
 
       <!-- iam node -->
-      <rect x="670" y="90" width="180" height="54" rx="3" fill="#101722" stroke="#1E2936"/>
+      <rect x="670" y="90" width="180" height="54" rx="4" fill="#101722" stroke="#1E2936"/>
       <text x="760" y="112" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">cloud IAM</text>
       <text x="760" y="130" text-anchor="middle" font-size="11.5" fill="#7D8CA3">unchanged</text>
 
       <!-- apps node -->
-      <rect x="510" y="180" width="210" height="44" rx="3" fill="#101722" stroke="#1E2936"/>
-      <text x="615" y="206" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">apps · agents · services</text>
+      <rect x="500" y="180" width="210" height="44" rx="4" fill="#101722" stroke="#1E2936"/>
+      <text x="605" y="206" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">apps · agents · services</text>
 
-      <!-- chain -> tee -->
-      <path d="M 240 224 C 240 290, 340 302, 386 328" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
-      <text x="266" y="286" font-size="11.5" fill="#7D8CA3">policy</text>
+      <!-- chain -> tee : policy (orthogonal) -->
+      <path d="M 200 224 L 200 270 Q 200 278 208 278 L 352 278 Q 360 278 360 286 L 360 326" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <text x="320" y="270" text-anchor="middle" font-size="11.5" fill="#7D8CA3">policy</text>
 
-      <!-- iam -> tee -->
-      <path d="M 760 144 C 760 252, 620 292, 554 328" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
-      <text x="676" y="260" text-anchor="middle" font-size="11.5" fill="#7D8CA3">OIDC token exchange</text>
+      <!-- tee -> chain : receipts (blue, orthogonal, paired channel) -->
+      <path d="M 400 330 L 400 310 Q 400 302 392 302 L 288 302 Q 280 302 280 294 L 280 228" fill="none" stroke="#4D9FFF" marker-end="url(#arrB)"/>
+      <text x="240" y="252" text-anchor="middle" font-size="11.5" fill="#4D9FFF">⑥ receipts</text>
 
-      <!-- apps -> tee -->
-      <path d="M 615 224 C 615 272, 545 302, 508 328" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
-      <text x="592" y="282" font-size="11.5" fill="#7D8CA3">one API</text>
+      <!-- iam -> tee : OIDC (orthogonal, right side) -->
+      <path d="M 760 144 L 760 364 Q 760 372 752 372 L 616 372" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <text x="750" y="312" text-anchor="end" font-size="11.5" fill="#7D8CA3">OIDC token exchange</text>
+
+      <!-- apps -> tee : one API (straight vertical) -->
+      <line x1="605" y1="224" x2="605" y2="326" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <text x="615" y="286" font-size="11.5" fill="#7D8CA3">one API</text>
 
       <!-- tee node -->
-      <rect x="306" y="326" width="308" height="108" rx="4" fill="none" stroke="#4D9FFF" stroke-opacity=".22"/>
-      <rect x="310" y="330" width="300" height="100" rx="3" fill="#101722" stroke="#4D9FFF"/>
+      <rect x="306" y="326" width="308" height="108" rx="6" fill="none" stroke="#4D9FFF" stroke-opacity=".22"/>
+      <rect x="310" y="330" width="300" height="100" rx="4" fill="#101722" stroke="#4D9FFF"/>
       <text x="460" y="362" text-anchor="middle" font-size="14" fill="#F2F7FF" font-weight="600" letter-spacing="1.2">③ GOVERNANCE NODE</text>
       <text x="460" y="383" text-anchor="middle" font-size="12.5" fill="#F2F7FF">chain-attested TEE</text>
       <text x="460" y="403" text-anchor="middle" font-size="11.5" fill="#7D8CA3">on-prem $8,000 · or hosted</text>
 
       <!-- stablecoins -->
-      <rect x="60" y="362" width="160" height="60" rx="3" fill="#101722" stroke="#1E2936"/>
+      <rect x="60" y="362" width="160" height="60" rx="4" fill="#101722" stroke="#1E2936"/>
       <text x="140" y="396" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">⑤ stablecoins</text>
-      <text x="265" y="366" text-anchor="middle" font-size="11.5" fill="#7D8CA3">policy-gated</text>
-      <text x="265" y="380" text-anchor="middle" font-size="11.5" fill="#7D8CA3">settlement</text>
-      <line x1="220" y1="392" x2="308" y2="392" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <text x="224" y="372" font-size="11.5" fill="#7D8CA3">policy-gated</text>
+      <text x="224" y="386" font-size="11.5" fill="#7D8CA3">settlement</text>
+      <line x1="220" y1="396" x2="306" y2="396" stroke="#7D8CA3" marker-end="url(#arr)"/>
 
-      <!-- tee -> venues -->
-      <path d="M 380 430 C 300 482, 240 512, 198 556" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <!-- tee -> venues (orthogonal fan) -->
+      <path d="M 370 430 L 370 470 Q 370 478 362 478 L 203 478 Q 195 478 195 486 L 195 556" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
       <line x1="460" y1="430" x2="460" y2="556" stroke="#7D8CA3" marker-end="url(#arr)"/>
-      <path d="M 540 430 C 620 482, 680 512, 722 556" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <path d="M 550 430 L 550 470 Q 550 478 558 478 L 717 478 Q 725 478 725 486 L 725 556" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
 
       <!-- venues -->
-      <rect x="80" y="560" width="230" height="60" rx="3" fill="#101722" stroke="#1E2936"/>
+      <rect x="80" y="560" width="230" height="60" rx="4" fill="#101722" stroke="#1E2936"/>
       <text x="195" y="584" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">④ private GPUs</text>
-      <text x="195" y="602" text-anchor="middle" font-size="11.5" fill="#4D9FFF">attested</text>
+      <text x="195" y="603" text-anchor="middle" font-size="11.5"><tspan fill="#4D9FFF">attested</tspan> <tspan fill="#7D8CA3">· 🇺🇸 🇳🇱 🇩🇪 🇮🇳 🇯🇵</tspan></text>
 
-      <rect x="345" y="560" width="230" height="60" rx="3" fill="#101722" stroke="#1E2936"/>
+      <rect x="345" y="560" width="230" height="60" rx="4" fill="#101722" stroke="#1E2936"/>
       <text x="460" y="594" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">your racks</text>
 
-      <rect x="610" y="560" width="230" height="60" rx="3" fill="#101722" stroke="#1E2936"/>
+      <rect x="610" y="560" width="230" height="60" rx="4" fill="#101722" stroke="#1E2936"/>
       <text x="725" y="584" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">frontier APIs</text>
       <text x="725" y="602" text-anchor="middle" font-size="11.5" fill="#7D8CA3">OpenAI · Anthropic</text>
-
-      <!-- tee -> chain receipts (blue) -->
-      <path d="M 610 372 C 806 372, 830 190, 416 190" fill="none" stroke="#4D9FFF" marker-end="url(#arrB)"/>
-      <text x="742" y="284" text-anchor="middle" font-size="11.5" fill="#4D9FFF">⑥ every allow ·</text>
-      <text x="742" y="300" text-anchor="middle" font-size="11.5" fill="#4D9FFF">every refusal</text>
     </svg>
+    </div>
+    </div>
     </div>
   </div>
 
-  <section>
+  <section class="first">
     <div class="wrap">
       <p class="label">NOTES</p>
       <div class="notes">
         <p class="note"><span class="n">①</span><b>M-of-N quorum.</b> Policy changes require M-of-N signatures from keys your team already holds — YubiKeys, passkeys, wallets. No admin can act alone; no vendor can act at all.</p>
         <p class="note"><span class="n">②</span><b>The chain.</b> Any EVM chain. Authority root, policy, and receipts live there — they outlast every vendor, including us.</p>
         <p class="note"><span class="n">③</span><b>The node.</b> A chain-attested TEE: an $8,000 appliance on-prem, or hosted by us. It enforces policy and holds nothing you can't reproduce — if there's a fire, save something else.</p>
-        <p class="note"><span class="n">④</span><b>The venues.</b> Private GPU venues present attestation — hardware, stack, and location — before payment releases. Your racks and the frontier APIs sit behind the same API.</p>
-        <p class="note"><span class="n">⑤</span><b>Settlement.</b> Stablecoins fund every venue through the node; payment moves only on policy.</p>
+        <p class="note"><span class="n">④</span><b>The venues.</b> Private GPU venues present attestation — hardware, stack, and location — before payment releases. Today: the US, Netherlands, Germany, India, and Japan (pilot); the map grows. Your racks and the frontier APIs sit behind the same API.</p>
+        <p class="note"><span class="n">⑤</span><b>Settlement.</b> Stablecoins fund every venue through the node; payment moves only on policy. Treasury can live directly in the system — keys sealed in the node — or behind a qualified custodian you plug in. Same policy either way.</p>
         <p class="note"><span class="n">⑥</span><b>The record.</b> A receipt for every allow and every refusal, anchored to the chain.</p>
       </div>
     </div>
@@ -203,7 +223,6 @@
       <p class="label">BRIEFING</p>
       <p class="big">Tell us what being cut off would look like for you.</p>
       <a class="btn fill js-brief" href="#briefing">Request a briefing</a>
-      <p class="fine">Conducted by the founding team.</p>
     </div>
   </section>
 </main>
@@ -213,9 +232,12 @@
 </footer>
 
 <script>
-  // EDIT HERE: paste the Google Form URL between the quotes. Until set, briefing buttons scroll to the briefing section.
-  const FORM_URL = "";
-  document.querySelectorAll(".js-brief").forEach(a => { if (FORM_URL) a.href = FORM_URL; });
+  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe-hn-DRgtQaQdSClrjDeVCLhMQKo0MSc7xJsMOIAlV6-RovA/viewform";
+  document.querySelectorAll(".js-brief").forEach(a => {
+    a.href = FORM_URL;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
 </script>
 </body>
 </html>
