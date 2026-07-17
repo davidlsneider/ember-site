@@ -1,5 +1,9 @@
+.git/
+.git/**
+.wrangler/
+.wrangler/**
 wrangler.jsonc
 CNAME
 .nojekyll
-.git
 .assetsignore
+README.md
