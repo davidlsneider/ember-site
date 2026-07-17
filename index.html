@@ -3,298 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ember Sovereignty Systems — AI sovereignty, as a system</title>
-<meta name="description" content="Hold the keys to intelligence. Keys, budgets, rules, and receipts on a blockchain of your choice, enforced by a chain-attested TEE — to reach private GPUs and govern any digital system.">
-<meta property="og:title" content="Ember Sovereignty Systems">
-<meta property="og:description" content="Hold the keys to intelligence. Authority on a blockchain of your choice, enforced by a chain-attested TEE — private GPUs and any digital system, governed.">
-<meta property="og:type" content="website">
+<title>Ember Sovereignty Systems</title>
+<meta name="description" content="Sovereign mode for AI products.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0E14'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%234D9FFF'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#0A0E14; --surface:#101722; --panel:#0C121C; --line:#1E2936;
-    --white:#F2F7FF; --muted:#8CA0B8; --ember:#4D9FFF; --glow:#9FCBFF;
-  }
+  :root{--bg:#0A0E14;--line:#1E2936;--white:#F2F7FF;--muted:#8CA0B8;--ember:#4D9FFF;--glow:#9FCBFF}
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--muted);font:400 17px/1.7 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{background:var(--bg);color:var(--muted);font:400 17px/1.7 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
   ::selection{background:var(--ember);color:var(--bg)}
-  a{color:var(--white)}
-  a:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
-  .wrap{max-width:1020px;margin:0 auto;padding:0 24px}
-
-  header{border-bottom:1px solid var(--line);position:relative;z-index:2}
-  .bar{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;max-width:1020px;margin:0 auto;gap:16px}
-  .brand{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.18em;color:var(--white);text-decoration:none;white-space:nowrap}
-  .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-decoration:none;padding:11px 20px;border:1px solid var(--line);color:var(--white);white-space:nowrap;border-radius:4px}
-  .btn:hover{border-color:var(--muted)}
-  .btn.fill{background:var(--ember);border-color:var(--ember);color:var(--bg);font-weight:500}
-  .btn.fill:hover{background:var(--glow);border-color:var(--glow)}
-
-  .hero{text-align:center;padding:92px 0 52px;position:relative;z-index:1}
-  h1{color:var(--white);font-size:clamp(40px,7vw,66px);font-weight:600;line-height:1.08;letter-spacing:-.022em}
-  .hero .sub{max-width:660px;margin:24px auto 34px;font-size:18.5px}
-
-  .framewrap{position:relative;padding-bottom:10px}
-  .framewrap::before{content:"";position:absolute;inset:-90px -60px 0;background:radial-gradient(55% 60% at 50% 42%,rgba(77,159,255,.17),transparent 70%);pointer-events:none}
-  .frame{position:relative;border:1px solid #24344D;border-radius:12px;background:var(--panel);padding:18px 16px 12px;box-shadow:0 0 140px rgba(77,159,255,.15)}
-  .frame .diagram{overflow-x:auto}
-  .frame svg{display:block;min-width:840px;width:100%;height:auto;font-family:"IBM Plex Mono",monospace}
-
-  section{padding:76px 0;border-top:1px solid var(--line);position:relative;z-index:1}
-  section.first{margin-top:64px}
-  .label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;color:var(--muted);margin-bottom:28px}
-  .notes{display:grid;grid-template-columns:1fr 1fr;gap:28px 44px}
-  .note{font-size:16px}
-  .note b{color:var(--white);font-weight:600}
-
-  .prodgrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px}
-  .prod{background:var(--surface);padding:32px 30px}
-  .prod h3{color:var(--white);font-size:19px;font-weight:600;margin-bottom:10px}
-  .prod p{font-size:16px}
-
-  .boxrow{display:grid;grid-template-columns:1fr 1.35fr;gap:48px;margin-top:40px;align-items:center}
-  .figure{border:1px solid var(--line);background:var(--surface);padding:34px 24px 18px;text-align:center;border-radius:8px}
-  .figure svg{max-width:210px;width:100%;height:auto}
-  .figcap{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--muted);margin-top:18px}
-  .figcap b{color:var(--white);font-weight:500}
-  .spec{font-family:"IBM Plex Mono",monospace;font-size:14px;line-height:1.55}
-  .spec dt{color:var(--ember);letter-spacing:.18em;font-size:11px;margin-top:22px}
-  .spec dt:first-child{margin-top:0}
-  .spec dd{color:var(--white);margin-top:4px}
-  @media (prefers-reduced-motion:no-preference){
-    .led{animation:ledpulse 3s ease-in-out infinite}
-    @keyframes ledpulse{0%,100%{opacity:1}50%{opacity:.4}}
-  }
-  .prodclose{color:var(--white);font-size:clamp(17px,2.2vw,20px);line-height:1.5;max-width:760px}
-
-  .point p{color:var(--white);font-size:clamp(17px,2.2vw,21px);line-height:1.55;max-width:760px;margin-bottom:18px}
-  .point p em{color:var(--muted);font-style:normal}
-
-  .brief p.big{color:var(--white);font-size:clamp(20px,2.8vw,27px);font-weight:600;line-height:1.35;max-width:700px;margin-bottom:28px}
-
-  footer{border-top:1px solid var(--line);padding:26px 24px;text-align:center}
-  footer p{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;color:#4A5567}
-
-  @media (max-width:720px){
-    .notes,.prodgrid{grid-template-columns:1fr}
-    .boxrow{grid-template-columns:1fr;gap:28px}
-    section{padding:56px 0}
-    .hero{padding:64px 0 40px}
-  }
+  main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px}
+  .card{max-width:560px}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.22em;color:var(--muted);margin-bottom:36px}
+  .brand i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ember);margin-right:10px}
+  h1{color:var(--white);font-size:clamp(28px,5vw,40px);font-weight:600;line-height:1.15;letter-spacing:-.015em;margin-bottom:20px}
+  p{margin-bottom:28px}
+  .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-decoration:none;padding:12px 22px;border-radius:4px;background:var(--ember);color:var(--bg);font-weight:500}
+  .btn:hover{background:var(--glow)}
+  .btn:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#4A5567}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="bar">
-    <a class="brand" href="#top">EMBER SOVEREIGNTY SYSTEMS</a>
-    <a class="btn js-brief" href="#briefing">Request a briefing</a>
+<main>
+  <div class="card">
+    <p class="brand"><i></i>EMBER SOVEREIGNTY SYSTEMS</p>
+    <h1>Sovereign mode<br>for AI products.</h1>
+    <p>A clean room where a vendor's intelligence meets a user's data under the user's key — and nobody keeps the data. Even the vendor can't see it. And that's verifiable.</p>
+    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSe-hn-DRgtQaQdSClrjDeVCLhMQKo0MSc7xJsMOIAlV6-RovA/viewform" target="_blank" rel="noopener">Request a briefing</a>
   </div>
-</header>
-
-<main id="top">
-  <div class="wrap">
-    <div class="hero">
-      <h1>Hold the keys<br>to intelligence</h1>
-      <p class="sub">Keys, budgets, rules, and receipts on a blockchain of your choice, enforced by a chain-attested TEE — to reach private GPUs and govern any digital system.</p>
-      <a class="btn fill js-brief" href="#briefing">Request a briefing</a>
-    </div>
-
-    <div class="framewrap">
-    <div class="frame">
-    <div class="diagram" role="img" aria-label="Ember system diagram, read left to right. Control plane, used rarely: team-held keys — a 3-of-5 quorum of YubiKeys and passkeys — sign to an EVM chain of your choice, which sends policy to the governance node and receives receipts back. Daily use: your SaaS and IAM — apps, agents, people — exchange with the node over one API; a dashed line shows how they connect to providers today, directly and ungoverned. The governance node, a chain-attested TEE, routes to frontier APIs, your racks, and the attested private GPU API with capacity in five countries. Stablecoins settle through the node on policy.">
-    <svg viewBox="0 0 1040 560" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" fill="#45536B"/>
-        </marker>
-      </defs>
-
-      <!-- captions -->
-      <text x="10" y="246" font-size="11" letter-spacing="2.2" fill="#4D9FFF">CONTROL PLANE — RARE</text>
-      <text x="830" y="44" font-size="11" letter-spacing="2.2" fill="#7D8CA3">DAILY USE — CONSTANT</text>
-
-      <!-- SaaS & IAM -->
-      <rect x="830" y="60" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="915" y="84" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">your SaaS &amp; IAM</text>
-      <text x="915" y="102" text-anchor="middle" font-size="10.5" fill="#7D8CA3">apps · agents · people</text>
-
-      <!-- SaaS <-> node : one API (two-way) -->
-      <path d="M 826 90 L 613 90 Q 605 90 605 98 L 605 264" fill="none" stroke="#45536B" marker-start="url(#arr)" marker-end="url(#arr)"/>
-      <text x="613" y="180" font-size="11" fill="#7D8CA3">one API</text>
-
-      <!-- SaaS -> frontier : today (dashed) -->
-      <path d="M 915 120 L 915 174" fill="none" stroke="#384858" stroke-dasharray="4 4" marker-end="url(#arr)"/>
-      <text x="925" y="152" font-size="10.5" fill="#5B6B84">direct · today</text>
-
-      <!-- keys (control plane UI — 3-of-5 quorum) -->
-      <rect x="10" y="270" width="170" height="60" rx="6" fill="#101722" stroke="#4D9FFF"/>
-      <text x="95" y="288" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">team-held keys</text>
-      <rect x="59" y="296" width="8" height="11" rx="2" fill="#4D9FFF"/>
-      <circle cx="79" cy="301.5" r="4.5" fill="#4D9FFF"/>
-      <rect x="91" y="296" width="8" height="11" rx="2" fill="#4D9FFF"/>
-      <circle cx="111" cy="301.5" r="4.5" fill="none" stroke="#45536B"/>
-      <rect x="123" y="296" width="8" height="11" rx="2" fill="none" stroke="#45536B"/>
-      <text x="95" y="322" text-anchor="middle" font-size="10" fill="#7D8CA3">3 of 5 sign</text>
-
-      <!-- keys -> chain -->
-      <line x1="180" y1="300" x2="276" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
-      <text x="228" y="289" text-anchor="middle" font-size="10.5" fill="#7D8CA3">M-of-N quorum</text>
-
-      <!-- chain -->
-      <rect x="280" y="270" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="365" y="294" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">EVM chain</text>
-      <text x="365" y="312" text-anchor="middle" font-size="10.5" fill="#7D8CA3">your choice</text>
-
-      <!-- chain -> node : policy -->
-      <line x1="450" y1="300" x2="516" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
-      <text x="483" y="289" text-anchor="middle" font-size="11" fill="#7D8CA3">policy</text>
-
-      <!-- node -> chain : receipts (return channel above rail) -->
-      <path d="M 545 270 L 545 218 Q 545 210 537 210 L 368 210 Q 360 210 360 218 L 360 266" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
-      <text x="450" y="202" text-anchor="middle" font-size="11" fill="#7D8CA3">receipts</text>
-
-      <!-- governance node -->
-      <rect x="516" y="266" width="178" height="68" rx="8" fill="none" stroke="#4D9FFF" stroke-opacity=".22"/>
-      <rect x="520" y="270" width="170" height="60" rx="6" fill="#101722" stroke="#4D9FFF"/>
-      <text x="605" y="294" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="600">governance node</text>
-      <text x="605" y="312" text-anchor="middle" font-size="10.5" fill="#7D8CA3">chain-attested TEE</text>
-
-      <!-- stablecoins -->
-      <rect x="520" y="460" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="605" y="494" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">stablecoins</text>
-
-      <!-- stablecoins -> node : settlement -->
-      <line x1="605" y1="460" x2="605" y2="336" stroke="#45536B" marker-end="url(#arr)"/>
-
-      <!-- node -> venues (fork) -->
-      <line x1="690" y1="300" x2="826" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
-      <path d="M 790 300 L 790 218 Q 790 210 798 210 L 826 210" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
-      <path d="M 790 300 L 790 382 Q 790 390 798 390 L 826 390" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
-      <circle cx="790" cy="300" r="2.5" fill="#45536B"/>
-
-      <!-- venues -->
-      <rect x="830" y="180" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="915" y="204" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">frontier APIs</text>
-      <text x="915" y="222" text-anchor="middle" font-size="10.5" fill="#7D8CA3">OpenAI · Anthropic</text>
-
-      <rect x="830" y="270" width="170" height="60" rx="6" fill="#101722" stroke="#1E2936"/>
-      <text x="915" y="304" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">your racks</text>
-
-      <rect x="830" y="360" width="170" height="60" rx="6" fill="#101722" stroke="#4D9FFF"/>
-      <text x="915" y="384" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">private GPU API</text>
-      <text x="915" y="402" text-anchor="middle" font-size="10.5"><tspan fill="#9FCBFF">attested</tspan> <tspan fill="#7D8CA3">· 🇺🇸 🇳🇱 🇩🇪 🇮🇳 🇯🇵</tspan></text>
-
-    </svg>
-    </div>
-    </div>
-    </div>
-  </div>
-
-  <section class="first">
-    <div class="wrap">
-      <p class="label">NOTES</p>
-      <div class="notes">
-        <p class="note"><b>M-of-N quorum.</b> Policy changes require M-of-N signatures from keys your team already holds — YubiKeys, passkeys, wallets. No admin can act alone; no vendor can act at all.</p>
-        <p class="note"><b>Chain.</b> Any EVM chain. Authority root, policy, and receipts outlast every vendor, including us.</p>
-        <p class="note"><b>Governance node.</b> A chain-attested TEE: an appliance on-prem, or hosted. It enforces policy and holds nothing you can't reproduce.</p>
-        <p class="note"><b>SaaS &amp; IAM.</b> Your identity and software stack reaches intelligence through one governed API instead of scattered keys. The dashed line is how it connects today: directly, ungoverned.</p>
-        <p class="note"><b>Private GPU API.</b> Attestation before payment releases. Today: the US, Netherlands, Germany, India, and Japan (pilot); the map grows.</p>
-        <p class="note"><b>Settlement.</b> Stablecoins fund every venue through the node; payment moves only on policy.</p>
-        <p class="note"><b>Record.</b> A receipt for every allow and every refusal, anchored to the chain.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <p class="label">THE PRODUCT</p>
-      <div class="prodgrid">
-        <div class="prod">
-          <h3>The private GPU API</h3>
-          <p>One endpoint over attested GPUs in five countries. The attestation proves hardware, stack, and location before payment releases — jurisdiction as a verified fact, not a contract clause. Your racks and the frontier APIs plug into the same interface.</p>
-        </div>
-        <div class="prod">
-          <h3>Finance controls</h3>
-          <p>Budgets per team, per app, per agent — enforced, not dashboarded. Holds above thresholds, refusals past the line, a receipt for every decision. Treasury in-system or behind a qualified custodian.</p>
-        </div>
-      </div>
-      <p class="prodclose">Two sides of one core: <em style="color:var(--muted);font-style:normal">where intelligence runs, and what it may spend.</em> The same governance opens outward — other APIs, email.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <p class="label">THE BOX</p>
-      <p class="prodclose" style="margin-bottom:8px"><b style="color:var(--white)">You hold the keys. The box holds nothing.</b> <span>If there's a fire, save something else.</span></p>
-      <div class="boxrow">
-        <div class="figure">
-          <svg viewBox="0 0 260 300" role="img" aria-label="Technical drawing of the appliance: an AMD EPYC workstation tower with a sealed enclave and a single blue status light.">
-            <ellipse cx="130" cy="282" rx="86" ry="7" fill="#060a10"/>
-            <path d="M186 30 L210 44 L210 258 L186 272 Z" fill="#0C121C" stroke="#24344D" stroke-width="1"/>
-            <rect x="66" y="26" width="120" height="246" rx="5" fill="#101722" stroke="#24344D" stroke-width="1"/>
-            <line x1="82" y1="48" x2="170" y2="48" stroke="#24344D" stroke-width="1"/>
-            <line x1="82" y1="56" x2="170" y2="56" stroke="#24344D" stroke-width="1"/>
-            <line x1="82" y1="64" x2="170" y2="64" stroke="#24344D" stroke-width="1"/>
-            <line x1="82" y1="72" x2="170" y2="72" stroke="#24344D" stroke-width="1"/>
-            <rect x="82" y="96" width="88" height="1" fill="#24344D"/>
-            <rect x="82" y="210" width="88" height="26" rx="2" fill="none" stroke="#24344D" stroke-width="1"/>
-            <text x="126" y="227" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="2" fill="#8CA0B8">SEALED</text>
-            <circle class="led" cx="160" cy="252" r="3.5" fill="#4D9FFF"/>
-            <circle cx="160" cy="252" r="8" fill="none" stroke="#4D9FFF" stroke-opacity=".3" stroke-width="1"/>
-            <line x1="46" y1="26" x2="46" y2="272" stroke="#24344D" stroke-width="1"/>
-            <line x1="42" y1="26" x2="50" y2="26" stroke="#24344D" stroke-width="1"/>
-            <line x1="42" y1="272" x2="50" y2="272" stroke="#24344D" stroke-width="1"/>
-          </svg>
-          <p class="figcap"><b>AMD EPYC TOWER · SEV-SNP ATTESTED</b></p>
-        </div>
-        <dl class="spec">
-          <dt>CHASSIS</dt>
-          <dd>AMD EPYC · SEV-SNP remote attestation</dd>
-          <dt>RUNS</dt>
-          <dd>the governance node — a chain-attested TEE</dd>
-          <dt>AUTHORITY</dt>
-          <dd>on the chain. Never in the box.</dd>
-          <dt>RECOVERY</dt>
-          <dd>a new box + 3-of-5 keys. Never us.</dd>
-          <dt>OR</dt>
-          <dd>hosted — same system, switch anytime</dd>
-        </dl>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap point">
-      <p class="label">WHY SOVEREIGNTY</p>
-      <p>Everything your company runs on is rented — the models, the logins, the payments. <em>Renting is fine. Having no way out is not.</em></p>
-      <p>Route everything through it on day one. Move anything to owned — private GPUs first — one service at a time. Rent what you like; own what you must; switch without asking.</p>
-    </div>
-  </section>
-
-  <section id="briefing">
-    <div class="wrap brief">
-      <p class="label">BRIEFING</p>
-      <p class="big">Ready to explore resilience?</p>
-      <a class="btn fill js-brief" href="#briefing">Request a briefing</a>
-    </div>
-  </section>
 </main>
-
-<footer>
-  <p>EMBER SOVEREIGNTY SYSTEMS · GOVERNANCE ON CHAIN · ATTESTED HARDWARE · © 2026</p>
-</footer>
-
-<script>
-  const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe-hn-DRgtQaQdSClrjDeVCLhMQKo0MSc7xJsMOIAlV6-RovA/viewform";
-  document.querySelectorAll(".js-brief").forEach(a => {
-    a.href = FORM_URL;
-    a.target = "_blank";
-    a.rel = "noopener";
-  });
-</script>
+<footer>EMBER SOVEREIGNTY SYSTEMS · © 2026</footer>
 </body>
 </html>
