@@ -15,11 +15,11 @@
 <style>
   :root{
     --bg:#0A0E14; --surface:#101722; --panel:#0C121C; --line:#1E2936;
-    --white:#F2F7FF; --muted:#7D8CA3; --ember:#4D9FFF; --glow:#9FCBFF;
+    --white:#F2F7FF; --muted:#8CA0B8; --ember:#4D9FFF; --glow:#9FCBFF;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--muted);font:400 16px/1.65 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{background:var(--bg);color:var(--muted);font:400 17px/1.7 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   ::selection{background:var(--ember);color:var(--bg)}
   a{color:var(--white)}
   a:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
@@ -35,7 +35,7 @@
 
   .hero{text-align:center;padding:92px 0 52px;position:relative;z-index:1}
   h1{color:var(--white);font-size:clamp(40px,7vw,66px);font-weight:600;line-height:1.08;letter-spacing:-.022em}
-  .hero .sub{max-width:640px;margin:24px auto 34px;font-size:17.5px}
+  .hero .sub{max-width:660px;margin:24px auto 34px;font-size:18.5px}
 
   .framewrap{position:relative;padding-bottom:10px}
   .framewrap::before{content:"";position:absolute;inset:-90px -60px 0;background:radial-gradient(55% 60% at 50% 42%,rgba(77,159,255,.17),transparent 70%);pointer-events:none}
@@ -47,13 +47,27 @@
   section.first{margin-top:64px}
   .label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;color:var(--muted);margin-bottom:28px}
   .notes{display:grid;grid-template-columns:1fr 1fr;gap:28px 44px}
-  .note{font-size:15px}
+  .note{font-size:16px}
   .note b{color:var(--white);font-weight:600}
 
   .prodgrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px}
   .prod{background:var(--surface);padding:32px 30px}
   .prod h3{color:var(--white);font-size:19px;font-weight:600;margin-bottom:10px}
-  .prod p{font-size:15px}
+  .prod p{font-size:16px}
+
+  .boxrow{display:grid;grid-template-columns:1fr 1.35fr;gap:48px;margin-top:40px;align-items:center}
+  .figure{border:1px solid var(--line);background:var(--surface);padding:34px 24px 18px;text-align:center;border-radius:8px}
+  .figure svg{max-width:210px;width:100%;height:auto}
+  .figcap{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--muted);margin-top:18px}
+  .figcap b{color:var(--white);font-weight:500}
+  .spec{font-family:"IBM Plex Mono",monospace;font-size:14px;line-height:1.55}
+  .spec dt{color:var(--ember);letter-spacing:.18em;font-size:11px;margin-top:22px}
+  .spec dt:first-child{margin-top:0}
+  .spec dd{color:var(--white);margin-top:4px}
+  @media (prefers-reduced-motion:no-preference){
+    .led{animation:ledpulse 3s ease-in-out infinite}
+    @keyframes ledpulse{0%,100%{opacity:1}50%{opacity:.4}}
+  }
   .prodclose{color:var(--white);font-size:clamp(17px,2.2vw,20px);line-height:1.5;max-width:760px}
 
   .point p{color:var(--white);font-size:clamp(17px,2.2vw,21px);line-height:1.55;max-width:760px;margin-bottom:18px}
@@ -66,6 +80,7 @@
 
   @media (max-width:720px){
     .notes,.prodgrid{grid-template-columns:1fr}
+    .boxrow{grid-template-columns:1fr;gap:28px}
     section{padding:56px 0}
     .hero{padding:64px 0 40px}
   }
@@ -208,6 +223,45 @@
         </div>
       </div>
       <p class="prodclose">Two sides of one core: <em style="color:var(--muted);font-style:normal">where intelligence runs, and what it may spend.</em> From there, the same governance opens outward — other APIs, email, and the SaaS you already run.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="label">THE BOX</p>
+      <p class="prodclose" style="margin-bottom:8px"><b style="color:var(--white)">AI sovereignty, end to end: one appliance in your office.</b></p>
+      <div class="boxrow">
+        <div class="figure">
+          <svg viewBox="0 0 260 300" role="img" aria-label="Technical drawing of the Ember box: a workstation tower with a sealed key enclave and a single blue status light.">
+            <ellipse cx="130" cy="282" rx="86" ry="7" fill="#060a10"/>
+            <path d="M186 30 L210 44 L210 258 L186 272 Z" fill="#0C121C" stroke="#24344D" stroke-width="1"/>
+            <rect x="66" y="26" width="120" height="246" rx="5" fill="#101722" stroke="#24344D" stroke-width="1"/>
+            <line x1="82" y1="48" x2="170" y2="48" stroke="#24344D" stroke-width="1"/>
+            <line x1="82" y1="56" x2="170" y2="56" stroke="#24344D" stroke-width="1"/>
+            <line x1="82" y1="64" x2="170" y2="64" stroke="#24344D" stroke-width="1"/>
+            <line x1="82" y1="72" x2="170" y2="72" stroke="#24344D" stroke-width="1"/>
+            <rect x="82" y="96" width="88" height="1" fill="#24344D"/>
+            <rect x="82" y="210" width="88" height="26" rx="2" fill="none" stroke="#24344D" stroke-width="1"/>
+            <text x="126" y="227" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="2" fill="#8CA0B8">SEALED</text>
+            <circle class="led" cx="160" cy="252" r="3.5" fill="#4D9FFF"/>
+            <circle cx="160" cy="252" r="8" fill="none" stroke="#4D9FFF" stroke-opacity=".3" stroke-width="1"/>
+            <line x1="46" y1="26" x2="46" y2="272" stroke="#24344D" stroke-width="1"/>
+            <line x1="42" y1="26" x2="50" y2="26" stroke="#24344D" stroke-width="1"/>
+            <line x1="42" y1="272" x2="50" y2="272" stroke="#24344D" stroke-width="1"/>
+          </svg>
+          <p class="figcap"><b>THE EMBER BOX</b> · $8,000</p>
+        </div>
+        <dl class="spec">
+          <dt>RUNS</dt>
+          <dd>the governance node — a chain-attested TEE</dd>
+          <dt>HOLDS</dt>
+          <dd>your keys, sealed in-enclave — and nothing you can't reproduce</dd>
+          <dt>RECOVERS BY</dt>
+          <dd>your team's quorum. Never by us.</dd>
+          <dt>UNTIL THEN</dt>
+          <dd>we host it — same system, switch whenever you're ready</dd>
+        </dl>
+      </div>
     </div>
   </section>
 
