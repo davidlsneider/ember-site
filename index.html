@@ -4,129 +4,59 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ember Sovereignty Systems — AI sovereignty, as a system</title>
-<meta name="description" content="AI sovereignty, as a system. Cryptographic control over where inference runs, what it spends, and who holds the keys — independent of every vendor. Deployed on your premises, or operated for you.">
+<meta name="description" content="AI sovereignty, as a system. Your authority — keys, budgets, rules, receipts — on an EVM chain you choose, enforced by a chain-attested TEE in your office or hosted. Private GPUs first.">
 <meta property="og:title" content="Ember Sovereignty Systems">
-<meta property="og:description" content="AI sovereignty, as a system. Choose where your AI runs. Control what it spends. No single vendor can turn it off.">
+<meta property="og:description" content="AI sovereignty, as a system. Authority on your chain, enforced by a chain-attested TEE. Private GPUs first.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23141210'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23E85D2A'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0E14'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%234D9FFF'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#141210; --surface:#1b1815; --line:#2a2620;
-    --bone:#ede6dc; --ash:#8a8074; --ember:#e85d2a; --glow:#ffb38a;
+    --bg:#0A0E14; --surface:#101722; --panel:#0C121C; --line:#1E2936;
+    --white:#F2F7FF; --muted:#7D8CA3; --ember:#4D9FFF; --glow:#9FCBFF;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--ash);font:400 16px/1.65 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  body{background:var(--bg);color:var(--muted);font:400 16px/1.65 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
   ::selection{background:var(--ember);color:var(--bg)}
-  a{color:var(--bone)}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
-  .mono{font-family:"IBM Plex Mono",monospace}
+  a{color:var(--white)}
+  a:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
   .wrap{max-width:980px;margin:0 auto;padding:0 24px}
 
   header{border-bottom:1px solid var(--line)}
   .bar{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;max-width:980px;margin:0 auto;gap:16px}
-  .brand{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.18em;color:var(--bone);text-decoration:none;white-space:nowrap}
-  .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-decoration:none;padding:10px 18px;border:1px solid var(--line);color:var(--bone);white-space:nowrap}
-  .btn:hover{border-color:var(--ash)}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.18em;color:var(--white);text-decoration:none;white-space:nowrap}
+  .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-decoration:none;padding:10px 18px;border:1px solid var(--line);color:var(--white);white-space:nowrap}
+  .btn:hover{border-color:var(--muted)}
   .btn.fill{background:var(--ember);border-color:var(--ember);color:var(--bg);font-weight:500}
   .btn.fill:hover{background:var(--glow);border-color:var(--glow)}
 
-  .hero{padding:96px 0 72px}
-  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.22em;color:var(--ash);margin-bottom:28px}
-  h1{color:var(--bone);font-size:clamp(30px,5.4vw,54px);font-weight:700;line-height:1.12;letter-spacing:-.015em;max-width:820px}
-  .sub{max-width:620px;margin:28px 0 36px;font-size:17px}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.22em;color:var(--muted);padding:56px 0 8px}
 
-  /* countries strip */
-  .capacity{margin-top:56px;font-family:"IBM Plex Mono",monospace}
-  .capacity .cap-label{font-size:11px;letter-spacing:.2em;color:var(--ash);margin-bottom:12px}
-  .capacity ul{list-style:none;display:flex;flex-wrap:wrap;gap:0}
-  .capacity li{font-size:13px;color:var(--bone);padding:8px 18px;border:1px solid var(--line);border-right:none}
-  .capacity li:last-child{border-right:1px solid var(--line)}
-  .capacity li span{color:var(--ash)}
+  .diagram{overflow-x:auto;padding:8px 0 0}
+  .diagram svg{display:block;min-width:760px;width:100%;height:auto;font-family:"IBM Plex Mono",monospace}
 
-  .ledger{margin-top:16px;border:1px solid var(--line);background:var(--surface)}
-  .ledger-head{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.2em;color:var(--ash);padding:10px 16px;border-bottom:1px solid var(--line)}
-  .ledger table{width:100%;border-collapse:collapse;font-family:"IBM Plex Mono",monospace;font-size:13px}
-  .ledger td{padding:10px 16px;white-space:nowrap}
-  .ledger tr+tr td{border-top:1px solid var(--line)}
-  .ledger .t{color:#5f574c}
-  .ledger .v{text-align:right;color:var(--ash);letter-spacing:.08em}
-  .ledger .refuse td{color:var(--bone)}
-  .ledger .refuse .v{color:var(--ember);text-shadow:0 0 18px rgba(232,93,42,.55);font-weight:500}
-  .ledger .note td{color:#5f574c;font-size:12px}
-  .ledger-scroll{overflow-x:auto}
+  section{padding:72px 0;border-top:1px solid var(--line)}
+  .label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;color:var(--muted);margin-bottom:28px}
+  .notes{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px}
+  .note{font-size:15px}
+  .note .n{font-family:"IBM Plex Mono",monospace;color:var(--ember);font-size:13px;margin-right:8px}
+  .note b{color:var(--white);font-weight:600}
 
-  section{padding:88px 0;border-top:1px solid var(--line)}
-  .label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;color:var(--ash);margin-bottom:32px}
-  h2{color:var(--bone);font-size:clamp(24px,3.4vw,34px);font-weight:600;letter-spacing:-.01em;line-height:1.2;max-width:720px}
-  .big{color:var(--bone);font-size:clamp(20px,2.8vw,28px);font-weight:600;line-height:1.35;letter-spacing:-.01em;max-width:760px}
+  .point p{color:var(--white);font-size:clamp(17px,2.2vw,21px);line-height:1.55;max-width:760px;margin-bottom:18px}
+  .point p em{color:var(--muted);font-style:normal}
 
-  .paths{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:40px 0}
-  .path{background:var(--surface);padding:32px 28px}
-  .path h3{color:var(--bone);font-size:19px;font-weight:600;margin-bottom:10px}
-
-  .tests{margin:40px 0;border-top:1px solid var(--line)}
-  .test{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
-  .test .n{font-family:"IBM Plex Mono",monospace;color:var(--ember);font-size:14px}
-  .test p{color:var(--bone);font-size:clamp(17px,2vw,20px);line-height:1.45;max-width:680px}
-
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:40px 0}
-  .cell{background:var(--surface);padding:30px 28px}
-  .cell h3{color:var(--bone);font-size:17px;font-weight:600;margin-bottom:10px}
-  .cell p{font-size:15px}
-  .closer{font-family:"IBM Plex Mono",monospace;font-size:14px;letter-spacing:.04em;color:var(--bone);border:1px solid var(--line);border-top:none;padding:18px 28px;background:var(--bg)}
-
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:40px 0}
-
-  /* box */
-  .boxrow{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;margin:44px 0;align-items:start}
-  .figure{border:1px solid var(--line);background:var(--surface);padding:36px 24px 20px;text-align:center}
-  .figure svg{max-width:230px;width:100%;height:auto}
-  .figcap{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;color:var(--ash);margin-top:20px}
-  .figcap b{color:var(--bone);font-weight:500}
-  .spec{border:1px solid var(--line);background:var(--surface);font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:2}
-  .spec dt{color:var(--ash);letter-spacing:.18em;font-size:11px;padding:16px 20px 2px}
-  .spec dt:not(:first-child){border-top:1px solid var(--line);margin-top:14px}
-  .spec dd{color:var(--bone);padding:0 20px}
-  .spec dd:last-of-type{padding-bottom:16px}
-
-  .rungs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:40px 0}
-  .rung{background:var(--surface);padding:26px 24px}
-  .rung .n{font-family:"IBM Plex Mono",monospace;color:var(--ember);font-size:13px;display:block;margin-bottom:12px}
-  .rung h3{color:var(--bone);font-size:16px;font-weight:600;margin-bottom:6px}
-  .rung p{font-size:14px}
-
-  .who li{list-style:none;color:var(--bone);font-size:clamp(16px,2vw,19px);padding:18px 0;border-bottom:1px solid var(--line);max-width:760px}
-  .who{margin:36px 0}
-
-  .brief .big{margin-bottom:32px}
+  .brief p.big{color:var(--white);font-size:clamp(20px,2.8vw,27px);font-weight:600;line-height:1.35;max-width:700px;margin-bottom:28px}
   .fine{font-size:14px;margin-top:16px}
 
-  footer{border-top:1px solid var(--line);padding:28px 24px;text-align:center}
-  footer p{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;color:#5f574c}
+  footer{border-top:1px solid var(--line);padding:26px 24px;text-align:center}
+  footer p{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;color:#4A5567}
 
-  .mt{margin-top:36px}
-  .lead{max-width:640px;margin-top:24px}
-
-  @media (max-width:820px){
-    .paths,.grid2,.grid3,.rungs{grid-template-columns:1fr}
-    .boxrow{grid-template-columns:1fr;gap:28px}
-    .hero{padding:64px 0 48px}
-    section{padding:64px 0}
-    .capacity li{flex:1 1 auto;text-align:center;border-right:1px solid var(--line);border-top:none}
-    .capacity li+li{border-top:none}
-    .capacity ul{flex-direction:column}
-    .capacity li{border:1px solid var(--line);border-bottom:none}
-    .capacity li:last-child{border-bottom:1px solid var(--line)}
-  }
-  @media (prefers-reduced-motion:no-preference){
-    .ledger .refuse .v{animation:pulse 2.4s ease-in-out infinite}
-    @keyframes pulse{0%,100%{text-shadow:0 0 18px rgba(232,93,42,.55)}50%{text-shadow:0 0 6px rgba(232,93,42,.25)}}
-    .led{animation:pulse2 3s ease-in-out infinite}
-    @keyframes pulse2{0%,100%{opacity:1}50%{opacity:.45}}
+  @media (max-width:720px){
+    .notes{grid-template-columns:1fr}
+    section{padding:56px 0}
   }
 </style>
 </head>
@@ -141,182 +71,130 @@
 
 <main id="top">
   <div class="wrap">
-    <div class="hero">
-      <p class="eyebrow">AI SOVEREIGNTY, AS A SYSTEM</p>
-      <h1>Choose where your AI runs.<br>Control what it spends.<br>No single vendor can turn it off.</h1>
-      <p class="sub">Ember is a command and key system for AI operations: cryptographic control over where inference runs, what it spends, and who holds the keys — independent of every vendor. Deployed on your premises, or operated for you.</p>
-      <a class="btn fill js-brief" href="#briefing">Request a briefing</a>
+    <p class="eyebrow">AI SOVEREIGNTY, AS A SYSTEM</p>
 
-      <div class="capacity">
-        <p class="cap-label">ATTESTED GPU CAPACITY · JULY 2026</p>
-        <ul>
-          <li>United States <span>· since ~2024</span></li>
-          <li>Netherlands <span>· since ~2024</span></li>
-          <li>Germany <span>· since ~2025</span></li>
-          <li>India <span>· since ~2025</span></li>
-          <li>Japan <span>· 2026 pilot</span></li>
-        </ul>
-      </div>
+    <div class="diagram" role="img" aria-label="Ember system diagram. Control plane, used rarely: team-held keys — YubiKeys, passkeys, wallets — sign by M-of-N quorum to an EVM chain of your choice, which holds the authority root, policy, and receipts. Daily use: your team signs in through your unchanged cloud IAM via SSO; apps, agents, and services call one API. Both feed the governance node — a chain-attested TEE, an $8,000 on-prem appliance or hosted — which routes to private GPUs verified by attestation, your racks, and frontier APIs like OpenAI and Anthropic. Stablecoins settle through the node, gated by policy. A receipt for every allow and every refusal returns to the chain.">
+    <svg viewBox="0 0 920 660" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#7D8CA3"/>
+        </marker>
+        <marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#4D9FFF"/>
+        </marker>
+      </defs>
 
-      <div class="ledger" role="img" aria-label="Illustration of the Ember move ledger: two allowed inference calls on attested German hardware, then a refusal when an agent's daily grant is exhausted, followed by a signed, anchored receipt.">
-        <div class="ledger-head">LEDGER · MOVES</div>
-        <div class="ledger-scroll">
-        <table>
-          <tr><td class="t">02:47:31</td><td>support-agent → gpu-fra-2 · eu-de ✓attested</td><td>$0.14</td><td class="v">ALLOW</td></tr>
-          <tr><td class="t">02:47:32</td><td>support-agent → gpu-fra-2 · eu-de ✓attested</td><td>$0.14</td><td class="v">ALLOW</td></tr>
-          <tr class="refuse"><td class="t">02:47:33</td><td>support-agent · grant exhausted $50.00/$50.00</td><td></td><td class="v">REFUSE ●</td></tr>
-          <tr class="note"><td class="t">02:47:33</td><td colspan="3">receipt signed · anchored</td></tr>
-        </table>
-        </div>
-      </div>
+      <!-- plane panels -->
+      <rect x="40" y="40" width="400" height="230" rx="4" fill="#0C121C" stroke="#1E2936"/>
+      <text x="60" y="68" font-size="11" letter-spacing="2.2" fill="#7D8CA3">① CONTROL PLANE — RARE</text>
+
+      <rect x="480" y="40" width="400" height="230" rx="4" fill="#0C121C" stroke="#1E2936"/>
+      <text x="500" y="68" font-size="11" letter-spacing="2.2" fill="#7D8CA3">DAILY USE — CONSTANT</text>
+
+      <!-- keys node -->
+      <rect x="70" y="90" width="250" height="54" rx="3" fill="#101722" stroke="#1E2936"/>
+      <text x="195" y="112" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">team-held keys</text>
+      <text x="195" y="130" text-anchor="middle" font-size="11.5" fill="#7D8CA3">YubiKey · passkey · wallet</text>
+
+      <!-- keys -> chain -->
+      <line x1="195" y1="144" x2="195" y2="164" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <text x="207" y="158" font-size="11.5" fill="#7D8CA3">M-of-N quorum</text>
+
+      <!-- chain node -->
+      <rect x="70" y="168" width="340" height="56" rx="3" fill="#101722" stroke="#4D9FFF"/>
+      <text x="240" y="190" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">② EVM chain of your choice</text>
+      <text x="240" y="208" text-anchor="middle" font-size="11.5" fill="#7D8CA3">authority root · policy · receipts</text>
+
+      <!-- team node -->
+      <rect x="510" y="90" width="120" height="44" rx="3" fill="#101722" stroke="#1E2936"/>
+      <text x="570" y="116" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">your team</text>
+
+      <!-- team -> iam -->
+      <line x1="630" y1="112" x2="668" y2="112" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <text x="649" y="103" text-anchor="middle" font-size="11.5" fill="#7D8CA3">SSO</text>
+
+      <!-- iam node -->
+      <rect x="670" y="90" width="180" height="54" rx="3" fill="#101722" stroke="#1E2936"/>
+      <text x="760" y="112" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">cloud IAM</text>
+      <text x="760" y="130" text-anchor="middle" font-size="11.5" fill="#7D8CA3">unchanged</text>
+
+      <!-- apps node -->
+      <rect x="510" y="180" width="210" height="44" rx="3" fill="#101722" stroke="#1E2936"/>
+      <text x="615" y="206" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">apps · agents · services</text>
+
+      <!-- chain -> tee -->
+      <path d="M 240 224 C 240 290, 340 302, 386 328" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <text x="266" y="286" font-size="11.5" fill="#7D8CA3">policy</text>
+
+      <!-- iam -> tee -->
+      <path d="M 760 144 C 760 252, 620 292, 554 328" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <text x="676" y="260" text-anchor="middle" font-size="11.5" fill="#7D8CA3">OIDC token exchange</text>
+
+      <!-- apps -> tee -->
+      <path d="M 615 224 C 615 272, 545 302, 508 328" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <text x="592" y="282" font-size="11.5" fill="#7D8CA3">one API</text>
+
+      <!-- tee node -->
+      <rect x="306" y="326" width="308" height="108" rx="4" fill="none" stroke="#4D9FFF" stroke-opacity=".22"/>
+      <rect x="310" y="330" width="300" height="100" rx="3" fill="#101722" stroke="#4D9FFF"/>
+      <text x="460" y="362" text-anchor="middle" font-size="14" fill="#F2F7FF" font-weight="600" letter-spacing="1.2">③ GOVERNANCE NODE</text>
+      <text x="460" y="383" text-anchor="middle" font-size="12.5" fill="#F2F7FF">chain-attested TEE</text>
+      <text x="460" y="403" text-anchor="middle" font-size="11.5" fill="#7D8CA3">on-prem $8,000 · or hosted</text>
+
+      <!-- stablecoins -->
+      <rect x="60" y="362" width="160" height="60" rx="3" fill="#101722" stroke="#1E2936"/>
+      <text x="140" y="396" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">⑤ stablecoins</text>
+      <text x="265" y="366" text-anchor="middle" font-size="11.5" fill="#7D8CA3">policy-gated</text>
+      <text x="265" y="380" text-anchor="middle" font-size="11.5" fill="#7D8CA3">settlement</text>
+      <line x1="220" y1="392" x2="308" y2="392" stroke="#7D8CA3" marker-end="url(#arr)"/>
+
+      <!-- tee -> venues -->
+      <path d="M 380 430 C 300 482, 240 512, 198 556" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <line x1="460" y1="430" x2="460" y2="556" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <path d="M 540 430 C 620 482, 680 512, 722 556" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
+
+      <!-- venues -->
+      <rect x="80" y="560" width="230" height="60" rx="3" fill="#101722" stroke="#1E2936"/>
+      <text x="195" y="584" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">④ private GPUs</text>
+      <text x="195" y="602" text-anchor="middle" font-size="11.5" fill="#4D9FFF">attested</text>
+
+      <rect x="345" y="560" width="230" height="60" rx="3" fill="#101722" stroke="#1E2936"/>
+      <text x="460" y="594" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">your racks</text>
+
+      <rect x="610" y="560" width="230" height="60" rx="3" fill="#101722" stroke="#1E2936"/>
+      <text x="725" y="584" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">frontier APIs</text>
+      <text x="725" y="602" text-anchor="middle" font-size="11.5" fill="#7D8CA3">OpenAI · Anthropic</text>
+
+      <!-- tee -> chain receipts (blue) -->
+      <path d="M 610 372 C 806 372, 830 190, 416 190" fill="none" stroke="#4D9FFF" marker-end="url(#arrB)"/>
+      <text x="742" y="284" text-anchor="middle" font-size="11.5" fill="#4D9FFF">⑥ every allow ·</text>
+      <text x="742" y="300" text-anchor="middle" font-size="11.5" fill="#4D9FFF">every refusal</text>
+    </svg>
     </div>
   </div>
 
   <section>
     <div class="wrap">
-      <p class="label">TWO PATHS</p>
-      <h2>There are two paths to AI sovereignty.</h2>
-      <div class="paths">
-        <div class="path">
-          <h3>Own the metal.</h3>
-          <p>GPUs at national scale. Without cryptographic governance it is a datacenter, not sovereignty — usage ungoverned, claims unprovable.</p>
-        </div>
-        <div class="path">
-          <h3>Verify the metal.</h3>
-          <p>Attested capacity you don't own — provisioned by policy, paid only on proof.</p>
-        </div>
-      </div>
-      <p class="big">Ember commands both. Same controls, same evidence.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <p class="label">THE DEFINITION</p>
-      <h2>What AI sovereignty has to mean.</h2>
-      <div class="tests">
-        <div class="test"><span class="n">01</span><p>You choose where inference runs — verified cryptographically, not contractually.</p></div>
-        <div class="test"><span class="n">02</span><p>You control what every person and agent may spend — in hardware, not policy documents.</p></div>
-        <div class="test"><span class="n">03</span><p>No single vendor can turn you off.</p></div>
-        <div class="test"><span class="n">04</span><p>The evidence outlives every vendor.</p></div>
-      </div>
-      <p class="big">Anything less is a hosting arrangement.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <p class="label">THE MODEL</p>
-      <div class="grid2">
-        <div class="cell">
-          <h3>Scoped in money.</h3>
-          <p>$50 a day for an agent, a hold above $500, a hard no past the line. Money is the meter.</p>
-        </div>
-        <div class="cell">
-          <h3>Ground you choose.</h3>
-          <p>One interface over attested GPUs — owned or rented. The attestation proves the place before payment releases.</p>
-        </div>
-        <div class="cell">
-          <h3>Policy over prompt and destination.</h3>
-          <p>What's asked, where it goes, what it costs. Out-of-bounds is refused by hardware, not flagged in a dashboard.</p>
-        </div>
-        <div class="cell">
-          <h3>No passwords. No vendor roots.</h3>
-          <p>Passkeys for people. Onchain identity and a wallet for every person, service, and agent. Policy changes take a quorum of hardware keys.</p>
-        </div>
-      </div>
-      <p class="closer">EVERY ALLOW AND EVERY REFUSAL, RECEIPTED AND ANCHORED.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <p class="label">THE EXPOSURE</p>
-      <h2>Compelled deplatforming is a normal condition now.</h2>
-      <div class="grid3">
-        <div class="cell">
-          <h3>Your model provider drops you.</h3>
-          <p>Keys and budgets are yours. Re-route to any attested GPU on earth, open weights, same policies.</p>
-        </div>
-        <div class="cell">
-          <h3>Your identity vendor drops you.</h3>
-          <p>Ember is the recovery root on your IdP and keeps your directory. Stand up an open-source IAM; keep signing in.</p>
-        </div>
-        <div class="cell">
-          <h3>Your bank drops you.</h3>
-          <p>Payment authority and history live with you. Re-point the rails.</p>
-        </div>
+      <p class="label">NOTES</p>
+      <div class="notes">
+        <p class="note"><span class="n">①</span><b>M-of-N quorum.</b> Policy changes require M-of-N signatures from keys your team already holds — YubiKeys, passkeys, wallets. No admin can act alone; no vendor can act at all.</p>
+        <p class="note"><span class="n">②</span><b>The chain.</b> Any EVM chain. Authority root, policy, and receipts live there — they outlast every vendor, including us.</p>
+        <p class="note"><span class="n">③</span><b>The node.</b> A chain-attested TEE: an $8,000 appliance on-prem, or hosted by us. It enforces policy and holds nothing you can't reproduce — if there's a fire, save something else.</p>
+        <p class="note"><span class="n">④</span><b>The venues.</b> Private GPU venues present attestation — hardware, stack, and location — before payment releases. Your racks and the frontier APIs sit behind the same API.</p>
+        <p class="note"><span class="n">⑤</span><b>Settlement.</b> Stablecoins fund every venue through the node; payment moves only on policy.</p>
+        <p class="note"><span class="n">⑥</span><b>The record.</b> A receipt for every allow and every refusal, anchored to the chain.</p>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="wrap">
-      <p class="label">THE BOX</p>
-      <h2>A box, not a datacenter.</h2>
-      <p class="lead">The hardware backup for a business. Buy the computer; hold the keys. It stores the material — keys, budgets, policies, identity roots — in silicon that takes a physics lab to break into, with the onchain ACL and its management software built in. It serves no inference; it decides what gets paid. Closed providers — Anthropic, OpenAI — connect like anything else; open weights on attested hardware are the guaranteed floor.</p>
-      <div class="boxrow">
-        <div class="figure">
-          <svg viewBox="0 0 260 300" role="img" aria-label="Technical drawing of the Ember workstation tower: an AMD EPYC chassis with a sealed key enclave and a single status light.">
-            <ellipse cx="130" cy="282" rx="86" ry="7" fill="#0e0c0a"/>
-            <path d="M186 30 L210 44 L210 258 L186 272 Z" fill="#171411" stroke="#3a352c" stroke-width="1"/>
-            <rect x="66" y="26" width="120" height="246" rx="5" fill="#1f1b17" stroke="#3a352c" stroke-width="1"/>
-            <line x1="82" y1="48" x2="170" y2="48" stroke="#3a352c" stroke-width="1"/>
-            <line x1="82" y1="56" x2="170" y2="56" stroke="#3a352c" stroke-width="1"/>
-            <line x1="82" y1="64" x2="170" y2="64" stroke="#3a352c" stroke-width="1"/>
-            <line x1="82" y1="72" x2="170" y2="72" stroke="#3a352c" stroke-width="1"/>
-            <rect x="82" y="96" width="88" height="1" fill="#3a352c"/>
-            <rect x="82" y="210" width="88" height="26" rx="2" fill="none" stroke="#3a352c" stroke-width="1"/>
-            <text x="126" y="227" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="2" fill="#8a8074">SEALED</text>
-            <circle class="led" cx="160" cy="252" r="3.5" fill="#e85d2a"/>
-            <circle cx="160" cy="252" r="8" fill="none" stroke="#e85d2a" stroke-opacity=".25" stroke-width="1"/>
-            <line x1="46" y1="26" x2="46" y2="272" stroke="#3a352c" stroke-width="1"/>
-            <line x1="42" y1="26" x2="50" y2="26" stroke="#3a352c" stroke-width="1"/>
-            <line x1="42" y1="272" x2="50" y2="272" stroke="#3a352c" stroke-width="1"/>
-          </svg>
-          <p class="figcap"><b>THE EMBER BOX</b> · BUY THE HARDWARE · HOLD THE KEYS</p>
-        </div>
-        <dl class="spec">
-          <dt>CHASSIS</dt>
-          <dd>AMD EPYC · SEV-SNP remote attestation</dd>
-          <dd>keys sealed in-enclave · quorum recovery only</dd>
-          <dd>onchain ACL + management software built in</dd>
-          <dt>HOLDS</dt>
-          <dd>provider keys</dd><dd>wallets</dd><dd>identity roots</dd><dd>policies</dd>
-          <dt>REFUSES</dt>
-          <dd>over-budget moves</dd><dd>unapproved vendors</dd><dd>unattested endpoints</dd><dd>silent overrides</dd>
-        </dl>
-      </div>
-      <p class="big mt">If any vendor — including us — disappeared tomorrow, your AI still runs. That is the test the box exists to pass.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <p class="label">THE LADDER</p>
-      <h2>Sovereignty is a dial, not a leap.</h2>
-      <div class="rungs">
-        <div class="rung"><span class="n">1</span><h3>Operated</h3><p>We run the system. You hold the policy root.</p></div>
-        <div class="rung"><span class="n">2</span><h3>A box on your premises</h3><p>Your keys, your law.</p></div>
-        <div class="rung"><span class="n">3</span><h3>Your own GPUs</h3><p>Same system.</p></div>
-        <div class="rung"><span class="n">4</span><h3>Your own chain</h3><p>Everything inside your walls.</p></div>
-      </div>
-      <p>Same system at organization scale and national scale.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <p class="label">WHO THIS IS FOR</p>
-      <h2>For nations and organizations answering for AI sovereignty.</h2>
-      <ul class="who">
-        <li>National programs turning residency claims into cryptographic proof.</li>
-        <li>Ministries provisioning inference across government.</li>
-        <li>Banks and critical infrastructure with border-bound data.</li>
-        <li>Sovereign funds governing autonomous operations.</li>
-        <li>Enterprises whose model access is a board-level dependency.</li>
-      </ul>
-      <p class="big">Initial deployments are underway.</p>
+    <div class="wrap point">
+      <p class="label">THE POINT</p>
+      <p>Everything your company runs on is rented — the models, the logins, the payments. <em>Renting is fine. Having no way out is not.</em></p>
+      <p>Ember puts your authority — keys, budgets, rules, receipts — on an EVM chain you choose, enforced by a chain-attested TEE in your office or hosted by us.</p>
+      <p>Your cloud IAM stays. It keeps answering <em>who</em>; Ember answers <em>how much, where, and with whose keys</em>.</p>
+      <p>Route everything through it on day one. Move anything to owned — private GPUs first — one service at a time. Rent what you like; own what you must; switch without asking.</p>
+      <p>It holds nothing precious. If there's a fire, save something else — the root of authority is the chain.</p>
     </div>
   </section>
 
@@ -331,7 +209,7 @@
 </main>
 
 <footer>
-  <p>EMBER SOVEREIGNTY SYSTEMS · ATTESTED HARDWARE · OPEN STANDARDS · CHAIN-ANCHORED AUDIT · © 2026</p>
+  <p>EMBER SOVEREIGNTY SYSTEMS · GOVERNANCE ON CHAIN · ATTESTED HARDWARE · © 2026</p>
 </footer>
 
 <script>
