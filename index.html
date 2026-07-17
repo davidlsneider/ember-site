@@ -33,10 +33,9 @@
   .btn.fill{background:var(--ember);border-color:var(--ember);color:var(--bg);font-weight:500}
   .btn.fill:hover{background:var(--glow);border-color:var(--glow)}
 
-  /* hero */
   .hero{text-align:center;padding:92px 0 52px;position:relative;z-index:1}
   h1{color:var(--white);font-size:clamp(40px,7vw,66px);font-weight:600;line-height:1.08;letter-spacing:-.022em}
-  .hero .sub{max-width:600px;margin:24px auto 34px;font-size:17.5px}
+  .hero .sub{max-width:640px;margin:24px auto 34px;font-size:17.5px}
 
   .framewrap{position:relative;padding-bottom:10px}
   .framewrap::before{content:"";position:absolute;inset:-90px -60px 0;background:radial-gradient(55% 60% at 50% 42%,rgba(77,159,255,.17),transparent 70%);pointer-events:none}
@@ -44,14 +43,13 @@
   .framebar{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:2px 8px 14px;border-bottom:1px solid var(--line);margin-bottom:14px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted)}
   .framebar .flags{letter-spacing:.1em}
   .frame .diagram{overflow-x:auto}
-  .frame svg{display:block;min-width:780px;width:100%;height:auto;font-family:"IBM Plex Mono",monospace}
+  .frame svg{display:block;min-width:840px;width:100%;height:auto;font-family:"IBM Plex Mono",monospace}
 
   section{padding:76px 0;border-top:1px solid var(--line);position:relative;z-index:1}
   section.first{margin-top:64px}
   .label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;color:var(--muted);margin-bottom:28px}
   .notes{display:grid;grid-template-columns:1fr 1fr;gap:28px 44px}
   .note{font-size:15px}
-  .note .n{font-family:"IBM Plex Mono",monospace;color:var(--ember);font-size:13px;margin-right:8px}
   .note b{color:var(--white);font-weight:600}
 
   .point p{color:var(--white);font-size:clamp(17px,2.2vw,21px);line-height:1.55;max-width:760px;margin-bottom:18px}
@@ -92,104 +90,92 @@
       <span>THE SYSTEM</span>
       <span class="flags">ONE API · ATTESTED GPUS&nbsp; 🇺🇸 🇳🇱 🇩🇪 🇮🇳 🇯🇵 · JURISDICTION PROVEN, NOT PROMISED</span>
     </div>
-    <div class="diagram" role="img" aria-label="Ember system diagram. Control plane, used rarely: team-held keys — YubiKeys, passkeys, wallets — sign by M-of-N quorum to an EVM chain of your choice holding the authority root, policy, and receipts. Daily use: your team signs in through your unchanged cloud IAM via SSO; apps, agents, and services call one API. Policy flows from the chain to the governance node — a chain-attested TEE, on-prem for $8,000 or hosted — and receipts flow back. The node routes to attested private GPUs, your racks, and frontier APIs, with stablecoin settlement gated by policy.">
-    <svg viewBox="0 0 920 650" xmlns="http://www.w3.org/2000/svg">
+    <div class="diagram" role="img" aria-label="Ember system diagram, read left to right. Control plane, used rarely: team-held keys — YubiKeys, passkeys, wallets — sign by M-of-N quorum to an EVM chain of your choice, which sends policy to the governance node and receives back receipts. Daily use: your cloud IAM, unchanged, hands sessions to the node by OIDC token exchange; apps, agents, and services call one API. The governance node — a chain-attested TEE, on-prem for $8,000 or hosted — routes to the attested private GPU API, your racks, and frontier APIs. Stablecoins settle through the node, gated by policy. Blue marks the Ember product.">
+    <svg viewBox="0 0 1040 560" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" fill="#7D8CA3"/>
-        </marker>
-        <marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" fill="#4D9FFF"/>
+          <path d="M0,0 L10,5 L0,10 z" fill="#45536B"/>
         </marker>
       </defs>
 
-      <!-- plane panels -->
-      <rect x="40" y="40" width="400" height="230" rx="6" fill="#0A1018" stroke="#4D9FFF" stroke-opacity=".65"/>
-      <text x="60" y="68" font-size="11" letter-spacing="2.2" fill="#9FCBFF">CONTROL PLANE — RARE</text>
+      <!-- captions -->
+      <text x="20" y="250" font-size="11" letter-spacing="2.2" fill="#4D9FFF">CONTROL PLANE — RARE</text>
+      <text x="560" y="44" font-size="11" letter-spacing="2.2" fill="#7D8CA3">DAILY USE — CONSTANT</text>
 
-      <rect x="480" y="40" width="400" height="230" rx="6" fill="#0A1018" stroke="#1E2936"/>
-      <text x="500" y="68" font-size="11" letter-spacing="2.2" fill="#7D8CA3">DAILY USE — CONSTANT</text>
+      <!-- daily use: cloud IAM -->
+      <rect x="520" y="60" width="170" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="605" y="82" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">cloud IAM</text>
+      <text x="605" y="100" text-anchor="middle" font-size="11" fill="#7D8CA3">unchanged</text>
 
-      <!-- keys node -->
-      <rect x="70" y="90" width="250" height="54" rx="4" fill="#101722" stroke="#1E2936"/>
-      <text x="195" y="112" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">team-held keys</text>
-      <text x="195" y="130" text-anchor="middle" font-size="11.5" fill="#7D8CA3">YubiKey · passkey · wallet</text>
+      <!-- daily use: apps -->
+      <rect x="740" y="60" width="170" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="825" y="90" text-anchor="middle" font-size="12" fill="#F2F7FF" font-weight="500">apps · agents · services</text>
+
+      <!-- iam -> node -->
+      <line x1="605" y1="112" x2="605" y2="246" stroke="#45536B" marker-end="url(#arr)"/>
+      <text x="613" y="170" font-size="11" fill="#7D8CA3">OIDC token exchange</text>
+
+      <!-- apps -> node (elbow) -->
+      <path d="M 825 112 L 825 210 Q 825 218 817 218 L 708 218 Q 700 218 700 226 L 700 246" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
+      <text x="730" y="210" text-anchor="middle" font-size="11" fill="#7D8CA3">one API</text>
+
+      <!-- receipts return: node top -> chain top -->
+      <path d="M 545 252 L 545 208 Q 545 200 537 200 L 383 200 Q 375 200 375 208 L 375 268" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
+      <text x="460" y="192" text-anchor="middle" font-size="11" fill="#7D8CA3">receipts</text>
+
+      <!-- control plane: keys -->
+      <rect x="20" y="274" width="170" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="105" y="294" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">team-held keys</text>
+      <text x="105" y="312" text-anchor="middle" font-size="10.5" fill="#7D8CA3">YubiKey · passkey · wallet</text>
 
       <!-- keys -> chain -->
-      <line x1="195" y1="144" x2="195" y2="164" stroke="#7D8CA3" marker-end="url(#arr)"/>
-      <text x="207" y="158" font-size="11.5" fill="#7D8CA3">M-of-N quorum</text>
+      <line x1="190" y1="300" x2="296" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
+      <text x="243" y="290" text-anchor="middle" font-size="10.5" fill="#7D8CA3">M-of-N quorum</text>
 
-      <!-- chain node -->
-      <rect x="70" y="168" width="340" height="56" rx="4" fill="#101722" stroke="#1E2936"/>
-      <text x="240" y="190" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">EVM chain of your choice</text>
-      <text x="240" y="208" text-anchor="middle" font-size="11.5" fill="#7D8CA3">authority root · policy · receipts</text>
+      <!-- chain -->
+      <rect x="300" y="274" width="170" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="385" y="294" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">EVM chain</text>
+      <text x="385" y="312" text-anchor="middle" font-size="10.5" fill="#7D8CA3">your choice · receipts</text>
 
-      <!-- team node -->
-      <rect x="510" y="90" width="120" height="44" rx="4" fill="#101722" stroke="#1E2936"/>
-      <text x="570" y="116" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">your team</text>
+      <!-- chain -> node -->
+      <line x1="470" y1="300" x2="516" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
+      <text x="493" y="290" text-anchor="middle" font-size="11" fill="#7D8CA3">policy</text>
 
-      <!-- team -> iam -->
-      <line x1="630" y1="112" x2="668" y2="112" stroke="#7D8CA3" marker-end="url(#arr)"/>
-      <text x="649" y="103" text-anchor="middle" font-size="11.5" fill="#7D8CA3">SSO</text>
-
-      <!-- iam node -->
-      <rect x="670" y="90" width="180" height="54" rx="4" fill="#101722" stroke="#1E2936"/>
-      <text x="760" y="112" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">cloud IAM</text>
-      <text x="760" y="130" text-anchor="middle" font-size="11.5" fill="#7D8CA3">unchanged</text>
-
-      <!-- apps node -->
-      <rect x="500" y="180" width="210" height="44" rx="4" fill="#101722" stroke="#1E2936"/>
-      <text x="605" y="206" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">apps · agents · services</text>
-
-      <!-- chain -> tee : policy (orthogonal) -->
-      <path d="M 200 224 L 200 270 Q 200 278 208 278 L 352 278 Q 360 278 360 286 L 360 326" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
-      <text x="320" y="270" text-anchor="middle" font-size="11.5" fill="#7D8CA3">policy</text>
-
-      <!-- tee -> chain : receipts (blue, orthogonal, paired channel) -->
-      <path d="M 400 330 L 400 310 Q 400 302 392 302 L 288 302 Q 280 302 280 294 L 280 228" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
-      <text x="240" y="252" text-anchor="middle" font-size="11.5" fill="#7D8CA3">receipts</text>
-
-      <!-- iam -> tee : OIDC (orthogonal, right side) -->
-      <path d="M 760 144 L 760 364 Q 760 372 752 372 L 616 372" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
-      <text x="750" y="312" text-anchor="end" font-size="11.5" fill="#7D8CA3">OIDC token exchange</text>
-
-      <!-- apps -> tee : one API (straight vertical) -->
-      <line x1="605" y1="224" x2="605" y2="326" stroke="#7D8CA3" marker-end="url(#arr)"/>
-      <text x="615" y="286" font-size="11.5" fill="#7D8CA3">one API</text>
-
-      <!-- tee node -->
-      <rect x="306" y="326" width="308" height="108" rx="6" fill="none" stroke="#4D9FFF" stroke-opacity=".22"/>
-      <rect x="310" y="330" width="300" height="100" rx="4" fill="#101722" stroke="#4D9FFF"/>
-      <text x="460" y="362" text-anchor="middle" font-size="14" fill="#F2F7FF" font-weight="600" letter-spacing="1.2">GOVERNANCE NODE</text>
-      <text x="460" y="383" text-anchor="middle" font-size="12.5" fill="#F2F7FF">chain-attested TEE</text>
-      <text x="460" y="403" text-anchor="middle" font-size="11.5" fill="#7D8CA3">on-prem $8,000 · or hosted</text>
+      <!-- governance node -->
+      <rect x="516" y="248" width="248" height="104" rx="8" fill="none" stroke="#4D9FFF" stroke-opacity=".22"/>
+      <rect x="520" y="252" width="240" height="96" rx="6" fill="#101722" stroke="#4D9FFF"/>
+      <text x="640" y="284" text-anchor="middle" font-size="14.5" fill="#F2F7FF" font-weight="600" letter-spacing="1.2">GOVERNANCE NODE</text>
+      <text x="640" y="306" text-anchor="middle" font-size="12.5" fill="#F2F7FF">chain-attested TEE</text>
+      <text x="640" y="326" text-anchor="middle" font-size="11" fill="#7D8CA3">on-prem $8,000 · or hosted</text>
 
       <!-- stablecoins -->
-      <rect x="60" y="362" width="160" height="60" rx="4" fill="#101722" stroke="#1E2936"/>
-      <text x="140" y="396" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">stablecoins</text>
-      <text x="224" y="372" font-size="11.5" fill="#7D8CA3">policy-gated</text>
-      <text x="224" y="386" font-size="11.5" fill="#7D8CA3">settlement</text>
-      <line x1="220" y1="396" x2="306" y2="396" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <rect x="290" y="470" width="170" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="375" y="500" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">stablecoins</text>
 
-      <!-- tee -> venues (orthogonal fan) -->
-      <path d="M 370 430 L 370 470 Q 370 478 362 478 L 203 478 Q 195 478 195 486 L 195 556" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
-      <line x1="460" y1="430" x2="460" y2="556" stroke="#7D8CA3" marker-end="url(#arr)"/>
-      <path d="M 550 430 L 550 470 Q 550 478 558 478 L 717 478 Q 725 478 725 486 L 725 556" fill="none" stroke="#7D8CA3" marker-end="url(#arr)"/>
+      <!-- stablecoins -> node (elbow) -->
+      <path d="M 375 470 L 375 388 Q 375 380 383 380 L 552 380 Q 560 380 560 372 L 560 352" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
+      <text x="467" y="372" text-anchor="middle" font-size="11" fill="#7D8CA3">policy-gated settlement</text>
+
+      <!-- node -> venues (fork) -->
+      <line x1="760" y1="300" x2="826" y2="300" stroke="#45536B" marker-end="url(#arr)"/>
+      <path d="M 795 300 L 795 214 Q 795 206 803 206 L 826 206" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
+      <path d="M 795 300 L 795 386 Q 795 394 803 394 L 826 394" fill="none" stroke="#45536B" marker-end="url(#arr)"/>
+      <circle cx="795" cy="300" r="2.5" fill="#45536B"/>
 
       <!-- venues -->
-      <rect x="80" y="560" width="230" height="60" rx="4" fill="#101722" stroke="#4D9FFF"/>
-      <text x="195" y="584" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">private GPU API</text>
-      <text x="195" y="603" text-anchor="middle" font-size="11.5"><tspan fill="#9FCBFF">attested</tspan> <tspan fill="#7D8CA3">· 🇺🇸 🇳🇱 🇩🇪 🇮🇳 🇯🇵</tspan></text>
+      <rect x="830" y="180" width="180" height="52" rx="6" fill="#101722" stroke="#4D9FFF"/>
+      <text x="920" y="200" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">private GPU API</text>
+      <text x="920" y="218" text-anchor="middle" font-size="10.5"><tspan fill="#9FCBFF">attested</tspan> <tspan fill="#7D8CA3">· 🇺🇸 🇳🇱 🇩🇪 🇮🇳 🇯🇵</tspan></text>
 
-      <rect x="345" y="560" width="230" height="60" rx="4" fill="#101722" stroke="#1E2936"/>
-      <text x="460" y="594" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">your racks</text>
+      <rect x="830" y="274" width="180" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="920" y="304" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">your racks</text>
 
-      <rect x="610" y="560" width="230" height="60" rx="4" fill="#101722" stroke="#1E2936"/>
-      <text x="725" y="584" text-anchor="middle" font-size="13.5" fill="#F2F7FF" font-weight="500">frontier APIs</text>
-      <text x="725" y="602" text-anchor="middle" font-size="11.5" fill="#7D8CA3">OpenAI · Anthropic</text>
+      <rect x="830" y="368" width="180" height="52" rx="6" fill="#101722" stroke="#1E2936"/>
+      <text x="920" y="388" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">frontier APIs</text>
+      <text x="920" y="406" text-anchor="middle" font-size="10.5" fill="#7D8CA3">OpenAI · Anthropic</text>
 
       <!-- legend -->
-      <text x="908" y="644" text-anchor="end" font-size="11" fill="#4D9FFF">blue — the Ember product</text>
+      <text x="1010" y="548" text-anchor="end" font-size="11" fill="#4D9FFF">blue — the Ember product</text>
     </svg>
     </div>
     </div>
