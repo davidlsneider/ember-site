@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember — Governance Node (Demo)</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0E14'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%234D9FFF'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E14; --surface:#101722; --panel:#0C121C; --line:#1E2936;
+    --white:#F2F7FF; --muted:#8CA0B8; --dim:#5B6B84; --ember:#4D9FFF; --glow:#9FCBFF;
+    --ok:#8CA0B8; --warn:#E8B44D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--muted);font:400 15px/1.6 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  a{color:var(--white)}
+
+  header{border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:14px 22px}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.18em;color:var(--white)}
+  .badge{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;color:var(--ember);border:1px solid #24344D;padding:4px 10px;border-radius:3px}
+
+  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;padding:18px 22px;max-width:1280px;margin:0 auto}
+  .col{display:flex;flex-direction:column;gap:18px;min-width:0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .card h2{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.2em;color:var(--muted);font-weight:400;padding:12px 16px;border-bottom:1px solid var(--line)}
+
+  table{width:100%;border-collapse:collapse;font-family:"IBM Plex Mono",monospace;font-size:12.5px}
+  td,th{padding:9px 16px;text-align:left;white-space:nowrap}
+  th{color:var(--dim);font-weight:400;font-size:10.5px;letter-spacing:.14em}
+  tr+tr td{border-top:1px solid var(--line)}
+  td{color:var(--white)}
+  td .sub{color:var(--dim)}
+  .chip{display:inline-block;font-size:10.5px;padding:2px 8px;border:1px solid var(--line);border-radius:3px;color:var(--muted)}
+  .chip.att{border-color:#24507e;color:var(--ember)}
+  .chip.owned{color:var(--white)}
+  .chip.dead{border-color:#7e2f24;color:#E8756B;text-decoration:line-through}
+
+  .actions{display:flex;flex-wrap:wrap;gap:10px;padding:14px 16px}
+  button{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.04em;padding:10px 14px;border-radius:4px;border:1px solid var(--line);background:var(--surface);color:var(--white);cursor:pointer}
+  button:hover{border-color:var(--muted)}
+  button.primary{background:var(--ember);border-color:var(--ember);color:var(--bg);font-weight:500}
+  button.primary:hover{background:var(--glow)}
+  button.danger{border-color:#7e2f24;color:#E8756B}
+  button:disabled{opacity:.45;cursor:default}
+
+  .console{font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.75;padding:14px 16px;height:340px;overflow-y:auto;background:#080c12}
+  .console .t{color:#43506488;margin-right:8px}
+  .console .ok{color:var(--muted)}
+  .console .hi{color:var(--white)}
+  .console .att{color:var(--ember)}
+  .console .refuse{color:var(--ember);font-weight:500;text-shadow:0 0 14px rgba(77,159,255,.5)}
+  .console .warn{color:var(--warn)}
+  .console div{animation:fadein .25s ease}
+  @keyframes fadein{from{opacity:0;transform:translateY(2px)}to{opacity:1}}
+
+  .budgetbar{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:11.5px}
+  .bar{flex:1;height:6px;background:var(--surface);border-radius:3px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--ember);width:25%;transition:width .4s}
+  .receipts{max-height:260px;overflow-y:auto}
+  .rrow{display:grid;grid-template-columns:86px 70px 1fr;gap:10px;padding:8px 16px;border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:12px;animation:fadein .25s ease}
+  .rrow .id{color:var(--dim)}
+  .rrow .v{color:var(--muted)}
+  .rrow .v.refuse{color:var(--ember);font-weight:500}
+  .rrow .d{color:var(--white);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .export{padding:12px 16px;border-top:1px solid var(--line)}
+
+  footer{text-align:center;padding:18px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#43506488}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="brand">EMBER · GOVERNANCE NODE</span>
+  <span class="badge">PRODUCT DEMO · SIMULATED DATA</span>
+</header>
+
+<div class="grid">
+  <div class="col">
+    <div class="card">
+      <h2>ESTATE — WHERE YOUR INTELLIGENCE RUNS</h2>
+      <table id="estate">
+        <tr><th>WORKLOAD</th><th>VENUE</th><th>JURISDICTION</th><th>BASIS</th></tr>
+        <tr><td>support-agent</td><td id="v-support">anthropic</td><td id="j-support">US</td><td><span class="chip" id="c-support">rented</span></td></tr>
+        <tr><td>research-batch</td><td>privatemode</td><td>DE · Frankfurt</td><td><span class="chip att">attested</span></td></tr>
+        <tr><td>fin-models</td><td>rack-01</td><td>HQ</td><td><span class="chip owned">owned</span></td></tr>
+        <tr><td>eval-suite</td><td id="v-eval">openrouter</td><td>US</td><td><span class="chip">rented</span></td></tr>
+      </table>
+      <div class="budgetbar">
+        <span>support-agent budget</span>
+        <div class="bar"><i id="budgetfill"></i></div>
+        <span id="budgettext">$12.40 / $50.00 today</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>RUN A MOVE</h2>
+      <div class="actions">
+        <button class="primary" onclick="routine()">Routine request</button>
+        <button class="primary" onclick="sensitive()">Sensitive request (client data)</button>
+        <button onclick="overrun()">Agent loop → over budget</button>
+        <button class="danger" id="cutbtn" onclick="cutoff()">Simulate vendor cut-off</button>
+      </div>
+      <div class="console" id="console">
+        <div><span class="t">02:47:29</span><span class="ok">governance node online · policy v42 anchored · 4 venues connected</span></div>
+        <div><span class="t">02:47:29</span><span class="ok">keys sealed in enclave · quorum 3-of-5 · chain: your-evm-chain</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <h2>RECEIPTS — EVERY ALLOW · EVERY REFUSAL</h2>
+      <div class="receipts" id="receipts"></div>
+      <div class="export"><button onclick="exportPack()">Export evidence pack</button> <span class="mono" style="font-size:11px;color:var(--dim)">&nbsp;signed · anchored · auditor-readable</span></div>
+    </div>
+    <div class="card">
+      <h2>WHAT THIS DEMO SHOWS</h2>
+      <div style="padding:14px 16px;font-size:14px">
+        <p style="margin-bottom:10px"><b style="color:var(--white)">One API over every venue.</b> Routine traffic uses the frontier; sensitive traffic only runs where the hardware proves itself.</p>
+        <p style="margin-bottom:10px"><b style="color:var(--white)">Policy that refuses.</b> Budgets are enforced at the call, not reported on the invoice.</p>
+        <p style="margin-bottom:10px"><b style="color:var(--white)">A receipt for everything.</b> Allows and refusals, exportable as an evidence pack.</p>
+        <p><b style="color:var(--white)">The exit, live.</b> Cut a vendor off — traffic re-routes under the same policy. Zero renegotiation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>EMBER SOVEREIGNTY SYSTEMS · GOVERNANCE ON CHAIN · DEMO ENVIRONMENT</footer>
+
+<script>
+let clock = new Date(0,0,1,2,47,31);
+let spent = 12.40, rid = 8840, cut = false;
+const cons = document.getElementById('console');
+const receipts = document.getElementById('receipts');
+const pack = [];
+
+function ts(){ const s=clock.toTimeString().slice(0,8); clock=new Date(clock.getTime()+ (700+Math.floor(Math.random()*900))); return s; }
+function line(cls, txt, t){ const d=document.createElement('div'); d.innerHTML='<span class="t">'+(t||ts())+'</span><span class="'+cls+'">'+txt+'</span>'; cons.appendChild(d); cons.scrollTop=cons.scrollHeight; }
+function receipt(verdict, detail){ rid++; const id='r-'+rid; const row=document.createElement('div'); row.className='rrow';
+  row.innerHTML='<span class="id">'+id+'</span><span class="v '+(verdict==='REFUSE'?'refuse':'')+'">'+verdict+'</span><span class="d">'+detail+'</span>';
+  receipts.prepend(row); pack.push({receipt:id, verdict:verdict, detail:detail, anchored:true}); return id; }
+function budget(add){ spent=Math.min(50,spent+add); document.getElementById('budgetfill').style.width=(spent/50*100)+'%'; document.getElementById('budgettext').textContent='$'+spent.toFixed(2)+' / $50.00 today'; }
+function seq(steps){ let i=0; (function next(){ if(i>=steps.length) return; steps[i++](); setTimeout(next, 420); })(); }
+
+function routine(){
+  const venue = cut ? 'openrouter' : 'anthropic';
+  seq([
+    ()=>line('ok','request · support-agent · data-class: <span class="hi">routine</span>'),
+    ()=>line('ok','policy: venues [anthropic · openrouter] · budget ok'),
+    ()=>line('ok','→ '+venue+' · us-east · rented'),
+    ()=>{ line('hi','✓ response · 214 tokens · $0.14 · receipt '+receipt('ALLOW','support-agent → '+venue+' · $0.14')+' anchored'); budget(0.14); }
+  ]);
+}
+function sensitive(){
+  seq([
+    ()=>line('ok','request · research-batch · data-class: <span class="warn">SENSITIVE — client data</span>'),
+    ()=>line('ok','policy: requires <span class="att">attested venue</span> · jurisdiction: EU only'),
+    ()=>line('att','attestation: quote verified ✓ · TDX + H100 CC · region: DE (Frankfurt)'),
+    ()=>line('ok','→ privatemode · eu-de · attested — frontier venues <span class="hi">not eligible</span>'),
+    ()=>line('hi','✓ response · 1,102 tokens · $0.86 · receipt '+receipt('ALLOW','research-batch → privatemode · attested DE · $0.86')+' anchored')
+  ]);
+}
+function overrun(){
+  seq([
+    ()=>line('ok','request · support-agent · call #41 this hour'),
+    ()=>{ budget(50); line('warn','policy: budget check → $50.00 / $50.00 <span class="hi">EXHAUSTED</span>'); },
+    ()=>line('refuse','✗ REFUSED · credential cooled · receipt '+receipt('REFUSE','support-agent · budget exhausted $50/$50')+' anchored'),
+    ()=>line('ok','notify → #ops-alerts · no human was awake for this. none was needed.')
+  ]);
+}
+function cutoff(){
+  const btn=document.getElementById('cutbtn');
+  if(!cut){
+    cut=true; btn.textContent='Restore vendor';
+    document.getElementById('v-support').textContent='openrouter';
+    document.getElementById('c-support').classList.add('att');
+    seq([
+      ()=>line('warn','venue anthropic: UNREACHABLE — simulated cut-off'),
+      ()=>line('ok','re-routing policy-eligible traffic → openrouter · privatemode'),
+      ()=>line('hi','✓ estate healthy · 0 requests dropped · re-route in 240ms'),
+      ()=>line('att','exit receipt '+receipt('ALLOW','vendor exit: anthropic → alternates · 0 dropped')+' anchored — this is the tested exit, as evidence')
+    ]);
+  } else {
+    cut=false; btn.textContent='Simulate vendor cut-off';
+    document.getElementById('v-support').textContent='anthropic';
+    document.getElementById('c-support').classList.remove('att');
+    line('ok','venue anthropic restored · routing normalized · receipt '+receipt('ALLOW','vendor restore: anthropic re-enabled')+' anchored');
+  }
+}
+function exportPack(){
+  const blob=new Blob([JSON.stringify({generated:'demo',receipts:pack},null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='ember-evidence-pack.json'; a.click();
+  line('hi','evidence pack exported · '+pack.length+' receipts · signed & anchored');
+}
+</script>
+</body>
+</html>
