@@ -7,3 +7,5 @@ CNAME
 .nojekyll
 .assetsignore
 README.md
+.github/
+.github/**
