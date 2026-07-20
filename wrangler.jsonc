@@ -1,12 +1,18 @@
 {
   "name": "ember",
+  "main": "worker.js",
   "compatibility_date": "2026-07-01",
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS"
   },
   "workers_dev": false,
   "routes": [
     { "pattern": "embersovereignty.com", "custom_domain": true },
     { "pattern": "www.embersovereignty.com", "custom_domain": true }
-  ]
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "BRIEFING_VAULT", "class_name": "BriefingVault" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["BriefingVault"] }]
 }

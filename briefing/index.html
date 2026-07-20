@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember — Request a briefing</title>
+<meta name="description" content="Request a Sovereign Mode briefing. Bring the deal that's stuck. We reply within one business day.">
+<meta name="theme-color" content="#0A0E14">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://embersovereignty.com/briefing/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0E14'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%234D9FFF'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0A0E14;--surface:#101722;--line:#1E2936;--white:#F2F7FF;--muted:#8CA0B8;--ember:#4D9FFF;--glow:#9FCBFF}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--muted);font:400 17px/1.7 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(640px 440px at calc(50% - 340px) -6%,rgba(77,159,255,.075),transparent 70%)}
+  ::selection{background:var(--ember);color:var(--bg)}
+  p{text-wrap:pretty}
+  .wrap{max-width:660px;margin:0 auto;padding:64px 24px 72px;position:relative}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;margin-bottom:56px}
+  .brand a{color:var(--muted);text-decoration:none}
+  .brand a:hover{color:var(--white)}
+  .brand i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ember);margin-right:10px;box-shadow:0 0 10px rgba(77,159,255,.55)}
+  h1{color:var(--white);font-size:clamp(26px,4.5vw,34px);font-weight:600;line-height:1.2;letter-spacing:-.015em;margin-bottom:14px;text-wrap:balance}
+  .lede{margin-bottom:40px;max-width:560px}
+  form{border:1px solid #24344D;border-radius:8px;background:var(--surface);padding:28px;box-shadow:inset 0 1px 0 rgba(159,203,255,.06)}
+  label{display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);margin-bottom:22px}
+  label .opt{color:#55627B;letter-spacing:.1em}
+  input,textarea{display:block;width:100%;margin-top:8px;background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:11px 12px;color:var(--white);font:400 16px/1.5 "IBM Plex Sans",system-ui,sans-serif}
+  input:focus,textarea:focus{outline:2px solid var(--ember);outline-offset:0;border-color:var(--ember)}
+  textarea{resize:vertical;min-height:132px}
+  ::placeholder{color:#4A5567}
+  .hp{position:absolute;left:-9999px;top:-9999px;height:1px;width:1px;overflow:hidden}
+  .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;border:0;cursor:pointer;padding:12px 22px;border-radius:4px;background:var(--ember);color:var(--bg);font-weight:500;transition:background-color .15s ease}
+  .btn:hover{background:var(--glow)}
+  .btn:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+  .alt{font-size:13.5px;margin-top:18px}
+  .alt a{color:var(--muted)}
+  .alt a:hover{color:var(--white)}
+  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#55627B}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="brand"><a href="/"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</a></p>
+
+  <h1>Request a briefing</h1>
+  <p class="lede">Bring the deal that&rsquo;s stuck. We read every submission and reply within one business day.</p>
+
+  <form method="POST" action="/api/briefing">
+    <label>NAME
+      <input name="name" required maxlength="200" autocomplete="name">
+    </label>
+    <label>WORK EMAIL
+      <input type="email" name="email" required maxlength="254" autocomplete="email">
+    </label>
+    <label>COMPANY
+      <input name="company" required maxlength="200" autocomplete="organization">
+    </label>
+    <label>ROLE <span class="opt">· OPTIONAL</span>
+      <input name="role" maxlength="200" autocomplete="organization-title">
+    </label>
+    <label>THE DEAL THAT&rsquo;S STUCK <span class="opt">· OPTIONAL</span>
+      <textarea name="deal" maxlength="5000" placeholder="As much as you can share."></textarea>
+    </label>
+    <div class="hp" aria-hidden="true">
+      <label>Website<input name="website" tabindex="-1" autocomplete="off"></label>
+    </div>
+    <button class="btn" type="submit">Request the briefing</button>
+    <p class="alt">Prefer email? <a href="mailto:david@litprotocol.com">david@litprotocol.com</a></p>
+  </form>
+</div>
+<footer>EMBER SOVEREIGNTY SYSTEMS · © 2026</footer>
+</body>
+</html>

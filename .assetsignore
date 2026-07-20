@@ -3,6 +3,7 @@
 .wrangler/
 .wrangler/**
 wrangler.jsonc
+worker.js
 CNAME
 .nojekyll
 .assetsignore

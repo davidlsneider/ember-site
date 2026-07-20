@@ -18,3 +18,15 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Set export key
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          if [ -n "$EXPORT_KEY" ]; then
+            echo "$EXPORT_KEY" | wrangler secret put EXPORT_KEY
+          else
+            echo "EXPORT_KEY repo secret not set; skipping"
+          fi
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          EXPORT_KEY: ${{ secrets.EXPORT_KEY }}
