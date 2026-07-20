@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember — Traditional BYOC vs Sovereign Mode</title>
+<meta name="description" content="A structural comparison across eight security vectors: trust anchor, data-in-use state, key custody, vendor access path, audit trail, review artifact, deployment burden, residual trust.">
+<meta name="theme-color" content="#0A0E14">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://embersovereignty.com/compare/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://embersovereignty.com/compare/">
+<meta property="og:site_name" content="Ember Sovereignty Systems">
+<meta property="og:title" content="Traditional BYOC vs Sovereign Mode">
+<meta property="og:description" content="A structural comparison across eight security vectors, from trust anchor to residual trust.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0E14'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%234D9FFF'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0A0E14;--surface:#101722;--line:#1E2936;--white:#F2F7FF;--muted:#8CA0B8;--ember:#4D9FFF;--glow:#9FCBFF}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--muted);font:400 17px/1.7 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(640px 440px at calc(50% - 340px) -6%,rgba(77,159,255,.075),transparent 70%)}
+  ::selection{background:var(--ember);color:var(--bg)}
+  p{text-wrap:pretty}
+  .wrap{max-width:1000px;margin:0 auto;padding:64px 24px 72px;position:relative}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;margin-bottom:56px}
+  .brand a{color:var(--muted);text-decoration:none}
+  .brand a:hover{color:var(--white)}
+  .brand i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ember);margin-right:10px;box-shadow:0 0 10px rgba(77,159,255,.55)}
+  h1{color:var(--white);font-size:clamp(26px,4.5vw,34px);font-weight:600;line-height:1.2;letter-spacing:-.015em;margin-bottom:14px;text-wrap:balance}
+  .lede{margin-bottom:40px;max-width:640px}
+  .scroll{overflow-x:auto;margin-bottom:48px}
+  .tbl{width:100%;min-width:860px;border-collapse:collapse;font-size:15.5px;line-height:1.5;color:#D7E1EF}
+  .tbl th{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;font-weight:500;color:var(--muted);text-align:left;padding:10px 16px;border-bottom:1px solid #24344D}
+  .tbl td{padding:15px 16px;border-bottom:1px solid var(--line);vertical-align:top;width:40%}
+  .tbl td.dim{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;color:#55627B;padding-top:18px;width:20%}
+  .tbl th.ember{color:var(--ember)}
+  .tbl td b{color:var(--white);font-weight:600}
+  .tbl tr:last-child td{border-bottom:0}
+  .note{font-size:14px;max-width:640px;margin-bottom:52px;color:#7D8CA3}
+  .cta{border:1px solid #24344D;border-radius:8px;background:var(--surface);padding:28px;box-shadow:inset 0 1px 0 rgba(159,203,255,.06);max-width:660px}
+  .cta .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);margin-bottom:12px}
+  .cta p{color:var(--white);margin-bottom:20px}
+  .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-decoration:none;padding:12px 22px;border-radius:4px;background:var(--ember);color:var(--bg);font-weight:500;transition:background-color .15s ease}
+  .btn:hover{background:var(--glow)}
+  .btn:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#55627B}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="brand"><a href="/"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</a></p>
+
+  <h1>Traditional BYOC vs Sovereign Mode</h1>
+  <p class="lede">Two enforcement models for the same requirement: the customer&rsquo;s data, protected from the vendor. Vector by vector.</p>
+
+  <div class="scroll">
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th>VECTOR</th>
+        <th>TRADITIONAL BYOC</th>
+        <th class="ember">AI PRODUCT + SOVEREIGN MODE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="dim">TRUST ANCHOR</td>
+        <td><b>Operational.</b> Network perimeter, IAM policy, and the vendor&rsquo;s release pipeline.</td>
+        <td><b>Cryptographic.</b> Silicon attestation chain and a content-pinned, audited build.</td>
+      </tr>
+      <tr>
+        <td class="dim">DATA-IN-USE STATE</td>
+        <td><b>Exposed.</b> Plaintext in application memory throughout processing.</td>
+        <td><b>Encrypted in use.</b> Plaintext exists only inside the attested enclave.</td>
+      </tr>
+      <tr>
+        <td class="dim">KEY CUSTODY</td>
+        <td><b>Shared at runtime.</b> Customer KMS at rest; the application handles plaintext.</td>
+        <td><b>Customer-held.</b> No vendor-side key exists to grant, leak, or compel.</td>
+      </tr>
+      <tr>
+        <td class="dim">VENDOR ACCESS PATH</td>
+        <td><b>Governed.</b> Support roles and update pipeline, under policy and exception process.</td>
+        <td><b>Absent.</b> Restored only by customer-key grant, receipted on the record.</td>
+      </tr>
+      <tr>
+        <td class="dim">AUDIT TRAIL</td>
+        <td><b>Mutable.</b> Centralized log files held by the operating parties.</td>
+        <td><b>Immutable.</b> Signed per-session receipts on an append-only public ledger.</td>
+      </tr>
+      <tr>
+        <td class="dim">SECURITY REVIEW ARTIFACT</td>
+        <td><b>Recurring audit.</b> Architecture and egress policy, re-reviewed for every release.</td>
+        <td><b>Verifiable proof.</b> Attestation measurements checked against the audited build, per session.</td>
+      </tr>
+      <tr>
+        <td class="dim">DEPLOYMENT BURDEN</td>
+        <td><b>High.</b> Tenancy setup, egress control, and upgrades land on the enterprise platform team.</td>
+        <td><b>Low.</b> Venue-independent: hosted, customer cloud, or customer hardware, identical guarantees.</td>
+      </tr>
+      <tr>
+        <td class="dim">RESIDUAL TRUST</td>
+        <td><b>Broad.</b> Vendor organization, cloud operator, and sustained egress discipline.</td>
+        <td><b>Narrow, named.</b> Silicon manufacturers&rsquo; attestation roots and the audited enclave code.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="note">A hardened BYOC deployment is real security work and this table credits it. The structural difference is the last row: what remains to be trusted, and whether anyone can prove it.</p>
+
+  <div class="cta">
+    <p class="k">REQUEST A BRIEFING</p>
+    <p>Thirty minutes with the deal that&rsquo;s stuck. We&rsquo;ll map Sovereign Mode onto the product and tell you whether it closes.</p>
+    <a class="btn" href="/briefing/">Request a briefing</a>
+  </div>
+</div>
+<footer>EMBER SOVEREIGNTY SYSTEMS · © 2026</footer>
+</body>
+</html>
