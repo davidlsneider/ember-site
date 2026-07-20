@@ -133,6 +133,14 @@
       <p>Attestation that the audited build is what actually ran, plus a receipt for every session. Both are checkable without asking you or us, and both can be forwarded straight into the review thread.</p>
     </details>
     <details>
+      <summary>Our buyers already ask for BYOC. How is this different?</summary>
+      <p>BYOC moves your code into their cloud, but it stays readable there: the restriction is a perimeter their security team builds and maintains around your releases, and it can&rsquo;t be proven. Sovereign Mode makes the restriction architectural: you hold no key, the build is pinned and attested, and their reviewer verifies it instead of policing it.</p>
+    </details>
+    <details>
+      <summary>Can our customer run the sealed environment themselves?</summary>
+      <p>Yes. It can run hosted, in their cloud, or on hardware they own, and the guarantees don&rsquo;t move with the venue: same keys, same attestation, same receipts.</p>
+    </details>
+    <details>
       <summary>Is this a crypto thing?</summary>
       <p>No token, nothing to trade. Receipts anchor to a public ledger for one reason: it&rsquo;s the only log a vendor can&rsquo;t quietly edit. Your customer&rsquo;s key is a passkey, one tap.</p>
     </details>
