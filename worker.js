@@ -11,7 +11,6 @@
 
 const FROM = "Ember Briefing <briefing@updates.embersovereignty.com>";
 const DEST = "david@litprotocol.com";
-const FALLBACK = "david@litprotocol.com";
 
 export class BriefingVault {
   constructor(state) {
@@ -106,10 +105,7 @@ async function handleBriefing(request, env, url) {
   }
 
   if (!stored && !emailed) {
-    return errPage(
-      500,
-      `We couldn’t record this just now. Nothing was lost on your side. Please send it straight to ${FALLBACK} and we’ll pick it up there.`
-    );
+    return errPage(500, "We couldn’t record this just now. Please go back and try again in a minute.");
   }
   console.log(`briefing lead captured: ${lead.id} (${lead.company})`);
   return Response.redirect(new URL("/briefing/sent/", url).toString(), 303);
@@ -184,7 +180,7 @@ h1{color:#F2F7FF;font-size:28px;margin:0 0 14px}
 a{color:#4D9FFF}</style></head><body><div class="wrap">
 <h1>That didn’t go through.</h1>
 <p>${msg}</p>
-<p><a href="/briefing/">&larr; back to the form</a> · <a href="mailto:${FALLBACK}">${FALLBACK}</a></p>
+<p><a href="/briefing/">&larr; back to the form</a></p>
 </div></body></html>`;
   return new Response(html, {
     status,
