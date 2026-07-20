@@ -2,3 +2,7 @@
 {"ts":"2026-07-20T19:43:27.742Z","cmd":"goto","args":"https://embersovereignty.com/compare/?v=2","origin":"https://embersovereignty.com/compare/?v=2","durationMs":444,"status":"ok","hasCookies":false,"mode":"launched"}
 {"ts":"2026-07-20T19:43:28.160Z","cmd":"wait","args":"--load","origin":"https://embersovereignty.com/compare/?v=2","durationMs":360,"status":"ok","hasCookies":false,"mode":"launched"}
 {"ts":"2026-07-20T19:43:29.350Z","cmd":"screenshot","args":"/tmp/live-compare-v3.png","origin":"https://embersovereignty.com/compare/?v=2","durationMs":135,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-07-20T19:57:40.226Z","cmd":"viewport","args":"1280x800","origin":"about:blank","durationMs":6,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-07-20T19:57:40.783Z","cmd":"goto","args":"https://embersovereignty.com/?v=1784577460","origin":"https://embersovereignty.com/?v=1784577460","durationMs":504,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-07-20T19:57:41.183Z","cmd":"wait","args":"--load","origin":"https://embersovereignty.com/?v=1784577460","durationMs":351,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-07-20T19:57:42.334Z","cmd":"screenshot","args":"/tmp/live-home-nav2.png --clip 0,0,1280,400","origin":"https://embersovereignty.com/?v=1784577460","durationMs":71,"status":"ok","hasCookies":false,"mode":"launched"}
