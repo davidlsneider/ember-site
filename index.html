@@ -150,7 +150,7 @@
     </details>
     <details>
       <summary>How does it actually work?</summary>
-      <p>Your application logic runs content-pinned in a sealed environment: the hardware proves it&rsquo;s running the exact build that was audited. Your customer&rsquo;s data enters encrypted under a key only they hold, decrypts only inside that environment, and nothing persists after the session. Inference is invoked from within it, so content never passes through your servers. Every session writes a signed receipt (what ran, where, under whose key) to a ledger nobody, including us, can edit. The cryptographic core is a blockchain-attested TEE, in production today.</p>
+      <p>Your application logic runs content-pinned in a sealed environment: the hardware proves it&rsquo;s running the exact build that was audited. Your customer&rsquo;s data enters encrypted under a key only they hold, decrypts only inside that environment, and nothing persists after the session. Inference is invoked from within it, so content never passes through your servers. Every session writes a signed receipt (what ran, where, under whose key) to a ledger nobody, including us, can edit. The cryptographic core is a blockchain-attested TEE, in production today. <a href="/developers/" style="color:var(--ember);text-decoration:none">The integration and the verification spec &rarr;</a></p>
     </details>
   </div>
 
