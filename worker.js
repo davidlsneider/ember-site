@@ -1,15 +1,16 @@
 // Serves the static site; handles POST /api/briefing.
 //
 // Every valid submission is stored in the BriefingVault Durable Object,
-// so no lead is lost even with no email leg configured. If a send_email
-// binding (BRIEFING_EMAIL) is present, a copy is also emailed; storage
-// is the source of truth either way. See site/DEPLOY.md for the state
-// of the email leg.
+// so no lead is lost even if the email leg fails. When RESEND_API_KEY
+// is set, a copy is emailed to DEST via Resend (from the Resend-verified
+// updates. subdomain, which leaves the zone's Google MX untouched).
+// Storage is the source of truth either way.
 //
 // GET /api/briefing/export  (Authorization: Bearer <EXPORT_KEY>)
 // returns all captured leads as JSON, oldest first.
 
-const FROM = "briefing@embersovereignty.com"; // used only when an email leg exists
+const FROM = "Ember Briefing <briefing@updates.embersovereignty.com>";
+const DEST = "david@litprotocol.com";
 const FALLBACK = "david@litprotocol.com";
 
 export class BriefingVault {
@@ -95,7 +96,7 @@ async function handleBriefing(request, env, url) {
   }
 
   let emailed = false;
-  if (env.BRIEFING_EMAIL) {
+  if (env.RESEND_API_KEY) {
     try {
       await sendLeadEmail(env, lead);
       emailed = true;
@@ -138,10 +139,9 @@ function timingSafeEqual(a, b) {
 }
 
 async function sendLeadEmail(env, lead) {
-  const dest = env.BRIEFING_EMAIL_DEST || FALLBACK;
   const when = lead.id.slice(0, 16).replace("T", " ") + " UTC";
   const where = [lead.city, lead.country].filter(Boolean).join(", ");
-  const body = [
+  const text = [
     `Name:    ${lead.name}`,
     `Email:   ${lead.email}`,
     `Company: ${lead.company}`,
@@ -153,37 +153,25 @@ async function sendLeadEmail(env, lead) {
     `—`,
     `${when}${where ? " · " + where : ""} · embersovereignty.com/briefing`,
   ].join("\n");
-  const raw = [
-    `From: Ember Briefing <${FROM}>`,
-    `Reply-To: <${lead.email}>`,
-    `To: <${dest}>`,
-    `Subject: ${header2047(`Briefing request — ${lead.company} (${lead.name})`)}`,
-    `Message-ID: <${crypto.randomUUID()}@embersovereignty.com>`,
-    `Date: ${new Date().toUTCString()}`,
-    `MIME-Version: 1.0`,
-    `Content-Type: text/plain; charset=utf-8`,
-    `Content-Transfer-Encoding: base64`,
-    ``,
-    b64wrap(body),
-  ].join("\r\n");
-  const { EmailMessage } = await import("cloudflare:email");
-  await env.BRIEFING_EMAIL.send(new EmailMessage(FROM, dest, raw));
-}
-
-// RFC 2047 encode a header value when it isn't plain ASCII.
-function header2047(s) {
-  return /^[\x20-\x7E]*$/.test(s) ? s : `=?utf-8?B?${b64(s)}?=`;
-}
-
-function b64(s) {
-  const bytes = new TextEncoder().encode(s);
-  let bin = "";
-  for (const b of bytes) bin += String.fromCharCode(b);
-  return btoa(bin);
-}
-
-function b64wrap(s) {
-  return b64(s).replace(/(.{76})/g, "$1\r\n");
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${env.RESEND_API_KEY}`,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      from: FROM,
+      to: [DEST],
+      reply_to: lead.email,
+      subject: `Briefing request — ${lead.company} (${lead.name})`,
+      text,
+    }),
+  });
+  if (!res.ok) {
+    throw new Error(`resend ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  }
+  const { id } = await res.json();
+  console.log(`briefing email sent: ${id}`);
 }
 
 function errPage(status, msg) {
