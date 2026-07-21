@@ -71,19 +71,12 @@
   <h1>Integration and verification</h1>
   <p class="lede">The two things the technical room asks: how small the integration is, and how a security reviewer verifies the sealed environment without trusting anyone.</p>
 
-  <p class="sec">THE INTEGRATION</p>
-  <p class="body">Sovereign Mode wraps the calls your product already makes. Your prompts, retrieval, and agents run unchanged; the wrapper decides where they run and who can read what goes in.</p>
-  <pre><span class="c">import</span> { sovereign } <span class="c">from</span> <span class="k">"@ember/sdk"</span>;
-
-<span class="c">// Wrap the calls your product already makes. Nothing else changes.</span>
-<span class="c">const</span> session = <span class="c">await</span> sovereign.open({ customer });
-
-<span class="c">// Runs content-pinned in the sealed environment. Plaintext never reaches you.</span>
-<span class="c">const</span> output = <span class="c">await</span> session.run(pipeline, input);
-
-<span class="c">// Nothing persists. The receipt names what ran, where, under whose key.</span>
-<span class="c">const</span> receipt = <span class="c">await</span> session.close();</pre>
-  <p class="aftersec">The customer&rsquo;s key is a passkey: one tap to switch the toggle on, one recovery phrase saved. No wallet, nothing to trade.</p>
+  <p class="sec">THE PILOT INTEGRATION</p>
+  <p class="body">Keep the AI SDK or agent harness your product already uses. The pilot begins at its model-provider boundary:</p>
+  <pre><span class="c"># Endpoint and key are issued during pilot onboarding.</span>
+<span class="c">export</span> ANTHROPIC_BASE_URL=https://&lt;ember-pilot&gt;/ember/anthropic
+<span class="c">export</span> ANTHROPIC_API_KEY=&lt;ember-pilot-key&gt;</pre>
+  <p class="aftersec">Pilot access starts with a briefing. We map one real workflow, issue the endpoint, and move that workflow into Sovereign Mode.</p>
 
   <p class="sec">THE VERIFICATION</p>
   <p class="body">Before the first corporate payload enters the environment, the buyer&rsquo;s security team verifies it independently. Three checks, none of which require trusting us or you:</p>

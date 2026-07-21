@@ -1,0 +1,8 @@
+{
+  "name": "ember-public-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test worker.test.js"
+  }
+}

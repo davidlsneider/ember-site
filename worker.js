@@ -43,7 +43,7 @@ export default {
     if (url.pathname === "/api/briefing/export") {
       return handleExport(request, env);
     }
-    return env.ASSETS.fetch(request);
+    return withSecurityHeaders(await env.ASSETS.fetch(request));
   },
 };
 
@@ -78,8 +78,6 @@ async function handleBriefing(request, env, url) {
     company,
     role,
     deal,
-    city: request.cf?.city || "",
-    country: request.cf?.country || "",
   };
 
   let stored = false;
@@ -136,7 +134,6 @@ function timingSafeEqual(a, b) {
 
 async function sendLeadEmail(env, lead) {
   const when = lead.id.slice(0, 16).replace("T", " ") + " UTC";
-  const where = [lead.city, lead.country].filter(Boolean).join(", ");
   const text = [
     `Name:    ${lead.name}`,
     `Email:   ${lead.email}`,
@@ -147,7 +144,7 @@ async function sendLeadEmail(env, lead) {
     lead.deal || "—",
     ``,
     `—`,
-    `${when}${where ? " · " + where : ""} · embersovereignty.com/briefing`,
+    `${when} · embersovereignty.com/briefing`,
   ].join("\n");
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -182,8 +179,19 @@ a{color:#4D9FFF}</style></head><body><div class="wrap">
 <p>${msg}</p>
 <p><a href="/briefing/">&larr; back to the form</a></p>
 </div></body></html>`;
-  return new Response(html, {
+  return withSecurityHeaders(new Response(html, {
     status,
-    headers: { "content-type": "text/html; charset=utf-8" },
-  });
+    headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
+  }));
+}
+
+function withSecurityHeaders(response) {
+  const headers = new Headers(response.headers);
+  headers.set("content-security-policy", "default-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; upgrade-insecure-requests");
+  headers.set("permissions-policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=()");
+  headers.set("referrer-policy", "strict-origin-when-cross-origin");
+  headers.set("strict-transport-security", "max-age=31536000; includeSubDomains");
+  headers.set("x-content-type-options", "nosniff");
+  headers.set("x-frame-options", "DENY");
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 }

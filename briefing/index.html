@@ -49,22 +49,22 @@
 
   <form method="POST" action="/api/briefing">
     <label>NAME
-      <input name="name" required maxlength="200" autocomplete="name">
+      <input type="text" name="name" required maxlength="200" autocomplete="name">
     </label>
     <label>WORK EMAIL
       <input type="email" name="email" required maxlength="254" autocomplete="email">
     </label>
     <label>COMPANY
-      <input name="company" required maxlength="200" autocomplete="organization">
+      <input type="text" name="company" required maxlength="200" autocomplete="organization">
     </label>
     <label>ROLE <span class="opt">· OPTIONAL</span>
-      <input name="role" maxlength="200" autocomplete="organization-title">
+      <input type="text" name="role" maxlength="200" autocomplete="organization-title">
     </label>
     <label>THE DEAL THAT&rsquo;S STUCK <span class="opt">· OPTIONAL</span>
       <textarea name="deal" maxlength="5000" placeholder="As much as you can share."></textarea>
     </label>
     <div class="hp" aria-hidden="true">
-      <label>Website<input name="website" tabindex="-1" autocomplete="off"></label>
+      <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"></label>
     </div>
     <button class="btn" type="submit">Request the briefing</button>
   </form>
