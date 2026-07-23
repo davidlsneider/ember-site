@@ -24,8 +24,10 @@
   body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(640px 440px at calc(50% - 340px) -6%,rgba(77,159,255,.075),transparent 70%)}
   ::selection{background:var(--ember);color:var(--bg)}
   p{text-wrap:pretty}
-  .wrap{max-width:720px;margin:0 auto;padding:64px 24px 72px;position:relative}
-  .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:56px}
+  .wrap{max-width:720px;margin:0 auto;padding:40px 24px 72px;position:relative}
+  .bar-in{max-width:1200px;margin:0 auto;padding:30px 40px 0;display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  @media(max-width:720px){.bar-in{padding:22px 24px 0}}
+  .nav a.here{color:var(--white)}
   .nav{display:flex;gap:22px;align-items:baseline;flex-wrap:wrap;margin-left:auto}
   .nav a{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);text-decoration:none;white-space:nowrap}
   .nav a:hover{color:var(--white)}
@@ -53,20 +55,22 @@
   .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-decoration:none;padding:12px 22px;border-radius:4px;background:var(--ember);color:var(--bg);font-weight:500;transition:background-color .15s ease}
   .btn:hover{background:var(--glow)}
   .btn:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
-  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#55627B}
+  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#71809A}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
+<header class="bar">
+  <div class="bar-in">
     <p class="brand"><a href="/"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</a></p>
     <nav class="nav">
       <a href="/compare/">COMPARE</a>
-      <a href="/developers/">DEVELOPERS</a>
+      <a href="/developers/">VERIFICATION</a>
+      <a class="here" href="/questionnaire/">QUESTIONNAIRE</a>
       <a class="toplink" href="/briefing/">REQUEST A BRIEFING &rarr;</a>
     </nav>
   </div>
-
+</header>
+<div class="wrap">
   <h1>The questionnaire, answered</h1>
   <p class="lede">Sixteen questions from CAIQ v4, the questionnaire enterprise security teams already send, answered the way your team answers them once Sovereign Mode is your premium tier.</p>
   <p class="scope">Scope note: these answers cover the sovereign tier, the crown-jewel data path. Your standard stack keeps its standard answers, and your certifications stay exactly as they are.</p>
@@ -90,7 +94,7 @@
   <div class="q">
     <p class="qid">CEK-03.1</p>
     <p class="qq">Are data at-rest and in-transit cryptographically protected using cryptographic libraries certified to approved standards?</p>
-    <p class="qa"><b>Yes, standard.</b> At-rest and in-transit protection use certified libraries, as on any serious stack. The sovereign tier adds the state this question does not ask about: data in use, with plaintext existing only inside the attested environment.</p>
+    <p class="qa"><b>Yes, standard.</b> At-rest and in-transit protection use certified libraries, as on any serious stack. The sovereign tier adds the state this question does not ask about: data in use, decrypting only inside the attested environment.</p>
   </div>
 
   <p class="sec">DATA</p>

@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ember — Integration and verification</title>
-<meta name="description" content="The Sovereign Mode SDK integration and the attestation verification spec: three checks a security reviewer runs before the first payload.">
+<title>Ember — Verification</title>
+<meta name="description" content="How a security reviewer verifies a Sovereign Mode session without trusting the vendor or Ember: three checks before the first payload.">
 <meta name="theme-color" content="#0A0E14">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://embersovereignty.com/developers/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://embersovereignty.com/developers/">
 <meta property="og:site_name" content="Ember Sovereignty Systems">
-<meta property="og:title" content="Ember — Integration and verification">
-<meta property="og:description" content="The SDK integration and the attestation verification spec.">
+<meta property="og:title" content="Ember — Verification">
+<meta property="og:description" content="Three checks a security reviewer runs, trusting no one.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0E14'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%234D9FFF'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,8 +24,10 @@
   body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(640px 440px at calc(50% - 340px) -6%,rgba(77,159,255,.075),transparent 70%)}
   ::selection{background:var(--ember);color:var(--bg)}
   p{text-wrap:pretty}
-  .wrap{max-width:720px;margin:0 auto;padding:64px 24px 72px;position:relative}
-  .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:56px}
+  .wrap{max-width:720px;margin:0 auto;padding:40px 24px 72px;position:relative}
+  .bar-in{max-width:1200px;margin:0 auto;padding:30px 40px 0;display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  @media(max-width:720px){.bar-in{padding:22px 24px 0}}
+  .nav a.here{color:var(--white)}
   .nav{display:flex;gap:22px;align-items:baseline;flex-wrap:wrap}
   .nav a{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);text-decoration:none;white-space:nowrap}
   .nav a:hover{color:var(--white)}
@@ -41,7 +43,7 @@
   .body{margin-bottom:18px;max-width:620px}
   .body b{color:var(--white);font-weight:600}
   pre{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 20px;font:400 13.5px/1.75 "IBM Plex Mono",monospace;color:var(--white);overflow-x:auto;margin-bottom:18px;box-shadow:inset 0 1px 0 rgba(159,203,255,.05)}
-  pre .c{color:#55627B}
+  pre .c{color:#71809A}
   pre .k{color:var(--ember)}
   .checks{margin:0 0 18px;max-width:640px;counter-reset:ck}
   .checks li{list-style:none;counter-increment:ck;padding:14px 0 14px 44px;position:relative;border-top:1px solid var(--line);font-size:15.5px}
@@ -54,32 +56,27 @@
   .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-decoration:none;padding:12px 22px;border-radius:4px;background:var(--ember);color:var(--bg);font-weight:500;transition:background-color .15s ease}
   .btn:hover{background:var(--glow)}
   .btn:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
-  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#55627B}
+  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#71809A}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
+<header class="bar">
+  <div class="bar-in">
     <p class="brand"><a href="/"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</a></p>
     <nav class="nav">
       <a href="/compare/">COMPARE</a>
+      <a class="here" href="/developers/">VERIFICATION</a>
       <a href="/questionnaire/">QUESTIONNAIRE</a>
       <a class="toplink" href="/briefing/">REQUEST A BRIEFING &rarr;</a>
     </nav>
   </div>
-
-  <h1>Integration and verification</h1>
-  <p class="lede">The two things the technical room asks: how small the integration is, and how a security reviewer verifies the sealed environment without trusting anyone.</p>
-
-  <p class="sec">THE PILOT INTEGRATION</p>
-  <p class="body">Keep the AI SDK or agent harness your product already uses. The pilot begins at its model-provider boundary:</p>
-  <pre><span class="c"># Endpoint and key are issued during pilot onboarding.</span>
-<span class="c">export</span> ANTHROPIC_BASE_URL=https://&lt;ember-pilot&gt;/ember/anthropic
-<span class="c">export</span> ANTHROPIC_API_KEY=&lt;ember-pilot-key&gt;</pre>
-  <p class="aftersec">Pilot access starts with a briefing. We map one real workflow, issue the endpoint, and move that workflow into Sovereign Mode.</p>
+</header>
+<div class="wrap">
+  <h1>Verify it yourself.</h1>
+  <p class="lede">Three checks a security reviewer runs before the first payload, trusting no one.</p>
 
   <p class="sec">THE VERIFICATION</p>
-  <p class="body">Before the first corporate payload enters the environment, the buyer&rsquo;s security team verifies it independently. Three checks, none of which require trusting us or you:</p>
+  <p class="body">The buyer&rsquo;s security team verifies the environment independently:</p>
   <ul class="checks">
     <li><b>Pull the attestation quote.</b> Every sovereign session exposes one.</li>
     <li><b>Verify the quote&rsquo;s signature</b> against the silicon vendor&rsquo;s published root of trust. This proves genuine attested hardware, not an emulator.</li>
@@ -88,6 +85,10 @@
   <pre><span class="c"># the attestation quote for any sovereign session</span>
 curl https://api.embersovereignty.com/attestation/{session_id}</pre>
   <p class="aftersec">The receipt trail repeats these facts for every session, so drift is visible the moment it happens. What a reviewer audits once, the architecture re-proves continuously.</p>
+
+  <p class="sec">THE PILOT</p>
+  <p class="body">Your AI SDK or agent harness runs unchanged inside the attested clean room; the Ember SDK in your UI completes the experience. <b>Pilot access starts with a briefing:</b> we map one real workflow and move it into Sovereign Mode.</p>
+  <p class="aftersec">The full method, including the receipt field reference, is in the <a href="/whitepaper" style="color:var(--ember);text-decoration:none">technical whitepaper &rarr;</a></p>
 
   <div class="cta">
     <p class="k">REQUEST A BRIEFING</p>

@@ -19,8 +19,13 @@
   body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(640px 440px at calc(50% - 340px) -6%,rgba(77,159,255,.075),transparent 70%)}
   ::selection{background:var(--ember);color:var(--bg)}
   p{text-wrap:pretty}
-  .wrap{max-width:660px;margin:0 auto;padding:64px 24px 72px;position:relative}
-  .brand{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;margin-bottom:56px}
+  .wrap{max-width:660px;margin:0 auto;padding:40px 24px 72px;position:relative}
+  .bar-in{max-width:1200px;margin:0 auto;padding:30px 40px 0;display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  @media(max-width:720px){.bar-in{padding:22px 24px 0}}
+  .nav{display:flex;gap:22px;align-items:baseline;flex-wrap:wrap}
+  .nav a{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);text-decoration:none;white-space:nowrap}
+  .nav a:hover{color:var(--white)}
+  .brand{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em}
   .brand a{color:var(--muted);text-decoration:none}
   .brand a:hover{color:var(--white)}
   .brand i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ember);margin-right:10px;box-shadow:0 0 10px rgba(77,159,255,.55)}
@@ -37,13 +42,29 @@
   .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;border:0;cursor:pointer;padding:12px 22px;border-radius:4px;background:var(--ember);color:var(--bg);font-weight:500;transition:background-color .15s ease}
   .btn:hover{background:var(--glow)}
   .btn:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
-  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#55627B}
+  .sec{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);margin:56px 0 6px}
+  .faq details{border-top:1px solid var(--line)}
+  .faq details:last-child{border-bottom:1px solid var(--line)}
+  .faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:15px 0;color:var(--white);font-weight:600;font-size:15.5px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:"IBM Plex Mono",monospace;color:var(--ember);flex-shrink:0}
+  .faq details[open] summary::after{content:"\2013"}
+  .faq details p{font-size:15px;padding:0 0 18px;max-width:600px}
+  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#71809A}
 </style>
 </head>
 <body>
+<header class="bar">
+  <div class="bar-in">
+    <p class="brand"><a href="/"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</a></p>
+    <nav class="nav">
+      <a href="/compare/">COMPARE</a>
+      <a href="/developers/">VERIFICATION</a>
+      <a href="/questionnaire/">QUESTIONNAIRE</a>
+    </nav>
+  </div>
+</header>
 <div class="wrap">
-  <p class="brand"><a href="/"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</a></p>
-
   <h1>Request a briefing</h1>
   <p class="lede">Bring the deal that&rsquo;s stuck. We read every submission and reply within one business day.</p>
 
@@ -68,6 +89,30 @@
     </div>
     <button class="btn" type="submit">Request the briefing</button>
   </form>
+
+  <p class="sec">COMMON QUESTIONS</p>
+  <div class="faq">
+    <details>
+      <summary>Does our product have to change?</summary>
+      <p>No. Prompts, retrieval, and agents run unchanged inside the clean room. You ship a toggle, not a rebuild.</p>
+    </details>
+    <details>
+      <summary>Do we lose frontier models?</summary>
+      <p>No. Inference is invoked from inside the environment; you keep the models you use today.</p>
+    </details>
+    <details>
+      <summary>How long until a pilot is live?</summary>
+      <p>One week. Install the SDK; we configure the environment with you.</p>
+    </details>
+    <details>
+      <summary>Is this a crypto thing?</summary>
+      <p>No token, nothing to trade. Receipts anchor to a public ledger for one reason: it&rsquo;s the only log a vendor can&rsquo;t quietly edit. Your customer&rsquo;s key is a passkey, one tap.</p>
+    </details>
+    <details>
+      <summary>What does it cost?</summary>
+      <p>Pilot terms are part of the design-partner conversation. The shape is fixed: Sovereign Mode is a tier of your product, priced to leave you margin.</p>
+    </details>
+  </div>
 </div>
 <footer>EMBER SOVEREIGNTY SYSTEMS · © 2026</footer>
 </body>

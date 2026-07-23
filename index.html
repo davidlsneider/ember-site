@@ -32,12 +32,12 @@
   body{background:var(--bg);color:var(--muted);font:400 17px/1.7 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
   ::selection{background:var(--ember);color:var(--bg)}
   p{text-wrap:pretty}
-  .hero{position:relative;min-height:clamp(600px,94svh,880px);display:flex;flex-direction:column;overflow:clip}
+  .hero{position:relative;min-height:clamp(560px,84svh,760px);display:flex;flex-direction:column;overflow:clip}
   #ember-field{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0;transition:opacity 1.6s ease}
   #ember-field.on{opacity:1}
   .hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(10,14,20,.92),rgba(10,14,20,.46) 38%,rgba(10,14,20,0) 64%)}
   .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(10,14,20,0),var(--bg))}
-  .hero-in{position:relative;z-index:2;display:flex;flex-direction:column;flex:1;width:100%;max-width:1200px;margin:0 auto;padding:30px 40px 96px}
+  .hero-in{position:relative;z-index:2;display:flex;flex-direction:column;flex:1;width:100%;max-width:1200px;margin:0 auto;padding:30px 40px 72px}
   .hero-copy{margin:auto 0;max-width:620px;padding-top:44px}
   .hero h1{font-size:clamp(32px,4.6vw,54px);margin-bottom:22px}
   .hero .lede{font-size:19px;max-width:44ch}
@@ -46,21 +46,29 @@
   .hero-cta .sub{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);text-decoration:none;white-space:nowrap}
   .hero-cta .sub:hover{color:var(--white)}
   @keyframes rise{to{opacity:1;transform:none}}
-  .hero .top,.hero-copy>*,.hero-cta{opacity:0;transform:translateY(10px);animation:rise .8s cubic-bezier(.2,.6,.2,1) forwards}
-  .hero .top{animation-delay:.05s}
+  .hero-copy>*,.hero-cta{opacity:0;transform:translateY(10px);animation:rise .8s cubic-bezier(.2,.6,.2,1) forwards}
   .hero h1{animation-delay:.18s}
   .hero .lede{animation-delay:.34s}
   .hero-cta{animation-delay:.5s}
-  @media (prefers-reduced-motion:reduce){.hero .top,.hero-copy>*,.hero-cta{animation:none;opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.hero-copy>*,.hero-cta{animation:none;opacity:1;transform:none}}
   @media (max-width:720px){
+    .nav a:not(.toplink){display:none}
+    .wrap{padding-top:72px}
+    .claim{margin-bottom:72px}
+    .rcap{margin-bottom:80px}
+    .stmts,.hub{margin-bottom:80px}
+    .stmt{font-size:19px}
+    .hub .hd{display:none}
     .hero{min-height:clamp(560px,92svh,780px)}
     .hero-in{padding:22px 24px 72px}
     .hero-copy{padding-top:10px}
     .hero::before{background:linear-gradient(180deg,rgba(10,14,20,.5) 0%,rgba(10,14,20,.72) 34%,rgba(10,14,20,.30) 58%,rgba(10,14,20,0) 78%)}
   }
-  .wrap{max-width:660px;margin:0 auto;padding:26px 24px 72px;position:relative}
+  .wrap{max-width:660px;margin:0 auto;padding:96px 24px 96px;position:relative}
   .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
   .brand{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;color:var(--muted)}
+  .brand a{color:var(--muted);text-decoration:none}
+  .brand a:hover{color:var(--white)}
   .brand i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ember);margin-right:10px;box-shadow:0 0 10px rgba(77,159,255,.55);animation:smolder 4.4s ease-in-out infinite}
   @keyframes smolder{0%,100%{box-shadow:0 0 5px rgba(77,159,255,.3);opacity:.75}50%{box-shadow:0 0 14px rgba(77,159,255,.9);opacity:1}}
   @media (prefers-reduced-motion:reduce){.brand i{animation:none}}
@@ -73,34 +81,36 @@
   .ciso{border-left:2px solid var(--ember);padding:4px 0 4px 16px;margin-bottom:24px}
   .ciso p{color:var(--white);font-size:18px}
   .ciso .who{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--muted);margin-top:6px}
-  .def{font-size:18px;margin-bottom:44px}
-  .def b{color:var(--white);font-weight:500}
-  .quotes{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:20px 24px;font-family:"IBM Plex Mono",monospace;font-size:14px;line-height:2.1;color:var(--white);margin-bottom:18px;box-shadow:inset 0 1px 0 rgba(159,203,255,.05)}
-  .turn{margin-bottom:48px}
-  .turn b{color:var(--white);font-weight:600}
-  .row{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:20px 0;border-top:1px solid var(--line)}
-  .row .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--ember);padding-top:4px}
-  .row p b{color:var(--white);font-weight:600}
-  .how{border-top:1px solid var(--line);padding:20px 0 0;font-size:15px;margin-bottom:48px}
-  .how+.how{border-top:0;padding-top:6px}
-  .sec{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);margin-bottom:6px}
-  .faq{margin-bottom:52px}
-  .faq details{border-top:1px solid var(--line)}
-  .faq details:last-child{border-bottom:1px solid var(--line)}
-  .faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:15px 0;color:var(--white);font-weight:600;font-size:15.5px}
-  .faq summary::-webkit-details-marker{display:none}
-  .faq summary::after{content:"+";font-family:"IBM Plex Mono",monospace;color:var(--ember);flex-shrink:0}
-  .faq details[open] summary::after{content:"–"}
-  .faq details p{font-size:15px;padding:0 0 18px;max-width:600px}
-  .faq details p+p{margin-top:-6px}
+  .claim{font-size:clamp(22px,1.9vw,27px);line-height:1.5;max-width:32ch;margin-bottom:110px}
+  .claim b{color:var(--white);font-weight:600}
+  .sec{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);margin-bottom:14px}
+  .receipt{border:1px solid var(--line);border-radius:6px;background:var(--surface);box-shadow:0 24px 70px rgba(0,0,0,.45),inset 0 1px 0 rgba(159,203,255,.07);font-family:"IBM Plex Mono",monospace;font-size:13px;overflow:hidden}
+  @media(min-width:900px){.receipt{margin-inline:-50px}}
+  .receipt .rhead{display:flex;justify-content:space-between;gap:16px;padding:14px 20px;border-bottom:1px solid var(--line);color:var(--white);letter-spacing:.14em;font-size:11px}
+  .receipt .rhead .tag{color:var(--muted)}
+  .receipt .rrow{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:11px 20px;border-top:1px solid rgba(30,41,54,.6)}
+  .receipt .rrow:first-of-type{border-top:0}
+  .receipt .rk{color:var(--muted);letter-spacing:.14em;font-size:11px;padding-top:2px}
+  .receipt .rv{color:var(--white)}
+  .receipt .rv .ok{color:var(--ember)}
+  .rcap{font-size:15px;margin-top:16px;margin-bottom:120px}
+  .stmts{margin-bottom:120px}
+  .stmt{color:var(--white);font-size:22px;font-weight:500;letter-spacing:-.01em;line-height:1.35;padding:26px 0;border-top:1px solid var(--line);text-wrap:balance}
+  .hub{margin-bottom:120px}
+  .hub a{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:24px 0;border-top:1px solid var(--line);text-decoration:none}
+  .hub a:last-child{border-bottom:1px solid var(--line)}
+  .hub .ht{color:var(--white);font-size:17px;font-weight:600}
+  .hub .hd{color:var(--muted);font-size:14px;margin-left:auto;text-align:right}
+  .hub .ar{color:var(--ember);font-family:"IBM Plex Mono",monospace;flex-shrink:0}
+  .hub a:hover .ht{color:var(--glow)}
   .cta{border:1px solid #24344D;border-radius:8px;background:var(--surface);padding:28px;box-shadow:inset 0 1px 0 rgba(159,203,255,.06)}
   .cta .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);margin-bottom:12px}
   .cta p{color:var(--white);margin-bottom:20px}
   .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-decoration:none;padding:12px 22px;border-radius:4px;background:var(--ember);color:var(--bg);font-weight:500;transition:background-color .15s ease}
   .btn:hover{background:var(--glow)}
   .btn:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
-  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#55627B}
-  @media(max-width:560px){.row{grid-template-columns:1fr;gap:6px}}
+  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#71809A}
+  @media(max-width:560px){.receipt .rrow{grid-template-columns:1fr;gap:4px}}
 </style>
 </head>
 <body>
@@ -108,10 +118,10 @@
   <canvas id="ember-field" aria-hidden="true"></canvas>
   <div class="hero-in">
     <div class="top">
-      <p class="brand"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</p>
+      <p class="brand"><a href="/"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</a></p>
       <nav class="nav">
         <a href="/compare/">COMPARE</a>
-        <a href="/developers/">DEVELOPERS</a>
+        <a href="/developers/">VERIFICATION</a>
         <a href="/questionnaire/">QUESTIONNAIRE</a>
         <a class="toplink" href="/briefing/">REQUEST A BRIEFING &rarr;</a>
       </nav>
@@ -121,89 +131,40 @@
       <p class="lede">For every partnership stalled in security review, there&rsquo;s <b>Sovereign Mode</b>.</p>
       <div class="hero-cta">
         <a class="btn" href="/briefing/">Request a briefing</a>
-        <a class="sub" href="/developers/">SEE THE INTEGRATION &rarr;</a>
       </div>
     </div>
   </div>
 </header>
 <div class="wrap">
-  <div class="ciso">
-    <p>&ldquo;We can&rsquo;t send our source code or IP to a third party.&rdquo;</p>
-    <p class="who">— EVERY CISO, EVENTUALLY</p>
-  </div>
-  <p class="def"><b>Sovereign Mode ends the stall: your AI product processes their data without being able to read it, and their security team can verify that for themselves.</b> Their repos, deal rooms, records.</p>
+  <p class="claim"><b>Run your product on their most sensitive work. Prove you never see it.</b> Their repos, deal rooms, records.</p>
 
-  <div class="quotes">
-    &ldquo;We don&rsquo;t train on your data.&rdquo;<br>
-    &ldquo;Zero data retention.&rdquo;<br>
-    &ldquo;Your data stays yours.&rdquo;
+  <div class="receipt" aria-label="Example session receipt">
+    <div class="rhead"><span>SESSION RECEIPT</span><span class="tag">EXAMPLE</span></div>
+    <div class="rrow"><span class="rk">CODE</span><span class="rv">sha256:9d41&hellip;7e2 &middot; approved build</span></div>
+    <div class="rrow"><span class="rk">VENUE</span><span class="rv">attested clean room</span></div>
+    <div class="rrow"><span class="rk">CREDENTIAL</span><span class="rv">institution-owned &middot; fingerprint bound</span></div>
+    <div class="rrow"><span class="rk">VERDICT</span><span class="rv"><span class="ok">allow</span></span></div>
+    <div class="rrow"><span class="rk">SIGNED</span><span class="rv">2026-07-21T14:32:07Z</span></div>
+    <div class="rrow"><span class="rk">CHAIN</span><span class="rv">anchored &middot; publicly verifiable</span></div>
   </div>
-  <p class="turn">If your security page makes commitments like these, <b>Sovereign Mode upgrades them from policy to proof.</b></p>
+  <p class="rcap">Every session leaves one. Anyone can verify it.</p>
 
-  <div class="row">
-    <span class="k">SECURITY REVIEW</span>
-    <p><b>Pass the review with evidence.</b> Their reviewers verify what ran, where it ran, and who could access it. No questionnaire round-trips.</p>
-  </div>
-  <div class="row">
-    <span class="k">PREMIUM TIER</span>
-    <p><b>Offer sovereignty as a product line.</b> The premium tier your regulated customers already request, priced and billed with your product.</p>
-  </div>
-  <div class="row">
-    <span class="k">DATA LIABILITY</span>
-    <p><b>Operate outside the custody path.</b> Your service cannot disclose, lose, or be compelled to produce content it cannot access.</p>
-  </div>
-  <div class="row">
-    <span class="k">PILOT PATH</span>
-    <p><b>Keep the AI SDK or agent harness you already use.</b> A pilot starts at its provider boundary, then moves one blocked workflow into Sovereign Mode. <a href="/developers/" style="color:var(--ember);text-decoration:none">See the integration &rarr;</a></p>
+  <div class="stmts">
+    <p class="stmt">Pass the review with proof, not promises.</p>
+    <p class="stmt">Sell sovereignty as your premium tier.</p>
+    <p class="stmt">You cannot be compelled to produce what you cannot read.</p>
   </div>
 
-  <p class="how" style="margin-bottom:16px">Until now their choice was cloud they have to trust or on-prem and BYOC they have to run. Sovereign Mode is <b style="color:var(--white)">the third way</b>: on-prem-grade custody, cloud economics.</p>
-
-  <p class="how">Your certifications (SOC 2, ISO 27001, ISO 42001) govern how access is granted across your organization, and you keep them. Sovereign Mode adds the one thing they can&rsquo;t: on the <b style="color:var(--white)">crown-jewel data path</b>, access isn&rsquo;t governed. It&rsquo;s absent.</p>
-
-  <div class="faq">
-    <p class="sec">COMMON QUESTIONS</p>
-    <details>
-      <summary>Does our product have to change?</summary>
-      <p>No. Your prompts, retrieval, and agents run unchanged within the sealed environment. Sovereign Mode wraps your product; you ship a toggle, not a rebuild.</p>
-    </details>
-    <details>
-      <summary>Do we lose frontier models?</summary>
-      <p>No. Inference is invoked from inside the sealed environment, so your product keeps the frontier models it uses today.</p>
-    </details>
-    <details>
-      <summary>How long until a pilot is live?</summary>
-      <p>One week. Install the SDK, and we&rsquo;ll work with you to configure the sealed environment for your product and customers.</p>
-    </details>
-    <details>
-      <summary>What does their security team actually get?</summary>
-      <p>Attestation that the audited build is what actually ran, plus a receipt for every session. Both are checkable without asking you or us, and both can be forwarded straight into the review thread. <a href="/questionnaire/" style="color:var(--ember);text-decoration:none">The standard questionnaire, answered &rarr;</a></p>
-    </details>
-    <details>
-      <summary>Our buyers already ask for BYOC. How is this different?</summary>
-      <p>BYOC moves your code into their cloud, but it stays readable there: the restriction is a perimeter their security team builds and maintains around your releases, and it can&rsquo;t be proven. Sovereign Mode makes the restriction architectural: you hold no key, the build is pinned and attested, and their reviewer verifies it instead of policing it. <a href="/compare/" style="color:var(--ember);text-decoration:none">The structural comparison, vector by vector &rarr;</a></p>
-    </details>
-    <details>
-      <summary>Can our customer run the sealed environment themselves?</summary>
-      <p>Yes. It can run hosted, in their cloud, or on hardware they own, and the guarantees don&rsquo;t move with the venue: same keys, same attestation, same receipts.</p>
-    </details>
-    <details>
-      <summary>Is this a crypto thing?</summary>
-      <p>No token, nothing to trade. Receipts anchor to a public ledger for one reason: it&rsquo;s the only log a vendor can&rsquo;t quietly edit. Your customer&rsquo;s key is a passkey, one tap.</p>
-    </details>
-    <details>
-      <summary>What does it cost?</summary>
-      <p>Pilot terms are part of the design-partner conversation. The shape is fixed: Sovereign Mode is a tier of your product, priced to leave you margin.</p>
-    </details>
-    <details>
-      <summary>How does it actually work?</summary>
-      <p>Your application logic runs content-pinned in a sealed environment: the hardware proves it&rsquo;s running the exact build that was audited. Your customer&rsquo;s data enters encrypted under a key only they hold, decrypts only inside that environment, and nothing persists after the session. Inference is invoked from within it, so content never passes through your servers. Every session writes a signed receipt (what ran, where, under whose key) to a ledger nobody, including us, can edit. The cryptographic core is a blockchain-attested TEE, in production today. <a href="/developers/" style="color:var(--ember);text-decoration:none">The integration and the verification spec &rarr;</a></p>
-    </details>
-  </div>
+  <nav class="hub" aria-label="Detail pages">
+    <p class="sec">THE DETAIL</p>
+    <a href="/compare/"><span class="ht">SaaS, BYOC, or Sovereign Mode</span><span class="hd">What each asks them to trust</span><span class="ar">&rarr;</span></a>
+    <a href="/developers/"><span class="ht">Verify it yourself</span><span class="hd">Three checks, trusting no one</span><span class="ar">&rarr;</span></a>
+    <a href="/questionnaire/"><span class="ht">The questionnaire, answered</span><span class="hd">Sixteen CAIQ answers, ready to adapt</span><span class="ar">&rarr;</span></a>
+  </nav>
 
   <div class="cta" id="briefing">
     <p class="k">REQUEST A BRIEFING</p>
-    <p>Bring the deal that&rsquo;s stuck: vertical, stage, what their security team is asking for. In thirty minutes we&rsquo;ll map Sovereign Mode onto your product and tell you whether it closes that deal.</p>
+    <p>Bring the deal that&rsquo;s stuck. Thirty minutes: we map Sovereign Mode onto your product and tell you whether it closes.</p>
     <a class="btn" href="/briefing/">Request a briefing</a>
   </div>
 </div>

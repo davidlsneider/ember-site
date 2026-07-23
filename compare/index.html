@@ -24,8 +24,10 @@
   body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(640px 440px at calc(50% - 340px) -6%,rgba(77,159,255,.075),transparent 70%)}
   ::selection{background:var(--ember);color:var(--bg)}
   p{text-wrap:pretty}
-  .wrap{max-width:1000px;margin:0 auto;padding:64px 24px 72px;position:relative}
-  .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:56px}
+  .wrap{max-width:1000px;margin:0 auto;padding:40px 24px 72px;position:relative}
+  .bar-in{max-width:1200px;margin:0 auto;padding:30px 40px 0;display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  @media(max-width:720px){.bar-in{padding:22px 24px 0}}
+  .nav a.here{color:var(--white)}
   .nav{display:flex;gap:22px;align-items:baseline;flex-wrap:wrap}
   .nav a{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);text-decoration:none;white-space:nowrap}
   .nav a:hover{color:var(--white)}
@@ -56,20 +58,22 @@
   .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-decoration:none;padding:12px 22px;border-radius:4px;background:var(--ember);color:var(--bg);font-weight:500;transition:background-color .15s ease}
   .btn:hover{background:var(--glow)}
   .btn:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
-  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#55627B}
+  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#71809A}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
+<header class="bar">
+  <div class="bar-in">
     <p class="brand"><a href="/"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</a></p>
     <nav class="nav">
-      <a href="/developers/">DEVELOPERS</a>
+      <a class="here" href="/compare/">COMPARE</a>
+      <a href="/developers/">VERIFICATION</a>
       <a href="/questionnaire/">QUESTIONNAIRE</a>
       <a class="toplink" href="/briefing/">REQUEST A BRIEFING &rarr;</a>
     </nav>
   </div>
-
+</header>
+<div class="wrap">
   <h1>SaaS, BYOC, or Sovereign Mode</h1>
   <p class="lede">The three ways an AI product reaches an enterprise, and what each asks the buyer to trust. The executive view first; the structural detail below it.</p>
 
@@ -101,7 +105,7 @@
         <td class="dim">DATA EXPOSURE</td>
         <td><b>High.</b> Plaintext in the vendor&rsquo;s backend.</td>
         <td><b>Contained.</b> Plaintext in memory, inside the buyer&rsquo;s perimeter.</td>
-        <td><b>Minimal.</b> Plaintext only inside the attested enclave.</td>
+        <td><b>Minimal.</b> Decrypts only inside the attested enclave; inference reaches the provider under its receipted terms.</td>
       </tr>
       <tr>
         <td class="dim">USAGE GOVERNANCE</td>
@@ -138,7 +142,7 @@
       <tr>
         <td class="dim">DATA-IN-USE STATE</td>
         <td><b>Exposed.</b> Plaintext in application memory throughout processing.</td>
-        <td><b>Encrypted in use.</b> Plaintext exists only inside the attested enclave.</td>
+        <td><b>Encrypted in use.</b> Content decrypts only inside the attested enclave.</td>
       </tr>
       <tr>
         <td class="dim">KEY CUSTODY</td>
