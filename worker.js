@@ -34,6 +34,9 @@ export class BriefingVault {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname === "/whitepaper" || url.pathname === "/whitepaper/") {
+      return handleWhitepaper(request, env, url);
+    }
     if (url.pathname === "/api/briefing") {
       if (request.method !== "POST") {
         return Response.redirect(new URL("/briefing/", url).toString(), 303);
@@ -46,6 +49,29 @@ export default {
     return withSecurityHeaders(await env.ASSETS.fetch(request));
   },
 };
+
+async function handleWhitepaper(request, env, url) {
+  if (request.method !== "GET" && request.method !== "HEAD") {
+    return withSecurityHeaders(new Response("method not allowed", {
+      status: 405,
+      headers: { allow: "GET, HEAD" },
+    }));
+  }
+
+  const assetUrl = new URL("/whitepaper/ember-whitepaper.pdf", url);
+  const pdf = await env.ASSETS.fetch(new Request(assetUrl, request));
+  if (!pdf.ok) return withSecurityHeaders(pdf);
+
+  const headers = new Headers(pdf.headers);
+  headers.set("content-type", "application/pdf");
+  headers.set("content-disposition", 'inline; filename="ember-sovereignty-whitepaper.pdf"');
+  headers.set("cache-control", "public, max-age=3600");
+  return withSecurityHeaders(new Response(pdf.body, {
+    status: pdf.status,
+    statusText: pdf.statusText,
+    headers,
+  }));
+}
 
 async function handleBriefing(request, env, url) {
   let form;

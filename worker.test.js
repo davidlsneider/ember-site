@@ -4,6 +4,7 @@ import worker from "./worker.js";
 
 function testEnv() {
   const leads = [];
+  const assetRequests = [];
   const vault = {
     async fetch(_url, init) {
       if (init?.method === "POST") leads.push(JSON.parse(init.body));
@@ -12,8 +13,18 @@ function testEnv() {
   };
   return {
     leads,
+    assetRequests,
     env: {
-      ASSETS: { fetch: async () => new Response("<h1>Ember</h1>", { headers: { "content-type": "text/html" } }) },
+      ASSETS: {
+        fetch: async (request) => {
+          const path = new URL(request.url).pathname;
+          assetRequests.push(path);
+          if (path === "/whitepaper/ember-whitepaper.pdf") {
+            return new Response("%PDF-test", { headers: { "content-type": "application/pdf" } });
+          }
+          return new Response("<h1>Ember</h1>", { headers: { "content-type": "text/html" } });
+        },
+      },
       BRIEFING_VAULT: {
         idFromName: (name) => name,
         get: () => vault,
@@ -36,6 +47,21 @@ test("static responses receive the security baseline", async () => {
   assert.equal(res.headers.get("x-content-type-options"), "nosniff");
   assert.equal(res.headers.get("x-frame-options"), "DENY");
   assert.equal(res.headers.get("strict-transport-security"), "max-age=31536000; includeSubDomains");
+});
+
+test("the canonical whitepaper URL serves the PDF inline", async () => {
+  const { env, assetRequests } = testEnv();
+  for (const path of ["/whitepaper", "/whitepaper/"]) {
+    const res = await worker.fetch(new Request(`https://embersovereignty.com${path}`), env);
+    assert.equal(res.status, 200);
+    assert.equal(res.headers.get("content-type"), "application/pdf");
+    assert.equal(res.headers.get("content-disposition"), 'inline; filename="ember-sovereignty-whitepaper.pdf"');
+    assert.equal(res.headers.get("x-content-type-options"), "nosniff");
+  }
+  assert.deepEqual(assetRequests, [
+    "/whitepaper/ember-whitepaper.pdf",
+    "/whitepaper/ember-whitepaper.pdf",
+  ]);
 });
 
 test("a valid pilot request is stored without inferred location", async () => {

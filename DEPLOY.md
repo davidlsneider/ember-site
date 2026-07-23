@@ -4,11 +4,14 @@ The public site, form handler, Durable Object binding, and Cloudflare Worker con
 
 ## Normal path
 
-Pushes to `main` that touch `site/**` or the site workflow run `.github/workflows/deploy-site.yml`:
+Pushes to `main` that touch `site/**`, the built whitepaper PDF, or the site workflow run `.github/workflows/deploy-site.yml`:
 
-1. run the Worker tests;
-2. deploy `site/wrangler.jsonc` to the existing Cloudflare Worker;
-3. retain the Worker's existing `RESEND_API_KEY` and `EXPORT_KEY` bindings.
+1. stage the tracked whitepaper PDF as a Worker asset;
+2. run the Worker tests;
+3. deploy `site/wrangler.jsonc` to the existing Cloudflare Worker;
+4. retain the Worker's existing `RESEND_API_KEY` and `EXPORT_KEY` bindings.
+
+The canonical paper URL is `/whitepaper`. The Worker serves `whitepaper/ember-whitepaper.pdf` inline at that path; the deploy workflow copies the built artifact from `../whitepaper/ember-whitepaper.pdf`, so the document has one tracked PDF source.
 
 The team repo needs:
 
@@ -19,7 +22,7 @@ The team repo needs:
 
 ## Cutover state
 
-The live Worker is currently deployed from `davidlsneider/ember-site`. Keep that workflow available until the first green team-repo deployment and live verification. After that, disable the old workflow rather than deleting the repository; its history is useful recovery evidence.
+Cutover completed on 2026-07-21. This team repo owns deployments. The old `davidlsneider/ember-site` repo remains as recovery history with its deploy workflow disabled.
 
 ## Verify
 
@@ -28,6 +31,7 @@ npm test
 npx wrangler deploy --dry-run
 curl -sSIL https://embersovereignty.com/
 curl -sSIL https://embersovereignty.com/briefing/
+curl -sSIL https://embersovereignty.com/whitepaper
 ```
 
-Verify the apex and `www`, the form page, CSP/security headers, the `/briefing/sent/` success page, and a known static asset. A real form submission sends an email, so do not use a synthetic live lead without naming it clearly.
+Verify the apex and `www`, the form page, CSP/security headers, the `/briefing/sent/` success page, `/whitepaper` as an inline PDF response, and a known static asset. A real form submission sends an email, so do not use a synthetic live lead without naming it clearly.
