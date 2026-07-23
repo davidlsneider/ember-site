@@ -25,15 +25,41 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="hero.js" defer></script>
 <style>
   :root{--bg:#0A0E14;--surface:#101722;--line:#1E2936;--white:#F2F7FF;--muted:#8CA0B8;--ember:#4D9FFF;--glow:#9FCBFF}
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--muted);font:400 17px/1.7 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(640px 440px at calc(50% - 340px) -6%,rgba(77,159,255,.075),transparent 70%)}
   ::selection{background:var(--ember);color:var(--bg)}
   p{text-wrap:pretty}
-  .wrap{max-width:660px;margin:0 auto;padding:64px 24px 72px;position:relative}
-  .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:56px}
+  .hero{position:relative;min-height:clamp(600px,94svh,880px);display:flex;flex-direction:column;overflow:clip}
+  #ember-field{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0;transition:opacity 1.6s ease}
+  #ember-field.on{opacity:1}
+  .hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(10,14,20,.92),rgba(10,14,20,.46) 38%,rgba(10,14,20,0) 64%)}
+  .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(10,14,20,0),var(--bg))}
+  .hero-in{position:relative;z-index:2;display:flex;flex-direction:column;flex:1;width:100%;max-width:1200px;margin:0 auto;padding:30px 40px 96px}
+  .hero-copy{margin:auto 0;max-width:620px;padding-top:44px}
+  .hero h1{font-size:clamp(32px,4.6vw,54px);margin-bottom:22px}
+  .hero .lede{font-size:19px;max-width:44ch}
+  .hero .lede b{color:var(--white);font-weight:600}
+  .hero-cta{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-top:36px}
+  .hero-cta .sub{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);text-decoration:none;white-space:nowrap}
+  .hero-cta .sub:hover{color:var(--white)}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .hero .top,.hero-copy>*,.hero-cta{opacity:0;transform:translateY(10px);animation:rise .8s cubic-bezier(.2,.6,.2,1) forwards}
+  .hero .top{animation-delay:.05s}
+  .hero h1{animation-delay:.18s}
+  .hero .lede{animation-delay:.34s}
+  .hero-cta{animation-delay:.5s}
+  @media (prefers-reduced-motion:reduce){.hero .top,.hero-copy>*,.hero-cta{animation:none;opacity:1;transform:none}}
+  @media (max-width:720px){
+    .hero{min-height:clamp(560px,92svh,780px)}
+    .hero-in{padding:22px 24px 72px}
+    .hero-copy{padding-top:10px}
+    .hero::before{background:linear-gradient(180deg,rgba(10,14,20,.5) 0%,rgba(10,14,20,.72) 34%,rgba(10,14,20,.30) 58%,rgba(10,14,20,0) 78%)}
+  }
+  .wrap{max-width:660px;margin:0 auto;padding:26px 24px 72px;position:relative}
+  .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
   .brand{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;color:var(--muted)}
   .brand i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ember);margin-right:10px;box-shadow:0 0 10px rgba(77,159,255,.55);animation:smolder 4.4s ease-in-out infinite}
   @keyframes smolder{0%,100%{box-shadow:0 0 5px rgba(77,159,255,.3);opacity:.75}50%{box-shadow:0 0 14px rgba(77,159,255,.9);opacity:1}}
@@ -78,24 +104,33 @@
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <p class="brand"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</p>
-    <nav class="nav">
-      <a href="/compare/">COMPARE</a>
-      <a href="/developers/">DEVELOPERS</a>
-      <a href="/questionnaire/">QUESTIONNAIRE</a>
-      <a class="toplink" href="/briefing/">REQUEST A BRIEFING &rarr;</a>
-    </nav>
+<header class="hero">
+  <canvas id="ember-field" aria-hidden="true"></canvas>
+  <div class="hero-in">
+    <div class="top">
+      <p class="brand"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</p>
+      <nav class="nav">
+        <a href="/compare/">COMPARE</a>
+        <a href="/developers/">DEVELOPERS</a>
+        <a href="/questionnaire/">QUESTIONNAIRE</a>
+        <a class="toplink" href="/briefing/">REQUEST A BRIEFING &rarr;</a>
+      </nav>
+    </div>
+    <div class="hero-copy">
+      <h1>Institutions know their methods and data are their alpha.</h1>
+      <p class="lede">For every partnership stalled in security review, there&rsquo;s <b>Sovereign Mode</b>.</p>
+      <div class="hero-cta">
+        <a class="btn" href="/briefing/">Request a briefing</a>
+        <a class="sub" href="/developers/">SEE THE INTEGRATION &rarr;</a>
+      </div>
+    </div>
   </div>
-
-  <h1>Your enterprise deal is stuck in security review.</h1>
-
+</header>
+<div class="wrap">
   <div class="ciso">
     <p>&ldquo;We can&rsquo;t send our source code or IP to a third party.&rdquo;</p>
     <p class="who">— EVERY CISO, EVENTUALLY</p>
   </div>
-
   <p class="def"><b>Sovereign Mode ends the stall: your AI product processes their data without being able to read it, and their security team can verify that for themselves.</b> Their repos, deal rooms, records.</p>
 
   <div class="quotes">

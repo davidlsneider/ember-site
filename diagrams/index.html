@@ -62,21 +62,24 @@
       <text x="140" y="395" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">customer</text>
       <text x="140" y="413" text-anchor="middle" font-size="10.5" fill="#7D8CA3">enterprise key · M-of-N</text>
       <text x="140" y="429" text-anchor="middle" font-size="10.5" fill="#7D8CA3">passkey · YubiKey · wallet</text>
-      <line x1="240" y1="408" x2="336" y2="408" stroke="#45536B" marker-end="url(#a1)"/>
-      <text x="288" y="398" text-anchor="middle" font-size="10.5" fill="#7D8CA3">ciphertext</text>
-      <rect x="340" y="368" width="200" height="80" rx="5" fill="#101722" stroke="#4D9FFF"/>
-      <text x="440" y="400" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="600">clean room</text>
-      <text x="440" y="420" text-anchor="middle" font-size="10.5" fill="#7D8CA3">attested · retains nothing</text>
-      <path d="M 540 388 L 590 388 L 590 356 L 636 356" fill="none" stroke="#45536B" marker-end="url(#a1)"/>
+      <line x1="240" y1="408" x2="316" y2="408" stroke="#45536B" marker-end="url(#a1)"/>
+      <text x="278" y="398" text-anchor="middle" font-size="10.5" fill="#7D8CA3">ciphertext</text>
+      <rect x="320" y="352" width="240" height="116" rx="6" fill="#101722" stroke="#4D9FFF"/>
+      <text x="440" y="372" text-anchor="middle" font-size="10" letter-spacing="1.5" fill="#4D9FFF">CLEAN ROOM · TEE</text>
+      <rect x="340" y="384" width="200" height="52" rx="5" fill="#0A0E14" stroke="#1E2936"/>
+      <text x="440" y="416" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="600">vendor app</text>
+      <text x="440" y="456" text-anchor="middle" font-size="10.5" fill="#7D8CA3">attested · retains nothing</text>
+      <path d="M 560 388 L 600 388 L 600 356 L 636 356" fill="none" stroke="#45536B" marker-end="url(#a1)"/>
       <rect x="640" y="328" width="200" height="56" rx="5" fill="#101722" stroke="#1E2936"/>
-      <text x="740" y="360" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">venue, per policy</text>
-      <path d="M 540 428 L 590 428 L 590 464 L 636 464" fill="none" stroke="#45536B" marker-end="url(#a1)"/>
+      <text x="740" y="351" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">inference provider</text>
+      <text x="740" y="369" text-anchor="middle" font-size="10.5" fill="#7D8CA3">per policy</text>
+      <path d="M 560 428 L 600 428 L 600 464 L 636 464" fill="none" stroke="#45536B" marker-end="url(#a1)"/>
       <rect x="640" y="436" width="200" height="56" rx="5" fill="#101722" stroke="#4D9FFF"/>
       <text x="740" y="459" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">encrypted memory</text>
       <text x="740" y="477" text-anchor="middle" font-size="10.5" fill="#7D8CA3">Ember or owner</text>
       <rect x="40" y="492" width="200" height="56" rx="5" fill="#101722" stroke="#1E2936"/>
-      <text x="140" y="524" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">vendor app</text>
-      <path d="M 240 520 L 440 520 L 440 452" fill="none" stroke="#45536B" stroke-dasharray="4 4" marker-end="url(#a1)"/>
+      <text x="140" y="524" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="500">vendor backend</text>
+      <path d="M 240 520 L 440 520 L 440 472" fill="none" stroke="#45536B" stroke-dasharray="4 4" marker-end="url(#a1)"/>
       <text x="290" y="510" font-size="10.5" fill="#7D8CA3">metadata only</text>
     </svg>
     </div>
@@ -87,10 +90,9 @@
     <h2>D2 — One session, precisely</h2>
     <p class="aud">AUDIENCE: THE VENDOR'S ENGINEERS · OWNS: THE RUNTIME PATH</p>
     <div class="frame">
-    <svg viewBox="0 0 880 730" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 880 650" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#45536B"/></marker>
-        <marker id="a2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4D9FFF"/></marker>
       </defs>
       <!-- grid: lifelines every 180px (90/270/450/630/810), headers uniform 160x52 -->
       <rect x="10" y="24" width="160" height="52" rx="5" fill="#101722" stroke="#1E2936"/>
@@ -98,16 +100,16 @@
       <text x="90" y="63" text-anchor="middle" font-size="10" fill="#7D8CA3">on the user's device</text>
       <rect x="190" y="24" width="160" height="52" rx="5" fill="#101722" stroke="#1E2936"/><text x="270" y="54" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">vendor backend</text>
       <rect x="370" y="24" width="160" height="52" rx="5" fill="#101722" stroke="#4D9FFF"/><text x="450" y="54" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="600">clean room</text>
-      <rect x="550" y="24" width="160" height="52" rx="5" fill="#101722" stroke="#1E2936"/><text x="630" y="54" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">venue</text>
+      <rect x="550" y="24" width="160" height="52" rx="5" fill="#101722" stroke="#1E2936"/><text x="630" y="54" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">inference provider</text>
       <rect x="730" y="24" width="160" height="52" rx="5" fill="#101722" stroke="#1E2936"/><text x="810" y="54" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">chain</text>
       <!-- lifelines -->
-      <line x1="90" y1="76" x2="90" y2="712" stroke="#1E2936" stroke-dasharray="3 5"/>
-      <line x1="270" y1="76" x2="270" y2="712" stroke="#1E2936" stroke-dasharray="3 5"/>
-      <line x1="450" y1="76" x2="450" y2="712" stroke="#1E2936" stroke-dasharray="3 5"/>
-      <line x1="630" y1="76" x2="630" y2="712" stroke="#1E2936" stroke-dasharray="3 5"/>
-      <line x1="810" y1="76" x2="810" y2="712" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="90" y1="76" x2="90" y2="616" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="270" y1="76" x2="270" y2="616" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="450" y1="76" x2="450" y2="616" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="630" y1="76" x2="630" y2="616" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="810" y1="76" x2="810" y2="616" stroke="#1E2936" stroke-dasharray="3 5"/>
       <!-- activation bar on clean room -->
-      <rect x="445" y="184" width="10" height="344" rx="2" fill="#101722" stroke="#4D9FFF"/>
+      <rect x="445" y="184" width="10" height="392" rx="2" fill="#101722" stroke="#4D9FFF"/>
       <!-- 1 self in the app -->
       <path d="M 90 108 L 145 108 L 145 132 L 95 132" fill="none" stroke="#45536B" marker-end="url(#a2)"/>
       <text x="155" y="112" font-size="11.5" fill="#8CA0B8">sovereign mode on · verify attestation</text>
@@ -130,61 +132,75 @@
       <!-- 7 result -->
       <line x1="445" y1="428" x2="94" y2="428" stroke="#45536B" marker-end="url(#a2)"/>
       <text x="268" y="418" text-anchor="middle" font-size="11.5" fill="#8CA0B8">result — decrypts inside the app</text>
-      <!-- 8 self: sovereign state + verify link -->
-      <path d="M 90 470 L 145 470 L 145 494 L 95 494" fill="none" stroke="#45536B" marker-end="url(#a2)"/>
-      <text x="155" y="474" font-size="11.5" fill="#8CA0B8">app shows "Sovereign ✓" + verify link</text>
-      <text x="155" y="490" font-size="11.5" fill="#4D9FFF">Ember — a separate service, embedded</text>
-      <!-- 9 receipt -->
-      <line x1="455" y1="528" x2="801" y2="528" stroke="#45536B" marker-end="url(#a2)"/>
-      <text x="628" y="518" text-anchor="middle" font-size="11.5" fill="#8CA0B8">receipt — hashes · venue · verdicts</text>
-      <!-- opt fragment: support, only by grant -->
-      <rect x="30" y="568" width="830" height="136" rx="6" fill="none" stroke="#24344D"/>
-      <text x="46" y="590" font-size="10.5" letter-spacing="2" fill="#4D9FFF">SUPPORT — ONLY BY GRANT</text>
-      <rect x="445" y="606" width="10" height="92" rx="2" fill="#101722" stroke="#4D9FFF"/>
-      <line x1="90" y1="620" x2="441" y2="620" stroke="#4D9FFF" marker-end="url(#a2b)"/>
-      <text x="265" y="610" text-anchor="middle" font-size="11.5" fill="#4D9FFF">report a problem — key-signed grant, this session</text>
-      <line x1="445" y1="656" x2="274" y2="656" stroke="#45536B" marker-end="url(#a2)"/>
-      <text x="360" y="646" text-anchor="middle" font-size="11.5" fill="#8CA0B8">session readable to support · expires</text>
-      <line x1="455" y1="692" x2="801" y2="692" stroke="#45536B" marker-end="url(#a2)"/>
-      <text x="628" y="682" text-anchor="middle" font-size="11.5" fill="#8CA0B8">grant + expiry receipted</text>
+      <!-- 8 metadata back to the vendor -->
+      <line x1="445" y1="470" x2="274" y2="470" stroke="#45536B" stroke-dasharray="4 4" marker-end="url(#a2)"/>
+      <text x="360" y="460" text-anchor="middle" font-size="11.5" fill="#8CA0B8">request complete — metadata only</text>
+      <!-- 9 self: sovereign state + verify link -->
+      <path d="M 90 504 L 145 504 L 145 528 L 95 528" fill="none" stroke="#45536B" marker-end="url(#a2)"/>
+      <text x="155" y="508" font-size="11.5" fill="#8CA0B8">app shows "Sovereign ✓" + verify link</text>
+      <text x="155" y="524" font-size="11.5" fill="#4D9FFF">Ember — a separate service, embedded</text>
+      <!-- 10 receipt -->
+      <line x1="455" y1="568" x2="801" y2="568" stroke="#45536B" marker-end="url(#a2)"/>
+      <text x="628" y="558" text-anchor="middle" font-size="11.5" fill="#8CA0B8">receipt — hashes · provider · verdicts</text>
     </svg>
     </div>
-    <p class="cap">The whole session happens inside the vendor's product. <em>The content is readable in exactly two places — the app on the user's device, and the attested room. When something breaks, support sees one session: by the user's grant, on the record.</em></p>
+    <p class="cap">The whole session happens inside the vendor's product. <em>The content is readable in exactly two places — the app on the user's device, and the attested room. The vendor gets metadata back, never plaintext.</em></p>
   </section>
 
   <section>
-    <h2>D3 — The dial</h2>
-    <p class="aud">AUDIENCE: THE END CUSTOMER AND THEIR AUDITOR · OWNS: TWO POSITIONS, ONE INVARIANT</p>
+    <h2>D3 — The upgrade</h2>
+    <p class="aud">AUDIENCE: THE END CUSTOMER AND THEIR AUDITOR · OWNS: THE MOST SENSITIVE OPERATION</p>
     <div class="frame">
-    <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 880 540" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#45536B"/></marker>
+        <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#45536B"/></marker>
+        <marker id="a3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4D9FFF"/></marker>
       </defs>
-      <!-- clean room -->
-      <rect x="330" y="36" width="240" height="64" rx="5" fill="#101722" stroke="#4D9FFF"/>
-      <text x="450" y="62" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="600">the clean room</text>
-      <text x="450" y="82" text-anchor="middle" font-size="10.5" fill="#7D8CA3">runs identically in both homes</text>
-      <path d="M 410 100 L 410 118 Q 410 126 402 126 L 273 126 Q 265 126 265 134 L 265 148" fill="none" stroke="#45536B" marker-end="url(#a3)"/>
-      <path d="M 490 100 L 490 118 Q 490 126 498 126 L 627 126 Q 635 126 635 134 L 635 148" fill="none" stroke="#45536B" marker-end="url(#a3)"/>
-      <!-- two homes -->
-      <rect x="120" y="152" width="290" height="72" rx="5" fill="#101722" stroke="#1E2936"/>
-      <text x="265" y="182" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">Lit network — hosted</text>
-      <text x="265" y="202" text-anchor="middle" font-size="10.5" fill="#7D8CA3">attested · anchored to Ethereum</text>
-      <line x1="414" y1="188" x2="486" y2="188" stroke="#45536B" marker-start="url(#a3)" marker-end="url(#a3)"/>
-      <rect x="490" y="152" width="290" height="72" rx="5" fill="#101722" stroke="#1E2936"/>
-      <text x="635" y="182" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">the owner's box</text>
-      <text x="635" y="202" text-anchor="middle" font-size="10.5" fill="#7D8CA3">EPYC · in your building · any blockchain</text>
-      <!-- shared move label -->
-      <text x="450" y="252" text-anchor="middle" font-size="11.5" fill="#4D9FFF">move anytime — owner-signed</text>
-      <!-- SCA root -->
-      <path d="M 340 300 L 340 264 Q 340 256 332 256 L 273 256 Q 265 256 265 248 L 265 228" fill="none" stroke="#45536B" marker-end="url(#a3)"/>
-      <path d="M 560 300 L 560 264 Q 560 256 568 256 L 627 256 Q 635 256 635 248 L 635 228" fill="none" stroke="#45536B" marker-end="url(#a3)"/>
-      <rect x="240" y="300" width="420" height="72" rx="5" fill="#101722" stroke="#4D9FFF"/>
-      <text x="450" y="330" text-anchor="middle" font-size="13" fill="#F2F7FF" font-weight="600">smart contract accounts</text>
-      <text x="450" y="350" text-anchor="middle" font-size="10.5" fill="#7D8CA3">the owner's keys decide what may run</text>
+      <!-- grid: lifelines at 110/330/550/770, headers uniform 180x52 -->
+      <rect x="20" y="24" width="180" height="52" rx="5" fill="#101722" stroke="#1E2936"/>
+      <text x="110" y="45" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">vendor</text>
+      <text x="110" y="63" text-anchor="middle" font-size="10" fill="#7D8CA3">ships a new build</text>
+      <rect x="240" y="24" width="180" height="52" rx="5" fill="#101722" stroke="#4D9FFF"/>
+      <text x="330" y="45" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="600">upgrade multisig</text>
+      <text x="330" y="63" text-anchor="middle" font-size="10" fill="#7D8CA3">on-chain · M-of-N</text>
+      <rect x="460" y="24" width="180" height="52" rx="5" fill="#101722" stroke="#4D9FFF"/>
+      <text x="550" y="54" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="600">clean room</text>
+      <rect x="680" y="24" width="180" height="52" rx="5" fill="#101722" stroke="#1E2936"/>
+      <text x="770" y="45" text-anchor="middle" font-size="12.5" fill="#F2F7FF" font-weight="500">customer</text>
+      <text x="770" y="63" text-anchor="middle" font-size="10" fill="#7D8CA3">and their auditor</text>
+      <!-- lifelines -->
+      <line x1="110" y1="76" x2="110" y2="506" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="330" y1="76" x2="330" y2="506" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="550" y1="76" x2="550" y2="506" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <line x1="770" y1="76" x2="770" y2="506" stroke="#1E2936" stroke-dasharray="3 5"/>
+      <!-- activation bar on clean room -->
+      <rect x="545" y="228" width="10" height="184" rx="2" fill="#101722" stroke="#4D9FFF"/>
+      <!-- 1 propose -->
+      <line x1="110" y1="120" x2="321" y2="120" stroke="#45536B" marker-end="url(#a3)"/>
+      <text x="218" y="110" text-anchor="middle" font-size="11.5" fill="#8CA0B8">propose upgrade — new code hash (CID)</text>
+      <!-- 2 self: M-of-N approval, the gate -->
+      <path d="M 330 152 L 385 152 L 385 176 L 335 176" fill="none" stroke="#4D9FFF" marker-end="url(#a3b)"/>
+      <text x="395" y="156" font-size="11.5" fill="#4D9FFF">M-of-N signatures — approval recorded on-chain</text>
+      <text x="395" y="172" font-size="11.5" fill="#8CA0B8">no vendor key can push code past this gate</text>
+      <!-- 3 room checks the chain -->
+      <line x1="545" y1="232" x2="339" y2="232" stroke="#45536B" marker-end="url(#a3)"/>
+      <text x="440" y="222" text-anchor="middle" font-size="11.5" fill="#8CA0B8">before loading any code: check approval</text>
+      <!-- 4 approved measurement -->
+      <line x1="330" y1="272" x2="541" y2="272" stroke="#45536B" stroke-dasharray="4 4" marker-end="url(#a3)"/>
+      <text x="440" y="262" text-anchor="middle" font-size="11.5" fill="#8CA0B8">approved measurement — hash matches</text>
+      <!-- 5 self: load or refuse -->
+      <path d="M 555 308 L 609 308 L 609 332 L 560 332" fill="none" stroke="#45536B" marker-end="url(#a3)"/>
+      <text x="619" y="312" font-size="11.5" fill="#8CA0B8">loads the approved build</text>
+      <text x="619" y="328" font-size="11.5" fill="#8CA0B8">anything unapproved refuses to boot</text>
+      <!-- 6 fresh attestation -->
+      <line x1="555" y1="384" x2="761" y2="384" stroke="#45536B" marker-end="url(#a3)"/>
+      <text x="670" y="374" text-anchor="middle" font-size="11.5" fill="#8CA0B8">fresh attestation — quotes new hash</text>
+      <!-- 7 self: verify against chain -->
+      <path d="M 770 424 L 825 424 L 825 448 L 775 448" fill="none" stroke="#45536B" marker-end="url(#a3)"/>
+      <text x="760" y="440" text-anchor="end" font-size="11.5" fill="#8CA0B8">verify: attestation matches the on-chain approval</text>
     </svg>
     </div>
-    <p class="cap">One room, two homes, one root — accounts controlled by the owners' keys decide what may run. <em>Memory moves the same way. This is how governance gets into people's hands.</em></p>
+    <p class="cap">No code reaches the room without on-chain M-of-N approval. <em>Upgrading is the most sensitive operation in the system — the room only boots builds the multisig has approved, and the customer can check the attestation against the chain.</em></p>
   </section>
 </div>
 </body>
