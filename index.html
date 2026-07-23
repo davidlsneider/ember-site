@@ -84,6 +84,7 @@
   .claim{font-size:clamp(22px,1.9vw,27px);line-height:1.5;max-width:32ch;margin-bottom:110px}
   .claim b{color:var(--white);font-weight:600}
   .sec{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);margin-bottom:14px}
+  .rcap b{color:var(--white)}
   .receipt{border:1px solid var(--line);border-radius:6px;background:var(--surface);box-shadow:0 24px 70px rgba(0,0,0,.45),inset 0 1px 0 rgba(159,203,255,.07);font-family:"IBM Plex Mono",monospace;font-size:13px;overflow:hidden}
   @media(min-width:900px){.receipt{margin-inline:-50px}}
   .receipt .rhead{display:flex;justify-content:space-between;gap:16px;padding:14px 20px;border-bottom:1px solid var(--line);color:var(--white);letter-spacing:.14em;font-size:11px}
@@ -120,9 +121,6 @@
     <div class="top">
       <p class="brand"><a href="/"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</a></p>
       <nav class="nav">
-        <a href="/compare/">COMPARE</a>
-        <a href="/developers/">VERIFICATION</a>
-        <a href="/questionnaire/">QUESTIONNAIRE</a>
         <a class="toplink" href="/briefing/">REQUEST A BRIEFING &rarr;</a>
       </nav>
     </div>
@@ -136,35 +134,36 @@
   </div>
 </header>
 <div class="wrap">
-  <p class="claim"><b>Run your product on their most sensitive work. Prove you never see it.</b> Their repos, deal rooms, records.</p>
+  <p class="claim"><b>Run your product on work buyers will not send to your cloud. Prove your company cannot read it.</b> Source code. Deal rooms. Patient records.</p>
 
-  <div class="receipt" aria-label="Example session receipt">
-    <div class="rhead"><span>SESSION RECEIPT</span><span class="tag">EXAMPLE</span></div>
-    <div class="rrow"><span class="rk">CODE</span><span class="rv">sha256:9d41&hellip;7e2 &middot; approved build</span></div>
-    <div class="rrow"><span class="rk">VENUE</span><span class="rv">attested clean room</span></div>
-    <div class="rrow"><span class="rk">CREDENTIAL</span><span class="rv">institution-owned &middot; fingerprint bound</span></div>
-    <div class="rrow"><span class="rk">VERDICT</span><span class="rv"><span class="ok">allow</span></span></div>
-    <div class="rrow"><span class="rk">SIGNED</span><span class="rv">2026-07-21T14:32:07Z</span></div>
-    <div class="rrow"><span class="rk">CHAIN</span><span class="rv">anchored &middot; publicly verifiable</span></div>
+  <p class="sec">THE ARTIFACT THAT MOVES THE REVIEW</p>
+  <div class="receipt" aria-label="Example security review proof">
+    <div class="rhead"><span>SECURITY REVIEW PROOF</span><span class="tag">EXAMPLE</span></div>
+    <div class="rrow"><span class="rk">YOUR PRODUCT</span><span class="rv">Institution-approved vendor build ran</span></div>
+    <div class="rrow"><span class="rk">VENDOR ACCESS</span><span class="rv">No institutional-content path</span></div>
+    <div class="rrow"><span class="rk">PROCESSING</span><span class="rv">Attested clean room</span></div>
+    <div class="rrow"><span class="rk">INFERENCE</span><span class="rv">Approved provider received the prompt under its terms</span></div>
+    <div class="rrow"><span class="rk">BUYER POLICY</span><span class="rv"><span class="ok">Passed for this session</span></span></div>
+    <div class="rrow"><span class="rk">PROOF</span><span class="rv">Cryptographically signed and independently verifiable</span></div>
   </div>
-  <p class="rcap">Every session leaves one. Anyone can verify it.</p>
+  <p class="rcap">Your buyer checks the boundary before launch. Every session then proves the same approved product and venue ran.</p>
 
   <div class="stmts">
     <p class="stmt">Pass the review with proof, not promises.</p>
     <p class="stmt">Sell sovereignty as your premium tier.</p>
-    <p class="stmt">You cannot be compelled to produce what you cannot read.</p>
+    <p class="stmt">A demand served on your company cannot produce content your systems never receive.</p>
   </div>
 
   <nav class="hub" aria-label="Detail pages">
-    <p class="sec">THE DETAIL</p>
-    <a href="/compare/"><span class="ht">SaaS, BYOC, or Sovereign Mode</span><span class="hd">What each asks them to trust</span><span class="ar">&rarr;</span></a>
-    <a href="/developers/"><span class="ht">Verify it yourself</span><span class="hd">Three checks, trusting no one</span><span class="ar">&rarr;</span></a>
-    <a href="/questionnaire/"><span class="ht">The questionnaire, answered</span><span class="hd">Sixteen CAIQ answers, ready to adapt</span><span class="ar">&rarr;</span></a>
+    <p class="sec">THE EVIDENCE</p>
+    <a href="/compare/"><span class="ht">Compare the trust boundary</span><span class="hd">What the buyer no longer has to trust</span><span class="ar">&rarr;</span></a>
+    <a href="/developers/"><span class="ht">See how the proof is checked</span><span class="hd">Attestation, approved code, session receipts</span><span class="ar">&rarr;</span></a>
+    <a href="/questionnaire/"><span class="ht">Use the security-review answers</span><span class="hd">Sixteen CAIQ answers ready to adapt</span><span class="ar">&rarr;</span></a>
   </nav>
 
   <div class="cta" id="briefing">
     <p class="k">REQUEST A BRIEFING</p>
-    <p>Bring the deal that&rsquo;s stuck. Thirty minutes: we map Sovereign Mode onto your product and tell you whether it closes.</p>
+    <p>Bring the deal that&rsquo;s stuck. In thirty minutes we map its data path, name the proof your buyer needs, and show where Sovereign Mode fits.</p>
     <a class="btn" href="/briefing/">Request a briefing</a>
   </div>
 </div>

@@ -82,7 +82,7 @@
     <li><b>Verify the quote&rsquo;s signature</b> against the silicon vendor&rsquo;s published root of trust. This proves genuine attested hardware, not an emulator.</li>
     <li><b>Compare the measurement</b> in the quote to the content-pinned hash of the audited build, and to the session&rsquo;s receipt on the ledger. Equal hashes prove the audited code is exactly what ran.</li>
   </ul>
-  <pre><span class="c"># the attestation quote for any sovereign session</span>
+  <pre><span class="c"># EXAMPLE VERIFICATION FLOW &middot; the attestation quote for any sovereign session</span>
 curl https://api.embersovereignty.com/attestation/{session_id}</pre>
   <p class="aftersec">The receipt trail repeats these facts for every session, so drift is visible the moment it happens. What a reviewer audits once, the architecture re-proves continuously.</p>
 
