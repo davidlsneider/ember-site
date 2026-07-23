@@ -81,7 +81,8 @@
   .ciso{border-left:2px solid var(--ember);padding:4px 0 4px 16px;margin-bottom:24px}
   .ciso p{color:var(--white);font-size:18px}
   .ciso .who{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--muted);margin-top:6px}
-  .claim{font-size:clamp(22px,1.9vw,27px);line-height:1.5;max-width:32ch;margin-bottom:110px}
+  .claim{font-size:clamp(22px,1.9vw,27px);line-height:1.5;max-width:44ch;margin-bottom:120px}
+  @media(max-width:720px){.claim br{display:none}}
   .claim b{color:var(--white);font-weight:600}
   .sec{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);margin-bottom:14px}
   .rcap b{color:var(--white)}
@@ -110,7 +111,7 @@
   .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-decoration:none;padding:12px 22px;border-radius:4px;background:var(--ember);color:var(--bg);font-weight:500;transition:background-color .15s ease}
   .btn:hover{background:var(--glow)}
   .btn:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
-  footer{text-align:center;padding:22px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#71809A}
+  footer{text-align:center;padding:28px 22px 48px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:#71809A}
   @media(max-width:560px){.receipt .rrow{grid-template-columns:1fr;gap:4px}}
 </style>
 </head>
@@ -134,7 +135,7 @@
   </div>
 </header>
 <div class="wrap">
-  <p class="claim"><b>Run your product on work buyers will not send to your cloud. Prove your company cannot read it.</b> Source code. Deal rooms. Patient records.</p>
+  <p class="claim"><b>Run your product on work buyers<br>will not send to your cloud.<br>Prove your company cannot read it.</b><br>Source code. Deal rooms. Patient records.</p>
 
   <p class="sec">THE ARTIFACT THAT MOVES THE REVIEW</p>
   <div class="receipt" aria-label="Example security review proof">
