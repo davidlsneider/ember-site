@@ -7,7 +7,6 @@
   if (!canvas || !canvas.getContext) return;
   const ctx = canvas.getContext("2d", { alpha: true });
   if (!ctx) return;
-  const hero = canvas.parentElement;
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* Deterministic RNG so the reduced-motion still frame is reproducible. */
@@ -214,10 +213,9 @@
   };
 
   const fit = () => {
-    const r = hero.getBoundingClientRect();
-    if (!r.width || !r.height) return;
+    if (!innerWidth || !innerHeight) return;
     DPR = Math.min(devicePixelRatio || 1, 2);
-    W = r.width; H = r.height;
+    W = innerWidth; H = innerHeight;
     canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     S = Math.min(1.3, Math.max(0.55, Math.min(W, H) / 860));
@@ -233,13 +231,22 @@
     if (reduced) { draw(); canvas.classList.add("on"); }
   };
 
-  let rt = 0;
-  new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(fit, 150); }).observe(hero);
+  /* the field is fixed to the viewport; ignore mobile URL-bar height jitter */
+  let rt = 0, lastW = 0, lastH = 0;
+  const onResize = () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => {
+      if (innerWidth === lastW && Math.abs(innerHeight - lastH) < 160) return;
+      lastW = innerWidth; lastH = innerHeight;
+      fit();
+    }, 150);
+  };
+  addEventListener("resize", onResize);
+  lastW = innerWidth; lastH = innerHeight;
   fit();
 
   if (!reduced) {
     document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
-    new IntersectionObserver((e) => (e[0].isIntersecting ? start() : stop())).observe(hero);
     start();
   }
 })();
