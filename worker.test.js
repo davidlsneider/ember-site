@@ -19,10 +19,10 @@ function testEnv() {
         fetch: async (request) => {
           const path = new URL(request.url).pathname;
           assetRequests.push(path);
-          if (path === "/whitepaper/ember-whitepaper.pdf") {
-            return new Response("%PDF-test", { headers: { "content-type": "application/pdf" } });
+          if (path === "/hero.js") {
+            return new Response("/* animation */", { headers: { "content-type": "text/javascript" } });
           }
-          return new Response("<h1>Ember</h1>", { headers: { "content-type": "text/html" } });
+          return new Response("<h1>Coming soon.</h1>", { headers: { "content-type": "text/html" } });
         },
       },
       BRIEFING_VAULT: {
@@ -47,21 +47,50 @@ test("static responses receive the security baseline", async () => {
   assert.equal(res.headers.get("x-content-type-options"), "nosniff");
   assert.equal(res.headers.get("x-frame-options"), "DENY");
   assert.equal(res.headers.get("strict-transport-security"), "max-age=31536000; includeSubDomains");
+  assert.equal(res.headers.get("x-robots-tag"), "noindex, nofollow");
 });
 
-test("the canonical whitepaper URL serves the PDF inline", async () => {
+test("old public pages and the whitepaper resolve to the coming-soon page", async () => {
   const { env, assetRequests } = testEnv();
-  for (const path of ["/whitepaper", "/whitepaper/"]) {
+  for (const path of [
+    "/briefing/",
+    "/compare/",
+    "/developers/",
+    "/questionnaire/",
+    "/whitepaper/",
+    "/whitepaper/ember-whitepaper.pdf",
+  ]) {
     const res = await worker.fetch(new Request(`https://embersovereignty.com${path}`), env);
-    assert.equal(res.status, 200);
-    assert.equal(res.headers.get("content-type"), "application/pdf");
-    assert.equal(res.headers.get("content-disposition"), 'inline; filename="ember-sovereignty-whitepaper.pdf"');
-    assert.equal(res.headers.get("x-content-type-options"), "nosniff");
+    assert.equal(res.status, 302);
+    assert.equal(res.headers.get("location"), "https://embersovereignty.com/");
+    assert.equal(res.headers.get("x-robots-tag"), "noindex, nofollow");
   }
-  assert.deepEqual(assetRequests, [
-    "/whitepaper/ember-whitepaper.pdf",
-    "/whitepaper/ember-whitepaper.pdf",
-  ]);
+  assert.deepEqual(assetRequests, []);
+});
+
+test("the animation and success page remain public", async () => {
+  const { env, assetRequests } = testEnv();
+  const animation = await worker.fetch(new Request("https://embersovereignty.com/hero.js"), env);
+  const success = await worker.fetch(new Request("https://embersovereignty.com/briefing/sent/"), env);
+  assert.equal(animation.status, 200);
+  assert.equal(success.status, 200);
+  assert.deepEqual(assetRequests, ["/hero.js", "/briefing/sent/"]);
+});
+
+test("a one-field coming-soon signup is stored", async () => {
+  const { env, leads } = testEnv();
+  const res = await worker.fetch(formRequest({
+    source: "coming-soon",
+    email: "prospect@example.com",
+  }), env);
+
+  assert.equal(res.status, 303);
+  assert.equal(res.headers.get("location"), "https://embersovereignty.com/briefing/sent/");
+  assert.equal(leads.length, 1);
+  assert.equal(leads[0].email, "prospect@example.com");
+  assert.equal(leads[0].source, "coming-soon");
+  assert.equal(leads[0].name, "");
+  assert.equal(leads[0].company, "");
 });
 
 test("a valid pilot request is stored without inferred location", async () => {

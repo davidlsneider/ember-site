@@ -11,6 +11,16 @@
 
 const FROM = "Ember Briefing <briefing@updates.embersovereignty.com>";
 const DEST = "david@litprotocol.com";
+const PUBLIC_ASSETS = new Set([
+  "/",
+  "/index.html",
+  "/hero.js",
+  "/apple-touch-icon.png",
+  "/og.png",
+  "/robots.txt",
+  "/briefing/sent/",
+  "/briefing/sent/index.html",
+]);
 
 export class BriefingVault {
   constructor(state) {
@@ -34,44 +44,21 @@ export class BriefingVault {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (url.pathname === "/whitepaper" || url.pathname === "/whitepaper/") {
-      return handleWhitepaper(request, env, url);
-    }
     if (url.pathname === "/api/briefing") {
       if (request.method !== "POST") {
-        return Response.redirect(new URL("/briefing/", url).toString(), 303);
+        return Response.redirect(new URL("/", url).toString(), 303);
       }
       return handleBriefing(request, env, url);
     }
     if (url.pathname === "/api/briefing/export") {
       return handleExport(request, env);
     }
+    if ((request.method === "GET" || request.method === "HEAD") && !PUBLIC_ASSETS.has(url.pathname)) {
+      return withSecurityHeaders(Response.redirect(new URL("/", url).toString(), 302));
+    }
     return withSecurityHeaders(await env.ASSETS.fetch(request));
   },
 };
-
-async function handleWhitepaper(request, env, url) {
-  if (request.method !== "GET" && request.method !== "HEAD") {
-    return withSecurityHeaders(new Response("method not allowed", {
-      status: 405,
-      headers: { allow: "GET, HEAD" },
-    }));
-  }
-
-  const assetUrl = new URL("/whitepaper/ember-whitepaper.pdf", url);
-  const pdf = await env.ASSETS.fetch(new Request(assetUrl, request));
-  if (!pdf.ok) return withSecurityHeaders(pdf);
-
-  const headers = new Headers(pdf.headers);
-  headers.set("content-type", "application/pdf");
-  headers.set("content-disposition", 'inline; filename="ember-sovereignty-whitepaper.pdf"');
-  headers.set("cache-control", "public, max-age=3600");
-  return withSecurityHeaders(new Response(pdf.body, {
-    status: pdf.status,
-    statusText: pdf.statusText,
-    headers,
-  }));
-}
 
 async function handleBriefing(request, env, url) {
   let form;
@@ -88,13 +75,19 @@ async function handleBriefing(request, env, url) {
   const company = line("company").slice(0, 200);
   const role = line("role").slice(0, 200);
   const deal = (form.get("deal") ?? "").toString().trim().slice(0, 5000);
+  const source = line("source").slice(0, 100);
+  const comingSoon = source === "coming-soon";
+  const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   // Honeypot filled → a bot. Pretend it worked.
   if (line("website")) {
     return Response.redirect(new URL("/briefing/sent/", url).toString(), 303);
   }
-  if (!name || !company || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return errPage(400, "Name, work email, and company are required.");
+  if (!validEmail || (!comingSoon && (!name || !company))) {
+    return errPage(
+      400,
+      comingSoon ? "A valid work email is required." : "Name, work email, and company are required.",
+    );
   }
 
   const lead = {
@@ -104,6 +97,7 @@ async function handleBriefing(request, env, url) {
     company,
     role,
     deal,
+    source: source || "briefing",
   };
 
   let stored = false;
@@ -160,17 +154,19 @@ function timingSafeEqual(a, b) {
 
 async function sendLeadEmail(env, lead) {
   const when = lead.id.slice(0, 16).replace("T", " ") + " UTC";
+  const isComingSoon = lead.source === "coming-soon";
   const text = [
-    `Name:    ${lead.name}`,
+    `Source:  ${lead.source}`,
+    `Name:    ${lead.name || "—"}`,
     `Email:   ${lead.email}`,
-    `Company: ${lead.company}`,
+    `Company: ${lead.company || "—"}`,
     `Role:    ${lead.role || "—"}`,
     ``,
     `The deal that's stuck:`,
     lead.deal || "—",
     ``,
     `—`,
-    `${when} · embersovereignty.com/briefing`,
+    `${when} · embersovereignty.com`,
   ].join("\n");
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -182,7 +178,9 @@ async function sendLeadEmail(env, lead) {
       from: FROM,
       to: [DEST],
       reply_to: lead.email,
-      subject: `Briefing request — ${lead.company} (${lead.name})`,
+      subject: isComingSoon
+        ? `Coming soon signup — ${lead.email}`
+        : `Briefing request — ${lead.company} (${lead.name})`,
       text,
     }),
   });
@@ -203,7 +201,7 @@ h1{color:#F2F7FF;font-size:28px;margin:0 0 14px}
 a{color:#4D9FFF}</style></head><body><div class="wrap">
 <h1>That didn’t go through.</h1>
 <p>${msg}</p>
-<p><a href="/briefing/">&larr; back to the form</a></p>
+<p><a href="/">&larr; back to the form</a></p>
 </div></body></html>`;
   return withSecurityHeaders(new Response(html, {
     status,
@@ -219,5 +217,6 @@ function withSecurityHeaders(response) {
   headers.set("strict-transport-security", "max-age=31536000; includeSubDomains");
   headers.set("x-content-type-options", "nosniff");
   headers.set("x-frame-options", "DENY");
+  headers.set("x-robots-tag", "noindex, nofollow");
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 }
