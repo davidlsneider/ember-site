@@ -3,53 +3,82 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ember — Coming soon</title>
-<meta name="description" content="Ember Sovereignty Systems. Coming soon.">
-<meta name="robots" content="noindex,nofollow">
+<title>Ember — Sovereign Mode for AI products</title>
+<meta name="description" content="Let customers use your AI on data they won’t give you. Add a Sovereign Mode without asking customers to deploy your backend.">
+<meta name="robots" content="index,follow">
 <meta name="theme-color" content="#0A0E14">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://embersovereignty.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://embersovereignty.com/">
+<meta property="og:site_name" content="Ember">
+<meta property="og:title" content="Let customers use your AI on data they won’t give you.">
+<meta property="og:description" content="Add a Sovereign Mode to your product without asking customers to deploy your backend.">
+<meta property="og:image" content="https://embersovereignty.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Let customers use your AI on data they won’t give you.">
+<meta name="twitter:description" content="Sovereign Mode for AI products.">
+<meta name="twitter:image" content="https://embersovereignty.com/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0E14'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%234D9FFF'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <script src="/hero.js" defer></script>
 <style>
-  :root{--bg:#0A0E14;--surface:#101722;--line:#24344D;--white:#F2F7FF;--muted:#8CA0B8;--ember:#4D9FFF;--glow:#9FCBFF}
+  :root{--bg:#0A0E14;--line:#24344D;--white:#F2F7FF;--muted:#91A5BE;--ember:#4D9FFF;--glow:#9FCBFF}
   *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--bg)}
   body{min-height:100svh;background:var(--bg);color:var(--muted);font:400 17px/1.6 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
   ::selection{background:var(--ember);color:var(--bg)}
   #ember-field{position:fixed;inset:0;width:100vw;height:100svh;z-index:0;opacity:0;transition:opacity 1.6s ease}
   #ember-field.on{opacity:1}
-  .veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(10,14,20,.88),rgba(10,14,20,.47) 44%,rgba(10,14,20,.03) 70%)}
-  main{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;width:min(1200px,100%);margin:0 auto;padding:30px 40px 64px}
-  .brand{font:500 11px/1.4 "IBM Plex Mono",monospace;letter-spacing:.22em;color:var(--muted)}
+  .veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(10,14,20,.94),rgba(10,14,20,.68) 48%,rgba(10,14,20,.05) 77%)}
+  main{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;width:min(1240px,100%);margin:0 auto;padding:30px 40px 42px}
+  header{display:flex;justify-content:space-between;align-items:center;gap:24px}
+  .brand,.nav,footer,.note{font-family:"IBM Plex Mono",monospace}
+  .brand{font-size:11px;line-height:1.4;font-weight:500;letter-spacing:.22em;color:var(--muted);text-decoration:none}
   .brand i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ember);margin-right:10px;box-shadow:0 0 10px rgba(77,159,255,.55);animation:smolder 4.4s ease-in-out infinite}
-  .center{width:min(540px,100%);margin:auto 0;padding:64px 0}
-  h1{color:var(--white);font-size:clamp(42px,6vw,68px);font-weight:600;line-height:1.05;letter-spacing:-.025em;text-wrap:balance}
-  form{display:flex;width:min(470px,100%);margin-top:36px}
-  label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .nav{font-size:11px;line-height:1.4;font-weight:500;letter-spacing:.12em;color:var(--muted);text-decoration:none;text-transform:uppercase}
+  .nav:hover{color:var(--white)}
+  .nav:focus-visible,.brand:focus-visible{outline:2px solid var(--glow);outline-offset:5px;border-radius:2px}
+  .center{width:min(690px,100%);margin:auto 0;padding:70px 0 78px}
+  h1{max-width:680px;color:var(--white);font-size:clamp(46px,6.2vw,76px);font-weight:600;line-height:1.02;letter-spacing:-.032em;text-wrap:balance}
+  .intro{width:min(615px,100%);margin-top:25px;color:#B6C5D7;font-size:clamp(17px,1.8vw,20px);line-height:1.55;text-wrap:pretty}
+  form{display:flex;width:min(480px,100%);margin-top:33px}
+  label.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   input[type="email"]{min-width:0;flex:1;background:rgba(10,14,20,.78);border:1px solid var(--line);border-right:0;border-radius:5px 0 0 5px;padding:13px 14px;color:var(--white);font:400 16px/1.4 "IBM Plex Sans",system-ui,sans-serif;backdrop-filter:blur(8px)}
   input[type="email"]::placeholder{color:#71809A}
   input[type="email"]:focus{position:relative;z-index:1;outline:2px solid var(--ember);outline-offset:-1px;border-color:var(--ember)}
   button{flex:0 0 auto;border:0;border-radius:0 5px 5px 0;background:var(--ember);color:var(--bg);padding:0 20px;cursor:pointer;font:500 12px/1 "IBM Plex Mono",monospace;letter-spacing:.06em}
   button:hover{background:var(--glow)}
   button:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+  .note{margin-top:12px;color:#71809A;font-size:11px;letter-spacing:.025em}
   .hp{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}
-  footer{font:400 10.5px/1.4 "IBM Plex Mono",monospace;letter-spacing:.14em;color:#71809A}
+  footer{font-size:10.5px;line-height:1.4;letter-spacing:.14em;color:#71809A}
   @keyframes rise{to{opacity:1;transform:none}}
   .center>*{opacity:0;transform:translateY(10px);animation:rise .8s cubic-bezier(.2,.6,.2,1) forwards}
-  .center form{animation-delay:.18s}
+  .center .intro{animation-delay:.10s}
+  .center form{animation-delay:.20s}
+  .center .note{animation-delay:.28s}
   @keyframes smolder{0%,100%{box-shadow:0 0 5px rgba(77,159,255,.3);opacity:.75}50%{box-shadow:0 0 14px rgba(77,159,255,.9);opacity:1}}
   @media(prefers-reduced-motion:reduce){.brand i{animation:none}.center>*{animation:none;opacity:1;transform:none}}
   @media(max-width:720px){
-    .veil{background:linear-gradient(180deg,rgba(10,14,20,.65),rgba(10,14,20,.35) 42%,rgba(10,14,20,.2) 68%,rgba(10,14,20,.5))}
-    main{padding:22px 24px 38px}
-    .center{padding-bottom:150px}
-    h1{font-size:clamp(40px,13vw,58px)}
-    form{margin-top:30px}
-    button{padding:0 15px}
+    .veil{background:linear-gradient(180deg,rgba(10,14,20,.84),rgba(10,14,20,.62) 55%,rgba(10,14,20,.28) 78%,rgba(10,14,20,.56))}
+    main{padding:22px 24px 30px}
+    .center{padding:56px 0 180px}
+    h1{font-size:clamp(43px,12.5vw,61px)}
+    .intro{margin-top:22px;font-size:17px}
+    form{margin-top:28px}
+    button{padding:0 14px;font-size:10.5px}
+    .nav{font-size:10px}
+  }
+  @media(max-width:420px){
+    form{display:grid;grid-template-columns:1fr}
+    input[type="email"]{border-right:1px solid var(--line);border-radius:5px 5px 0 0}
+    button{min-height:44px;border-radius:0 0 5px 5px}
   }
 </style>
 </head>
@@ -57,21 +86,28 @@
 <canvas id="ember-field" aria-hidden="true"></canvas>
 <div class="veil" aria-hidden="true"></div>
 <main>
-  <p class="brand"><i aria-hidden="true"></i>EMBER SOVEREIGNTY SYSTEMS</p>
+  <header>
+    <a class="brand" href="/"><i aria-hidden="true"></i>EMBER</a>
+    <a class="nav" href="/how-it-works/">How it works&nbsp; →</a>
+  </header>
+
   <div class="center">
-    <h1>Coming soon.</h1>
-    <form method="POST" action="/api/briefing">
-      <input type="hidden" name="source" value="coming-soon">
-      <label for="email">Work email</label>
+    <h1>Let customers use your AI on data they won’t give you.</h1>
+    <p class="intro">Add a Sovereign Mode to your product. It runs on their most sensitive data—your company never sees it, and your customer never has to deploy your backend.</p>
+    <form id="access" method="POST" action="/api/briefing">
+      <input type="hidden" name="source" value="homepage">
+      <label class="sr" for="email">Work email</label>
       <input id="email" type="email" name="email" required maxlength="254" autocomplete="email" inputmode="email" placeholder="Work email">
       <div class="hp" aria-hidden="true">
         <label for="website">Website</label>
         <input id="website" type="text" name="website" tabindex="-1" autocomplete="off">
       </div>
-      <button type="submit">NOTIFY ME</button>
+      <button type="submit">REQUEST ACCESS</button>
     </form>
+    <p class="note">For AI vendors. We’re working with a few early partners.</p>
   </div>
-  <footer>© 2026</footer>
+
+  <footer>EMBER · © 2026</footer>
 </main>
 </body>
 </html>

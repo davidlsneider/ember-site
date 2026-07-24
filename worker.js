@@ -18,6 +18,9 @@ const PUBLIC_ASSETS = new Set([
   "/apple-touch-icon.png",
   "/og.png",
   "/robots.txt",
+  "/sitemap.xml",
+  "/how-it-works/",
+  "/how-it-works/index.html",
   "/briefing/sent/",
   "/briefing/sent/index.html",
 ]);
@@ -54,9 +57,10 @@ export default {
       return handleExport(request, env);
     }
     if ((request.method === "GET" || request.method === "HEAD") && !PUBLIC_ASSETS.has(url.pathname)) {
-      return withSecurityHeaders(Response.redirect(new URL("/", url).toString(), 302));
+      return withSecurityHeaders(Response.redirect(new URL("/", url).toString(), 302), true);
     }
-    return withSecurityHeaders(await env.ASSETS.fetch(request));
+    const noindex = url.pathname === "/briefing/sent/" || url.pathname === "/briefing/sent/index.html";
+    return withSecurityHeaders(await env.ASSETS.fetch(request), noindex);
   },
 };
 
@@ -76,17 +80,17 @@ async function handleBriefing(request, env, url) {
   const role = line("role").slice(0, 200);
   const deal = (form.get("deal") ?? "").toString().trim().slice(0, 5000);
   const source = line("source").slice(0, 100);
-  const comingSoon = source === "coming-soon";
+  const oneField = source === "coming-soon" || source === "homepage";
   const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   // Honeypot filled → a bot. Pretend it worked.
   if (line("website")) {
     return Response.redirect(new URL("/briefing/sent/", url).toString(), 303);
   }
-  if (!validEmail || (!comingSoon && (!name || !company))) {
+  if (!validEmail || (!oneField && (!name || !company))) {
     return errPage(
       400,
-      comingSoon ? "A valid work email is required." : "Name, work email, and company are required.",
+      oneField ? "A valid work email is required." : "Name, work email, and company are required.",
     );
   }
 
@@ -154,7 +158,7 @@ function timingSafeEqual(a, b) {
 
 async function sendLeadEmail(env, lead) {
   const when = lead.id.slice(0, 16).replace("T", " ") + " UTC";
-  const isComingSoon = lead.source === "coming-soon";
+  const isAccessRequest = lead.source === "coming-soon" || lead.source === "homepage";
   const text = [
     `Source:  ${lead.source}`,
     `Name:    ${lead.name || "—"}`,
@@ -178,8 +182,8 @@ async function sendLeadEmail(env, lead) {
       from: FROM,
       to: [DEST],
       reply_to: lead.email,
-      subject: isComingSoon
-        ? `Coming soon signup — ${lead.email}`
+      subject: isAccessRequest
+        ? `Ember access request — ${lead.email}`
         : `Briefing request — ${lead.company} (${lead.name})`,
       text,
     }),
@@ -206,10 +210,10 @@ a{color:#4D9FFF}</style></head><body><div class="wrap">
   return withSecurityHeaders(new Response(html, {
     status,
     headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
-  }));
+  }), true);
 }
 
-function withSecurityHeaders(response) {
+function withSecurityHeaders(response, noindex = false) {
   const headers = new Headers(response.headers);
   headers.set("content-security-policy", "default-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; upgrade-insecure-requests");
   headers.set("permissions-policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=()");
@@ -217,6 +221,7 @@ function withSecurityHeaders(response) {
   headers.set("strict-transport-security", "max-age=31536000; includeSubDomains");
   headers.set("x-content-type-options", "nosniff");
   headers.set("x-frame-options", "DENY");
-  headers.set("x-robots-tag", "noindex, nofollow");
+  if (noindex) headers.set("x-robots-tag", "noindex, nofollow");
+  else headers.delete("x-robots-tag");
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 }

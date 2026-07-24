@@ -22,7 +22,7 @@ function testEnv() {
           if (path === "/hero.js") {
             return new Response("/* animation */", { headers: { "content-type": "text/javascript" } });
           }
-          return new Response("<h1>Coming soon.</h1>", { headers: { "content-type": "text/html" } });
+          return new Response("<h1>Ember</h1>", { headers: { "content-type": "text/html" } });
         },
       },
       BRIEFING_VAULT: {
@@ -47,10 +47,10 @@ test("static responses receive the security baseline", async () => {
   assert.equal(res.headers.get("x-content-type-options"), "nosniff");
   assert.equal(res.headers.get("x-frame-options"), "DENY");
   assert.equal(res.headers.get("strict-transport-security"), "max-age=31536000; includeSubDomains");
-  assert.equal(res.headers.get("x-robots-tag"), "noindex, nofollow");
+  assert.equal(res.headers.get("x-robots-tag"), null);
 });
 
-test("old public pages and the whitepaper resolve to the coming-soon page", async () => {
+test("retired pages and the old whitepaper resolve to the homepage", async () => {
   const { env, assetRequests } = testEnv();
   for (const path of [
     "/briefing/",
@@ -68,19 +68,23 @@ test("old public pages and the whitepaper resolve to the coming-soon page", asyn
   assert.deepEqual(assetRequests, []);
 });
 
-test("the animation and success page remain public", async () => {
+test("the animation, workflow, and success page remain public", async () => {
   const { env, assetRequests } = testEnv();
   const animation = await worker.fetch(new Request("https://embersovereignty.com/hero.js"), env);
+  const workflow = await worker.fetch(new Request("https://embersovereignty.com/how-it-works/"), env);
   const success = await worker.fetch(new Request("https://embersovereignty.com/briefing/sent/"), env);
   assert.equal(animation.status, 200);
+  assert.equal(workflow.status, 200);
   assert.equal(success.status, 200);
-  assert.deepEqual(assetRequests, ["/hero.js", "/briefing/sent/"]);
+  assert.equal(workflow.headers.get("x-robots-tag"), null);
+  assert.equal(success.headers.get("x-robots-tag"), "noindex, nofollow");
+  assert.deepEqual(assetRequests, ["/hero.js", "/how-it-works/", "/briefing/sent/"]);
 });
 
-test("a one-field coming-soon signup is stored", async () => {
+test("a one-field homepage access request is stored", async () => {
   const { env, leads } = testEnv();
   const res = await worker.fetch(formRequest({
-    source: "coming-soon",
+    source: "homepage",
     email: "prospect@example.com",
   }), env);
 
@@ -88,7 +92,7 @@ test("a one-field coming-soon signup is stored", async () => {
   assert.equal(res.headers.get("location"), "https://embersovereignty.com/briefing/sent/");
   assert.equal(leads.length, 1);
   assert.equal(leads[0].email, "prospect@example.com");
-  assert.equal(leads[0].source, "coming-soon");
+  assert.equal(leads[0].source, "homepage");
   assert.equal(leads[0].name, "");
   assert.equal(leads[0].company, "");
 });

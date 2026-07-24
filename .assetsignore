@@ -7,7 +7,6 @@ worker.js
 CNAME
 .nojekyll
 .assetsignore
-.htmlvalidate.json
 README.md
 .github/
 .github/**
@@ -17,3 +16,4 @@ package.json
 package-lock.json
 worker.test.js
 DEPLOY.md
+.htmlvalidate.json
